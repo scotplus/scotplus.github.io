@@ -1,0 +1,802 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Setup Tutorial &#8212; SCOOTR</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'setup_tutorial';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="UGW Tutorial" href="UGW_tutorial.html" />
+    <link rel="prev" title="The Evolution of SCOOTR" href="theory.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/SCOOTR_logo.006.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/SCOOTR_logo.006.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to SCOOTR
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Core Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Getting Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">The Evolution of SCOOTR</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Setup Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UGW_tutorial.html">UGW Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UCOOT_tutorial.html">UCOOT Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fused_tutorial.html">Fused Formulation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SCOOTR_tutorial.html">SCOOTR Tutorial</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Cbaker37/SCOOTR.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Cbaker37/SCOOTR.git/issues/new?title=Issue%20on%20page%20%2Fsetup_tutorial.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/setup_tutorial.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Setup Tutorial</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterations">Iterations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tolerance">Tolerance</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="setup-tutorial">
+<h1>Setup Tutorial<a class="headerlink" href="#setup-tutorial" title="Permalink to this heading">#</a></h1>
+<p>In this tutorial, we will go over how to set up a SCOOTR object for generating coupling matrices. In particular, we will dive into the different parameters that affect how closely we approximate exact optimal transport solutions.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you have not yet configured a SCOOTR directory of some kind, see our installation instructions markdown. Once you complete those steps or set up your own virual environment, continue on here.</p>
+<p>If you are unsure what some of the notation means throughout the rest of this document, or what we are really trying to accomplish, try reading our optimal transport theory section to get more comfortable.</p>
+<p>If you are already comfortable with setting up the SCOOTR object, try moving on to our UGW tutorial, which will ease you into using the tool and give some intuition for how to select different hyperparameters.</p>
+</div>
+<p>To start, we will set up some random matrices to align:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">src.scootr</span> <span class="k">as</span> <span class="nn">scootr</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Helvetica Neue&#39;</span>
+
+<span class="c1"># setting up torch</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Torch version: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CUDA available: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CUDA version: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">cuda</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CUDNN version: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">version</span><span class="p">()))</span>
+
+<span class="n">use_cuda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:0&quot;</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span><span class="o">=</span><span class="kc">True</span>
+
+<span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ny</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Torch version: 2.0.1
+CUDA available: False
+CUDA version: None
+CUDNN version: None
+</pre></div>
+</div>
+</div>
+</div>
+<section id="iterations">
+<h2>Iterations<a class="headerlink" href="#iterations" title="Permalink to this heading">#</a></h2>
+<p>Now, we can begin examining the SCOOTR object. First, we will look at how the number of iterations (of BCD and UOT) impact alignment.</p>
+<p>When instantiating a SCOOTR object, there are two options for modifying the number of iterations done in approximating the optimal coupling matrices for a given alignment: nits_bcd and nits_uot. To understand what these do, we have to understand the BCD (block coordinate descent) part of the algorithm, as well as the UOT (unbalanced optimal transport) part. See our theory document for a little more detail on these.</p>
+<p>When solving for the optimal coupling matrices, our process begins in either the sample or feature matrix (we start with feature in this code), and begins solving a single, non-co-optimal transport problem on this matrix using an OT algorithm like Sinkhorn. Then, it switches to the other matrix, and does the same. We define a single BCD iteration to be one set of OT iterations on each matrix. So, some OT iterations on the sample matrix, followed by some OT iterations on the feature matrix, would constitute one iteration. The total number of iterations the alignment will run for, not accounting for early stopping, is what we select for nits_bcd.</p>
+<p>Within a given BCD iteration, we do the selected OT algorithm on each coupling matrix for a certain number of iterations, or until convergence. nits_uot defines the maximum number of times we iterate this algorithm before switching within the larger BCD process. So, a smaller value for nits_uot leads to faster BCD iterations and more communication between the sample/feature coupling matrices, while a larger one will do the opposite. Let’s try out some extreme values just to get a sense of how this works:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scootr_sm_uot</span> <span class="o">=</span> <span class="n">scootr</span><span class="o">.</span><span class="n">SCOOTR</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_sm_uot</span><span class="p">,</span> <span class="n">pi_feat_sm_uot</span><span class="p">),</span> <span class="n">duals</span> <span class="o">=</span> <span class="n">scootr_sm_uot</span><span class="o">.</span><span class="n">solver_fcoot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cost at iteration 1: 0.07501447200775146
+Cost at iteration 6: 0.061206281185150146
+Cost at iteration 11: 0.06131690740585327
+Cost at iteration 16: 0.0615992546081543
+Cost at iteration 21: 0.06249082088470459
+Cost at iteration 26: 0.06329423189163208
+Cost at iteration 31: 0.0625995397567749
+Cost at iteration 36: 0.0627627968788147
+Cost at iteration 41: 0.06264740228652954
+Cost at iteration 46: 0.06259876489639282
+Cost at iteration 51: 0.06257826089859009
+Cost at iteration 56: 0.06254732608795166
+Cost at iteration 61: 0.06257873773574829
+Cost at iteration 66: 0.06256270408630371
+Cost at iteration 71: 0.06255173683166504
+Cost at iteration 76: 0.06254374980926514
+Cost at iteration 81: 0.06258100271224976
+Cost at iteration 86: 0.06286519765853882
+Cost at iteration 91: 0.06268036365509033
+Cost at iteration 96: 0.06258928775787354
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scootr_lg_uot</span> <span class="o">=</span> <span class="n">scootr</span><span class="o">.</span><span class="n">SCOOTR</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span> <span class="c1"># upper bound; UOT likely converges first</span>
+<span class="p">(</span><span class="n">pi_samp_lg_uot</span><span class="p">,</span> <span class="n">pi_feat_lg_uot</span><span class="p">),</span> <span class="n">duals</span> <span class="o">=</span> <span class="n">scootr_lg_uot</span><span class="o">.</span><span class="n">solver_fcoot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cost at iteration 1: 0.08687222003936768
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cost at iteration 6: 0.06807816028594971
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In this example, we are using the Sinkhorn algorithm to solve for our coupling matrices. However, there are other options that vary based on the alignment method you choose to use, including conditional gradient descent (CG), earth mover’s distance (EMD), and majorization-minimization (MM). Some of these algorithms (namely, CG and EMD) require significantly more iterations to converge, and nits_uot should be adjusted as such. To see what we select for these algorithms, work your way towards our SCOOTR tutorial; SCOOTR is the only method that allows either CG or EMD for its OT iterations.</p>
+</div>
+<p>Clearly, the second cell of code takes much longer (total, and per iteration) than the first, as expected. In addition, the first cell requires many more BCD iterations to reach the error tolerance, considering each BCD step is doing a lot less (less nested iterations). We can visualize the different coupling matrices:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pi_feat</span><span class="p">,</span> <span class="n">pi_samp</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">pi_feat_sm_uot</span><span class="p">,</span> <span class="n">pi_samp_sm_uot</span><span class="p">,</span> <span class="s1">&#39;nits_uot=1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">pi_feat_lg_uot</span><span class="p">,</span> <span class="n">pi_samp_lg_uot</span><span class="p">,</span> <span class="s1">&#39;nits_uot=10000&#39;</span><span class="p">)]:</span>    
+    <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pi_feat</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/15d59e991e6cbd892666938108d3d8f5900df05586c8e521ef2ad2c3f9ca0a15.png" src="_images/15d59e991e6cbd892666938108d3d8f5900df05586c8e521ef2ad2c3f9ca0a15.png" />
+<img alt="_images/d21646b78cda7dfbab5607960e0328ce5bb8c5db8eb2e7813cecffdf1ab6e68f.png" src="_images/d21646b78cda7dfbab5607960e0328ce5bb8c5db8eb2e7813cecffdf1ab6e68f.png" />
+</div>
+</div>
+<p>Note that the coupling matrices in the first case are not perfectly sparse. We see this result because each individual matrix was not evaluated as much individually (small nits_uot) as they were jointly (normal nits_bcd).</p>
+<p>Now, we can find out what happens when we change nits_bcd. The default nits_bcd generally allows for the optimization to continue until it reaches the tolerance; it is not often a limiting factor. However, we can make it a limiting factor by making it small enough, particularly in the case of our small nits_uot from above:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scootr_sm_bcd</span> <span class="o">=</span> <span class="n">scootr</span><span class="o">.</span><span class="n">SCOOTR</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nits_bcd</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_sm_bcd</span><span class="p">,</span> <span class="n">pi_feat_sm_bcd</span><span class="p">),</span> <span class="n">duals</span> <span class="o">=</span> <span class="n">scootr_sm_bcd</span><span class="o">.</span><span class="n">solver_fcoot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cost at iteration 1: 0.07501447200775146
+Cost at iteration 6: 0.061206281185150146
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scootr_lg_bcd</span> <span class="o">=</span> <span class="n">scootr</span><span class="o">.</span><span class="n">SCOOTR</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">nits_bcd</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_lg_bcd</span><span class="p">,</span> <span class="n">pi_feat_lg_bcd</span><span class="p">),</span> <span class="n">duals</span> <span class="o">=</span> <span class="n">scootr_lg_bcd</span><span class="o">.</span><span class="n">solver_fcoot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cost at iteration 1: 0.08687222003936768
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cost at iteration 6: 0.06807816028594971
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pi_feat</span><span class="p">,</span> <span class="n">pi_samp</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">pi_feat_sm_bcd</span><span class="p">,</span> <span class="n">pi_samp_sm_bcd</span><span class="p">,</span> <span class="s1">&#39;nits_uot=1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">pi_feat_lg_bcd</span><span class="p">,</span> <span class="n">pi_samp_lg_bcd</span><span class="p">,</span> <span class="s1">&#39;nits_uot=10000&#39;</span><span class="p">)]:</span>    
+    <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pi_feat</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/adf46fa3f8803d9887328809634378cd431176e70745abe09129276ef7ed367d.png" src="_images/adf46fa3f8803d9887328809634378cd431176e70745abe09129276ef7ed367d.png" />
+<img alt="_images/d21646b78cda7dfbab5607960e0328ce5bb8c5db8eb2e7813cecffdf1ab6e68f.png" src="_images/d21646b78cda7dfbab5607960e0328ce5bb8c5db8eb2e7813cecffdf1ab6e68f.png" />
+</div>
+</div>
+<p>As seen in the matrices above, limiting nits_uot and nits_bcd leads to a lack of convergence to a sparse solution as we would expect from this level of epsilon (see UCOOT/UGW tutorial to learn more about epsilon).</p>
+<p>Now that we have an understanding of how these two parameters work, we can make some suggestions. First, we suggest leaving nits_bcd at the default, unless your alignment is going beyond its bound, and you would like to see continued convergence (this will happen in cases where you have a very low error tolerance, which leads to later iterations being less meaningful anyway). For nits_uot, we suggest a little bit more experimentation, although as you can see in these results, allowing for a larger number of iterations leads to more sparse coupling matrices, which may be desirable. Recall our warning about different algorithms.</p>
+</section>
+<section id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this heading">#</a></h2>
+<p>Now that we understand the iterations parameters, lets move onto the evaluation parameters: eval_uot and eval_bcd. Our understanding of the BCD and UOT processes transfers over to these parameters. In particular, eval_uot and eval_bcd determine how often the error of each process is calculated. For example, if we set eval_uot=5, the error of the given OT algorithm will be calculated every 5 iterations. We can see how this looks by modifying eval_bcd and seeing what the cost log looks like. We will lower nits_uot to make the difference more clear:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scootr_sm_eval</span> <span class="o">=</span> <span class="n">scootr</span><span class="o">.</span><span class="n">SCOOTR</span><span class="p">(</span><span class="n">eval_bcd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_sm_eval</span><span class="p">,</span> <span class="n">pi_feat_sm_eval</span><span class="p">),</span> <span class="n">duals</span><span class="p">,</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scootr_sm_eval</span><span class="o">.</span><span class="n">solver_fcoot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of cost calculations: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_cost</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 58
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scootr_lg_eval</span> <span class="o">=</span> <span class="n">scootr</span><span class="o">.</span><span class="n">SCOOTR</span><span class="p">(</span><span class="n">eval_bcd</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_lg_eval</span><span class="p">,</span> <span class="n">pi_feat_lg_eval</span><span class="p">),</span> <span class="n">duals</span><span class="p">,</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scootr_lg_eval</span><span class="o">.</span><span class="n">solver_fcoot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of cost calculations: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_cost</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cost at iteration 1: 0.07501447200775146
+Cost at iteration 51: 0.06257826089859009
+Number of cost calculations: 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>eval_bcd, as seen above, does affect the actual alignment. We will see exactly why in the next section; however, the basic idea is that once the optimization hits a certain convergence threshold, it will stop. Since we only evaluate this convergence threshold every eval_bcd iterations, then if eval_bcd is a large, we might hit the threshold, but continue running BCD until we reach the next “eval” iteration. This is why we see more iterations in the second cell above; it would have stopped closer to 27 if eval_bcd were smaller. Instead, it was forced to continue to iteration 51.</p>
+</div>
+<p>Since eval_uot is almost entirely under the hood, we will not look at a code example. However, it functions the same as eval_bcd, except on the inner OT processes. The only reason to raise eval_uot above 1 is if you believe your coupling matrix will take a long time to converge and thus want to save a little bit of time by evaluating error less frequently.</p>
+<p>Clearly, the two evaluation parameters are slightly more important in conjunction with the tolerance parameters we will now examine. Note, in addition to the total transport cost being printed on the screen, we also evaluate the error in terms of how far away the previous iteration is from the current iteration under the hood, both in terms of cost and in terms of the products themselves (i.e. UGW(pi) - UGW(pi_prev), but also pi - pi_prev, in a sense). We call these types of errors “differential error” in the next section.</p>
+</section>
+<section id="tolerance">
+<h2>Tolerance<a class="headerlink" href="#tolerance" title="Permalink to this heading">#</a></h2>
+<p>From here, we will move on to another two parameters: tol_bcd and tol_uot. Rather than determining how many iterations each process does, tol_bcd and tol_uot determine when these processes might be allowed to stop before reaching their iteration count. The iterations (nits_bcd and nits_uot) are an upper bound of how long the processes are allowed to run; in some cases, the tolerance will be reached first. Recall that the tolerance is only checked at every eval iteration; so, if the error tolerance is achieved at a non-eval iteration and then deviates by the time it reaches an eval iteration, the process would still continue.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Note that the tolerance we specify with these parameters relates to the “differential error” of the matrices themselves (i.e., pi - pi_prev), NOT the optimal transport cost you see printed when running an optimization in verbose mode. So, the tolerance you specify will determine, in a sense, how close two iterations have to be to claim that the matrices (or duals) have “converged.”</p>
+<p>In order to specify a tolerance on the optimal transport cost “differential error”, use the early_stopping_tol parameter of any of the SCOOTR alignment methods. Since the absolute size of the cost will vary based on hyperparameters and the nature of your datasets, early_stopping_tol should be adjusted carefully (which is why we require it on a per-alignment basis, rather than in setup)</p>
+</div>
+<p>If we make either tolerance too high, the processes will stop before converging at all and give us an unreasonable solution. However, if we make either tolerance too low, we might have to wait until exhausting the iteration count, rather than getting an early exit. Let’s start with too high:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scootr_lg_tol</span> <span class="o">=</span> <span class="n">scootr</span><span class="o">.</span><span class="n">SCOOTR</span><span class="p">(</span><span class="n">eval_bcd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tol_bcd</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># note early_stopping_tol is like tolerance, but for differential UCOOT cost, not the matrices themselves</span>
+<span class="p">(</span><span class="n">pi_samp_lg_tol</span><span class="p">,</span> <span class="n">pi_feat_lg_tol</span><span class="p">),</span> <span class="n">duals</span><span class="p">,</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scootr_lg_tol</span><span class="o">.</span><span class="n">solver_fcoot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of cost calculations: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_cost</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we had let the tolerance be less, we would have seen many more iterations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scootr_lg_tol</span> <span class="o">=</span> <span class="n">scootr</span><span class="o">.</span><span class="n">SCOOTR</span><span class="p">(</span><span class="n">eval_bcd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tol_bcd</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_lg_tol</span><span class="p">,</span> <span class="n">pi_feat_lg_tol</span><span class="p">),</span> <span class="n">duals</span><span class="p">,</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scootr_lg_tol</span><span class="o">.</span><span class="n">solver_fcoot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of cost calculations: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_cost</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 8
+</pre></div>
+</div>
+</div>
+</div>
+<p>But, if we had let it be too low, we would have seen the iterations run out first:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scootr_lg_tol</span> <span class="o">=</span> <span class="n">scootr</span><span class="o">.</span><span class="n">SCOOTR</span><span class="p">(</span><span class="n">eval_bcd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tol_bcd</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span> <span class="n">nits_bcd</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_lg_tol</span><span class="p">,</span> <span class="n">pi_feat_lg_tol</span><span class="p">),</span> <span class="n">duals</span><span class="p">,</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scootr_lg_tol</span><span class="o">.</span><span class="n">solver_fcoot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of cost calculations: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_cost</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 150
+</pre></div>
+</div>
+</div>
+</div>
+<p>Given this demonstration, you can either choose tolerance to be 0 to force all of your iterations to run, or you might give it a reasonable (small) value to stop the iterations once convergence has sufficiently slowed.</p>
+<p>As in the last section, tol_uot is largely under the hood, so we will only look at one code example. However, the same ideas apply; if tol_uot is small, each OT process (in the larger scheme of the BCD iterations) will run for all nits_uot iterations. If tol_uot is large, the OT processes will not converge, leading to dense coupling matrices:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># notice that we raise nits_uot; an nits_uot of 1 is just as bad as a high tol_uot</span>
+<span class="n">scootr_lg_ot_tol</span> <span class="o">=</span> <span class="n">scootr</span><span class="o">.</span><span class="n">SCOOTR</span><span class="p">(</span><span class="n">eval_bcd</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nits_uot</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">tol_bcd</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">,</span> <span class="n">nits_bcd</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">tol_uot</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_lg_ot_tol</span><span class="p">,</span> <span class="n">pi_feat_lg_ot_tol</span><span class="p">),</span> <span class="n">duals</span><span class="p">,</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scootr_lg_ot_tol</span><span class="o">.</span><span class="n">solver_fcoot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of cost calculations: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_cost</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 100
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pi_feat_lg_ot_tol</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pi_samp_lg_ot_tol</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/04c728d9b93352002944e21fef49fbcb3cb7b36938107d0e0b5a61c3a2552a40.png" src="_images/04c728d9b93352002944e21fef49fbcb3cb7b36938107d0e0b5a61c3a2552a40.png" />
+</div>
+</div>
+<p>Here, we see a similar result as when we limited nits_uot in the first section, which is consistent, since our high tol_uot is roughly equivalent (in practice) to nits_uot = 1.</p>
+<p>Hopefully, with this tutorial completed, you now understand how to set up a SCOOTR object to run your various alignments with UCOOT or UGW. Our defaults should be appropriate for most cases, but feel free to play around with the parameters to get more convergence or more frequent tradeoffs between optimizing the two coupling matrices in the UCOOT case. We now recommend continuing on to the UCOOT/UGW tutorials in order to begin really using SCOOTR.</p>
+<p>Citations:</p>
+<p>Quang Huy Tran, Hicham Janati, Nicolas Courty, Rémi Flamary, Ievgen Redko, Pinar Demetci and Ritambhara Singh. Unbalanced CO-Optimal Transport. arXiv, <a class="reference external" href="http://stat.ML">stat.ML</a>, 2023.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="theory.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The Evolution of SCOOTR</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="UGW_tutorial.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">UGW Tutorial</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#iterations">Iterations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation">Evaluation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tolerance">Tolerance</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By R. Singh
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
