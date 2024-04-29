@@ -1,0 +1,86 @@
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
+    return future.result()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+joint_um=um.fit_transform(np.concatenate((adt, aligned_rna.numpy()), axis=0))
+
+adt_um=joint_um[0:1000,]
+rna_um=joint_um[1000:,]
+
+plt.scatter(adt_um[:,0], adt_um[:,1], c="k", s=5, label="ADT")
+plt.scatter(aligned_rna_um[:,0], aligned_rna_um[:,1], c="b", s=5, label="Gene Expression")
+plt.legend()
+plt.title("Colored based on domains")
+plt.show()
+------------------
+
+----- stderr -----
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f"n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.")
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mKeyboardInterrupt[0m                         Traceback (most recent call last)
+Cell [0;32mIn[30], line 1[0m
+[0;32m----> 1[0m joint_um[38;5;241m=[39m[43mum[49m[38;5;241;43m.[39;49m[43mfit_transform[49m[43m([49m[43mnp[49m[38;5;241;43m.[39;49m[43mconcatenate[49m[43m([49m[43m([49m[43madt[49m[43m,[49m[43m [49m[43maligned_rna[49m[38;5;241;43m.[39;49m[43mnumpy[49m[43m([49m[43m)[49m[43m)[49m[43m,[49m[43m [49m[43maxis[49m[38;5;241;43m=[39;49m[38;5;241;43m0[39;49m[43m)[49m[43m)[49m
+[1;32m      3[0m adt_um[38;5;241m=[39mjoint_um[[38;5;241m0[39m:[38;5;241m1000[39m,]
+[1;32m      4[0m rna_um[38;5;241m=[39mjoint_um[[38;5;241m1000[39m:,]
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:2887[0m, in [0;36mUMAP.fit_transform[0;34m(self, X, y, force_all_finite)[0m
+[1;32m   2851[0m [38;5;28;01mdef[39;00m [38;5;21mfit_transform[39m([38;5;28mself[39m, X, y[38;5;241m=[39m[38;5;28;01mNone[39;00m, force_all_finite[38;5;241m=[39m[38;5;28;01mTrue[39;00m):
+[1;32m   2852[0m [38;5;250m    [39m[38;5;124;03m"""Fit X into an embedded space and return that transformed[39;00m
+[1;32m   2853[0m [38;5;124;03m    output.[39;00m
+[1;32m   2854[0m 
+[0;32m   (...)[0m
+[1;32m   2885[0m [38;5;124;03m        Local radii of data points in the embedding (log-transformed).[39;00m
+[1;32m   2886[0m [38;5;124;03m    """[39;00m
+[0;32m-> 2887[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mfit[49m[43m([49m[43mX[49m[43m,[49m[43m [49m[43my[49m[43m,[49m[43m [49m[43mforce_all_finite[49m[43m)[49m
+[1;32m   2888[0m     [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39mtransform_mode [38;5;241m==[39m [38;5;124m"[39m[38;5;124membedding[39m[38;5;124m"[39m:
+[1;32m   2889[0m         [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39moutput_dens:
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:2528[0m, in [0;36mUMAP.fit[0;34m(self, X, y, force_all_finite)[0m
+[1;32m   2525[0m [38;5;28;01mtry[39;00m:
+[1;32m   2526[0m     [38;5;66;03m# sklearn pairwise_distances fails for callable metric on sparse data[39;00m
+[1;32m   2527[0m     _m [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39mmetric [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_sparse_data [38;5;28;01melse[39;00m [38;5;28mself[39m[38;5;241m.[39m_input_distance_func
+[0;32m-> 2528[0m     dmat [38;5;241m=[39m [43mpairwise_distances[49m[43m([49m[43mX[49m[43m[[49m[43mindex[49m[43m][49m[43m,[49m[43m [49m[43mmetric[49m[38;5;241;43m=[39;49m[43m_m[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_metric_kwds[49m[43m)[49m
+[1;32m   2529[0m [38;5;28;01mexcept[39;00m ([38;5;167;01mValueError[39;00m, [38;5;167;01mTypeError[39;00m) [38;5;28;01mas[39;00m e:
+[1;32m   2530[0m     [38;5;66;03m# metric is numba.jit'd or not supported by sklearn,[39;00m
+[1;32m   2531[0m     [38;5;66;03m# fallback to pairwise special[39;00m
+[1;32m   2533[0m     [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_sparse_data:
+[1;32m   2534[0m         [38;5;66;03m# Get a fresh metric since we are casting to dense[39;00m
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/sklearn/metrics/pairwise.py:2195[0m, in [0;36mpairwise_distances[0;34m(X, Y, metric, n_jobs, force_all_finite, **kwds)[0m
+[1;32m   2192[0m         [38;5;28;01mreturn[39;00m distance[38;5;241m.[39msquareform(distance[38;5;241m.[39mpdist(X, metric[38;5;241m=[39mmetric, [38;5;241m*[39m[38;5;241m*[39mkwds))
+[1;32m   2193[0m     func [38;5;241m=[39m partial(distance[38;5;241m.[39mcdist, metric[38;5;241m=[39mmetric, [38;5;241m*[39m[38;5;241m*[39mkwds)
+[0;32m-> 2195[0m [38;5;28;01mreturn[39;00m [43m_parallel_pairwise[49m[43m([49m[43mX[49m[43m,[49m[43m [49m[43mY[49m[43m,[49m[43m [49m[43mfunc[49m[43m,[49m[43m [49m[43mn_jobs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwds[49m[43m)[49m
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/sklearn/metrics/pairwise.py:1765[0m, in [0;36m_parallel_pairwise[0;34m(X, Y, func, n_jobs, **kwds)[0m
+[1;32m   1762[0m X, Y, dtype [38;5;241m=[39m _return_float_dtype(X, Y)
+[1;32m   1764[0m [38;5;28;01mif[39;00m effective_n_jobs(n_jobs) [38;5;241m==[39m [38;5;241m1[39m:
+[0;32m-> 1765[0m     [38;5;28;01mreturn[39;00m [43mfunc[49m[43m([49m[43mX[49m[43m,[49m[43m [49m[43mY[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwds[49m[43m)[49m
+[1;32m   1767[0m [38;5;66;03m# enforce a threading backend to prevent data communication overhead[39;00m
+[1;32m   1768[0m fd [38;5;241m=[39m delayed(_dist_wrapper)
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/sklearn/metrics/pairwise.py:1792[0m, in [0;36m_pairwise_callable[0;34m(X, Y, metric, force_all_finite, **kwds)[0m
+[1;32m   1790[0m iterator [38;5;241m=[39m itertools[38;5;241m.[39mcombinations([38;5;28mrange[39m(X[38;5;241m.[39mshape[[38;5;241m0[39m]), [38;5;241m2[39m)
+[1;32m   1791[0m [38;5;28;01mfor[39;00m i, j [38;5;129;01min[39;00m iterator:
+[0;32m-> 1792[0m     out[i, j] [38;5;241m=[39m [43mmetric[49m[43m([49m[43mX[49m[43m[[49m[43mi[49m[43m][49m[43m,[49m[43m [49m[43mY[49m[43m[[49m[43mj[49m[43m][49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwds[49m[43m)[49m
+[1;32m   1794[0m [38;5;66;03m# Make symmetric[39;00m
+[1;32m   1795[0m [38;5;66;03m# NB: out += out.T will produce incorrect results[39;00m
+[1;32m   1796[0m out [38;5;241m=[39m out [38;5;241m+[39m out[38;5;241m.[39mT
+
+[0;31mKeyboardInterrupt[0m: 
+

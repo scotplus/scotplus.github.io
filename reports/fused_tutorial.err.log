@@ -1,0 +1,90 @@
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
+    return future.result()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+D_samp_m = torch.from_numpy(D_samp.numpy() + 0.95*np.identity(1000, dtype='float32')).to(device)
+
+pi_samp_smp, _, pi_feat_smp = scot.ucoot(torch.from_numpy(adt).to(device), torch.from_numpy(rna).to(device), eps=1e-2, rho=(1,1), beta=(1, 0), D=(D_samp, 0), log=True)
+
+pi_samp_smp_m, _, pi_feat_smp_m = scot.ucoot(torch.from_numpy(adt).to(device), torch.from_numpy(rna).to(device), eps=1e-2, rho=(1,1), beta=(1, 0), D=(D_samp_m, 0), log=True)
+
+aligned_rna_smp = get_barycentre(adt, pi_samp_smp)
+
+aligned_rna_smp_m = get_barycentre(adt, pi_samp_smp_m)
+------------------
+
+----- stdout -----
+BCD Iteration 1 - Loss: 0.012936, 0.090179
+----- stdout -----
+BCD Iteration 2 - Loss: 0.011612, 0.089055
+BCD Iteration 3 - Loss: 0.011609, 0.089054
+BCD Iteration 4 - Loss: 0.011610, 0.089055
+----- stdout -----
+BCD Iteration 1 - Loss: 0.052560, 0.064207
+----- stdout -----
+BCD Iteration 2 - Loss: 0.016227, 0.037230
+----- stdout -----
+BCD Iteration 3 - Loss: 0.012160, 0.034881
+----- stdout -----
+BCD Iteration 4 - Loss: 0.011953, 0.034555
+----- stdout -----
+BCD Iteration 5 - Loss: 0.011818, 0.034420
+----- stdout -----
+BCD Iteration 6 - Loss: 0.011708, 0.034350
+----- stdout -----
+BCD Iteration 7 - Loss: 0.011645, 0.034315
+----- stdout -----
+BCD Iteration 8 - Loss: 0.011612, 0.034292
+----- stdout -----
+BCD Iteration 9 - Loss: 0.011599, 0.034277
+----- stdout -----
+BCD Iteration 10 - Loss: 0.011596, 0.034267
+----- stdout -----
+BCD Iteration 11 - Loss: 0.011598, 0.034260
+----- stdout -----
+BCD Iteration 12 - Loss: 0.011603, 0.034255
+----- stdout -----
+BCD Iteration 13 - Loss: 0.011607, 0.034252
+----- stdout -----
+BCD Iteration 14 - Loss: 0.011611, 0.034248
+----- stdout -----
+BCD Iteration 15 - Loss: 0.011612, 0.034244
+----- stderr -----
+/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/scotplus/utils/alignment.py:21: FutureWarning: The input object of type 'Tensor' is an array-like implementing one of the corresponding protocols (`__array__`, `__array_interface__` or `__array_struct__`); but not a sequence (or 0-D). In the future, this object will be coerced as if it was first converted using `np.array(obj)`. To retain the old behaviour, you have to either modify the type 'Tensor', or assign to an empty array created with `np.empty(correct_shape, dtype=object)`.
+  barycentre = pi_samp @ Xt / pi_samp.sum(1).reshape(-1, 1)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[16], line 7[0m
+[1;32m      3[0m pi_samp_smp, _, pi_feat_smp [38;5;241m=[39m scot[38;5;241m.[39mucoot(torch[38;5;241m.[39mfrom_numpy(adt)[38;5;241m.[39mto(device), torch[38;5;241m.[39mfrom_numpy(rna)[38;5;241m.[39mto(device), eps[38;5;241m=[39m[38;5;241m1e-2[39m, rho[38;5;241m=[39m([38;5;241m1[39m,[38;5;241m1[39m), beta[38;5;241m=[39m([38;5;241m1[39m, [38;5;241m0[39m), D[38;5;241m=[39m(D_samp, [38;5;241m0[39m), log[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[1;32m      5[0m pi_samp_smp_m, _, pi_feat_smp_m [38;5;241m=[39m scot[38;5;241m.[39mucoot(torch[38;5;241m.[39mfrom_numpy(adt)[38;5;241m.[39mto(device), torch[38;5;241m.[39mfrom_numpy(rna)[38;5;241m.[39mto(device), eps[38;5;241m=[39m[38;5;241m1e-2[39m, rho[38;5;241m=[39m([38;5;241m1[39m,[38;5;241m1[39m), beta[38;5;241m=[39m([38;5;241m1[39m, [38;5;241m0[39m), D[38;5;241m=[39m(D_samp_m, [38;5;241m0[39m), log[38;5;241m=[39m[38;5;28;01mTrue[39;00m)
+[0;32m----> 7[0m aligned_rna_smp [38;5;241m=[39m [43mget_barycentre[49m[43m([49m[43madt[49m[43m,[49m[43m [49m[43mpi_samp_smp[49m[43m)[49m
+[1;32m      9[0m aligned_rna_smp_m [38;5;241m=[39m get_barycentre(adt, pi_samp_smp_m)
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/scotplus/utils/alignment.py:21[0m, in [0;36mget_barycentre[0;34m(Xt, pi_samp)[0m
+[1;32m      6[0m [38;5;28;01mdef[39;00m [38;5;21mget_barycentre[39m(Xt, pi_samp):
+[1;32m      7[0m [38;5;250m    [39m[38;5;124;03m"""[39;00m
+[1;32m      8[0m [38;5;124;03m    Calculate the barycentre by the following formula: diag(1 / P1_{n_2}) P Xt[39;00m
+[1;32m      9[0m [38;5;124;03m    (need to be typed in latex).[39;00m
+[0;32m   (...)[0m
+[1;32m     18[0m [38;5;124;03m    Barycentre of size nx x dy[39;00m
+[1;32m     19[0m [38;5;124;03m    """[39;00m
+[0;32m---> 21[0m     barycentre [38;5;241m=[39m [43mpi_samp[49m[43m [49m[38;5;241;43m@[39;49m[43m [49m[43mXt[49m [38;5;241m/[39m pi_samp[38;5;241m.[39msum([38;5;241m1[39m)[38;5;241m.[39mreshape([38;5;241m-[39m[38;5;241m1[39m, [38;5;241m1[39m)
+[1;32m     23[0m     [38;5;28;01mreturn[39;00m barycentre
+
+[0;31mValueError[0m: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (3,) + inhomogeneous part.
+

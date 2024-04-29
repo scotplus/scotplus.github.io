@@ -1,0 +1,1543 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>UGW Tutorial &#8212; SCOOTR</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'UGW_tutorial';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="UCOOT Tutorial" href="UCOOT_tutorial.html" />
+    <link rel="prev" title="Setup Tutorial" href="setup_tutorial.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOOTR - Home"/>
+    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOOTR - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to SCOT+
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Core Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Getting Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">The Evolution of SCOT+</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup_tutorial.html">Setup Tutorial</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">UGW Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UCOOT_tutorial.html">UCOOT Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fused_tutorial.html">Fused Formulation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AGW_tutorial.html">AGW Tutorial</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exploration on Real World Datasets</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="placeholder.html">Applications Section</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/scotplus/book_source.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/scotplus/book_source.git/issues/new?title=Issue%20on%20page%20%2FUGW_tutorial.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/UGW_tutorial.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>UGW Tutorial</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-download">Data download</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-datasets-to-distance-matrices">Converting Datasets to Distance Matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-ugw">Default UGW</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropic-regularization">Entropic Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-relaxation">Marginal Relaxation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ugw-tutorial">
+<h1>UGW Tutorial<a class="headerlink" href="#ugw-tutorial" title="Link to this heading">#</a></h1>
+<p>In this tutorial, we will examine how to use Gromov-Wasserstein (GW) and unbalanced Gromov-Wasserstein (UGW) to align a CITEseq dataset, which has co-assayed antibody and gene expression data on 7985 human/mouse blood cells. We select 1000 human samples from this dataset, and split the data into two matrices: one that contains antibody information on these samples and another that contains gene expression information on the same samples. The goal in this tutorial (as well as UCOOT) will be to recover which sample matches with which sample using optimal transport. So, we are trying to recover a 1-1 mapping that we know exists.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before beginning this tutorial, note that it serves more as an introduction to UCOOT by showing a specific application (UGW), as well as setting up intuition for AGW later on. UCOOT is a generalized version of UGW, and UGW can be directly recovered by making the right choices for the inputs to UCOOT. So, if you want a more detailed tutorial of the generalized version, go to the UCOOT tutorial. This tutorial goes into a little bit more detail on the specifics of each hyperparameter, but leaves some of the potential steps to the UCOOT tutorial.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you have not yet configured a SCOT+ directory of some kind, see our installation instructions markdown. Once you complete those steps or set up your own virual environment, continue on here.</p>
+<p>If you aren’t sure what any of the parameters for setting up a Solver object mean, try our setup tutorial for getting used to using the tool. We use the default parameters for this tutorial.</p>
+<p>If you are unsure what some of the notation means throughout the rest of this document, try reading our optimal transport theory section to get more comfortable.</p>
+<p>If you are already comfortable with UGW, try moving on to our UCOOT tutorial.</p>
+</div>
+<section id="data-download">
+<h2>Data download<a class="headerlink" href="#data-download" title="Link to this heading">#</a></h2>
+<p>If you wish to work with the raw PBMC_ADT and PBMC_RNA files from the CITE-seq dataset (we will use the mostly preprocessed ones), run the following commands in the terminal in the root directory of this tutorial repository:</p>
+<center> sh ./download_scripts/CITEseq_download.sh </center><p>If you download the code manually instead, make sure to produce the same file structure - i.e., there should be a data directory with a CITEseq subdirectory containing your csv files. This folder should already be populated with our two preprocessed datasets.</p>
+</section>
+<section id="preprocessing">
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
+<p>We will start with some mild preprocessing, such as loading the preprocessed datasets into variables local to this notebook. We begin by setting up pytorch. Use this as is, unless you would like to try a different device.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Torch version: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CUDA available: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CUDA version: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">cuda</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CUDNN version: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">version</span><span class="p">()))</span>
+
+<span class="n">use_cuda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:0&quot;</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span><span class="o">=</span><span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Torch version: 2.1.0
+CUDA available: False
+CUDA version: None
+CUDNN version: None
+</pre></div>
+</div>
+</div>
+</div>
+<p>In these tutorials, we omit the exact preprocessing steps for this dataset. However, if you would like to replicate the steps in the appendix of Tran et al., implement your preprocessing of the raw datasets here. Use the shape attribute for ndarrays/dataframes/anndata to get a sense for how large these datasets are.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="kn">from</span> <span class="nn">scotplus.solvers</span> <span class="kn">import</span> <span class="n">SinkhornSolver</span>
+<span class="kn">from</span> <span class="nn">scotplus.utils.alignment</span> <span class="kn">import</span> <span class="n">compute_graph_distances</span><span class="p">,</span> <span class="n">get_barycentre</span><span class="p">,</span> <span class="n">calc_domainAveraged_FOSCTTM</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">umap</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">normalize</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Helvetica Neue&#39;</span>
+
+<span class="n">adt_raw</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/CITEseq/citeseq_adt_normalized_1000cells.csv&quot;</span><span class="p">)</span>
+<span class="n">rna_raw</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/CITEseq/citeseq_rna_normalizedFC_1000cells.csv&quot;</span><span class="p">)</span>
+<span class="n">adt_feat_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CD11a&quot;</span><span class="p">,</span><span class="s2">&quot;CD11c&quot;</span><span class="p">,</span><span class="s2">&quot;CD123&quot;</span><span class="p">,</span><span class="s2">&quot;CD127-IL7Ra&quot;</span><span class="p">,</span><span class="s2">&quot;CD14&quot;</span><span class="p">,</span><span class="s2">&quot;CD16&quot;</span><span class="p">,</span><span class="s2">&quot;CD161&quot;</span><span class="p">,</span><span class="s2">&quot;CD19&quot;</span><span class="p">,</span><span class="s2">&quot;CD197-CCR7&quot;</span><span class="p">,</span><span class="s2">&quot;CD25&quot;</span><span class="p">,</span><span class="s2">&quot;CD27&quot;</span><span class="p">,</span><span class="s2">&quot;CD278-ICOS&quot;</span><span class="p">,</span><span class="s2">&quot;CD28&quot;</span><span class="p">,</span><span class="s2">&quot;CD3&quot;</span><span class="p">,</span><span class="s2">&quot;CD34&quot;</span><span class="p">,</span><span class="s2">&quot;CD38&quot;</span><span class="p">,</span><span class="s2">&quot;CD4&quot;</span><span class="p">,</span><span class="s2">&quot;CD45RA&quot;</span><span class="p">,</span><span class="s2">&quot;CD45RO&quot;</span><span class="p">,</span><span class="s2">&quot;CD56&quot;</span><span class="p">,</span><span class="s2">&quot;CD57&quot;</span><span class="p">,</span><span class="s2">&quot;CD69&quot;</span><span class="p">,</span><span class="s2">&quot;CD79b&quot;</span><span class="p">,</span><span class="s2">&quot;CD8a&quot;</span><span class="p">,</span><span class="s2">&quot;HLA.DR&quot;</span><span class="p">]</span>
+<span class="n">rna_feat_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ITGAL&quot;</span><span class="p">,</span><span class="s2">&quot;ITGAX&quot;</span><span class="p">,</span><span class="s2">&quot;IL3RA&quot;</span><span class="p">,</span><span class="s2">&quot;IL7R&quot;</span><span class="p">,</span><span class="s2">&quot;CD14&quot;</span><span class="p">,</span><span class="s2">&quot;FCGR3A&quot;</span><span class="p">,</span><span class="s2">&quot;KLRB1&quot;</span><span class="p">,</span><span class="s2">&quot;CD19&quot;</span><span class="p">,</span><span class="s2">&quot;CCR7&quot;</span><span class="p">,</span><span class="s2">&quot;IL2RA&quot;</span><span class="p">,</span><span class="s2">&quot;CD27&quot;</span><span class="p">,</span><span class="s2">&quot;ICOS&quot;</span><span class="p">,</span><span class="s2">&quot;CD28&quot;</span><span class="p">,</span><span class="s2">&quot;CD3E&quot;</span><span class="p">,</span><span class="s2">&quot;CD34&quot;</span><span class="p">,</span><span class="s2">&quot;CD38&quot;</span><span class="p">,</span><span class="s2">&quot;CD4&quot;</span><span class="p">,</span><span class="s2">&quot;PTPRC&quot;</span><span class="p">,</span><span class="s2">&quot;PTPRC&quot;</span><span class="p">,</span><span class="s2">&quot;NCAM1&quot;</span><span class="p">,</span><span class="s2">&quot;B3GAT1&quot;</span><span class="p">,</span><span class="s2">&quot;CD69&quot;</span><span class="p">,</span><span class="s2">&quot;CD79B&quot;</span><span class="p">,</span><span class="s2">&quot;CD8A&quot;</span><span class="p">,</span><span class="s2">&quot;HLA-DRA&quot;</span><span class="p">]</span> 
+<span class="n">samp_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cell </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">adt_raw</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In order to examine further how exactly UGW alignment works later on in this tutorial, we examine a subset of 10 of the 25 gene-antibody pairs.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># l2 normalization of both datasets, which we found to help with single cell applications</span>
+<span class="n">adt_full_annotated</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">normalize</span><span class="p">(</span><span class="n">adt_raw</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()))</span>
+<span class="n">rna_full_annotated</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">normalize</span><span class="p">(</span><span class="n">rna_raw</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()))</span>
+
+<span class="c1"># annotation of both domains</span>
+<span class="n">adt_full_annotated</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">adt_full_annotated</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">samp_labels</span><span class="p">,</span> <span class="n">adt_feat_labels</span>
+<span class="n">rna_full_annotated</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">rna_full_annotated</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">samp_labels</span><span class="p">,</span> <span class="n">rna_feat_labels</span>
+
+<span class="c1"># gather full data in numpy</span>
+<span class="n">adt_full</span> <span class="o">=</span> <span class="n">adt_full_annotated</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">rna_full</span> <span class="o">=</span> <span class="n">rna_full_annotated</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="c1"># subset annotated data</span>
+<span class="n">adt_annotated</span> <span class="o">=</span> <span class="n">adt_full_annotated</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">rna_annotated</span> <span class="o">=</span> <span class="n">rna_full_annotated</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="c1"># gather subset in numpy</span>
+<span class="n">adt</span> <span class="o">=</span> <span class="n">adt_annotated</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">rna</span> <span class="o">=</span> <span class="n">rna_annotated</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have our data, we visualize it with two dimensionality reduction techniques: UMAP and PCA. These visualization techniques can be helpful for visualizing any intermediate steps through this project, although our eventual coupling matrices are better visualized with a heatmap.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">um</span> <span class="o">=</span> <span class="n">umap</span><span class="o">.</span><span class="n">UMAP</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">original_adt_um</span><span class="o">=</span><span class="n">um</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span>
+<span class="n">original_rna_um</span><span class="o">=</span><span class="n">um</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span>
+
+<span class="c1">#Visualization of the global geometry</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">original_adt_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">original_adt_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;ADT Domain </span><span class="se">\n</span><span class="s2"> before Alignment&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">original_rna_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">original_rna_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Gene Expression Domain </span><span class="se">\n</span><span class="s2"> before Alignment&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<img alt="_images/2713b180ab6c93781da625cde3ebef76f91b9c9e34040a550722eafb37d39191.png" src="_images/2713b180ab6c93781da625cde3ebef76f91b9c9e34040a550722eafb37d39191.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="n">pca</span><span class="o">=</span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">original_adt_pca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span>
+<span class="n">original_rna_pca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span>
+
+<span class="c1">#Visualization of the global geometry</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">original_adt_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">original_adt_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;ADT Domain </span><span class="se">\n</span><span class="s2"> Before Alignment&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">original_rna_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">original_rna_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Gene Expression Domain </span><span class="se">\n</span><span class="s2"> Before Alignment&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6692e3dd02e734ad2ca3ad31ac5fac389ec711407b609a1ac7358a4ef1fc1363.png" src="_images/6692e3dd02e734ad2ca3ad31ac5fac389ec711407b609a1ac7358a4ef1fc1363.png" />
+</div>
+</div>
+</section>
+<section id="converting-datasets-to-distance-matrices">
+<h2>Converting Datasets to Distance Matrices<a class="headerlink" href="#converting-datasets-to-distance-matrices" title="Link to this heading">#</a></h2>
+<p>In this tutorial, we will go over how to use a Solver object to align your data using UGW. UGW is a simpler form of UCOOT, which seeks only to minimize the transport cost for samples, and ignores the problem of aligning features. We can begin by instantiating a Solver object. These parameters (as per setup tutorial) are set to make this notebook run a bit faster, in addition to the fact that the CITEseq data doesn’t require quite as many UOT iterations to converge to a nice result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">tol_uot</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the case of UGW, the goal is to generate one coupling matrix, matching samples from one domain to samples of the other. UGW treats the samples of each experiment as two probability distributions (one for each experiment) and finds the coupling matrix that determines the most cost-efficient way to move mass from one distribution to the other. So, UGW will produce a matrix that determines how much mass of a sample in one domain should go to each sample in the other domain (values seen across each sample’s respective row or column). This matrix is then used to project data from one domain into the other.</p>
+<p>In order to do this, UGW seeks to minimize the cost of transporting each pair of points onto each other pair of points. In particular, for a given <span class="math notranslate nohighlight">\(x_a\)</span> and <span class="math notranslate nohighlight">\(x_b\)</span> in one domain and a given <span class="math notranslate nohighlight">\(y_a\)</span> and <span class="math notranslate nohighlight">\(y_b\)</span> in the other domain, UGW calculates the cost of transporting <span class="math notranslate nohighlight">\(x_a\)</span> and <span class="math notranslate nohighlight">\(x_b\)</span> to <span class="math notranslate nohighlight">\(y_a\)</span> and <span class="math notranslate nohighlight">\(y_b\)</span>: <span class="math notranslate nohighlight">\(L(D(x_a, x_b), D(y_a, y_b)) \cdot \pi_{x_a, y_a} \cdot \pi_{x_b, y_b}\)</span>, where <span class="math notranslate nohighlight">\(L\)</span> is a given cost function and <span class="math notranslate nohighlight">\(D\)</span> is some measure of intra-domain distance (in our case, l2 distance or nearest-neighbor connectivity). So, UGW seeks to select <span class="math notranslate nohighlight">\(\pi\)</span> to minimize these costs summed across all pairs of points in each domain. Looking at this cost function, we can see that UGW penalizes matching a pair of points based on some measure of the difference in pairwise distances; i.e., UGW seeks to maintain local geometry. As another way of thinking about it, UGW encourages a large <span class="math notranslate nohighlight">\(\pi_{xy}\)</span> if <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> have similar “locations” relative to the rest of their domain.</p>
+<p>Looking at the cost function again, we can see that UGW requires us to know the distance between each pair of points resting in the same domain. In fact, we input these distance matrices to UGW in order to make our alignments. Let’s look at a few different ways we can calculate these distance matrices:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># l2 distance</span>
+<span class="n">D_adt_l2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cdist</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">D_rna_l2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cdist</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># knn connectivity distance</span>
+<span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">compute_graph_distances</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">compute_graph_distances</span><span class="p">(</span><span class="n">rna</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="default-ugw">
+<h2>Default UGW<a class="headerlink" href="#default-ugw" title="Link to this heading">#</a></h2>
+<p>Now, we will start with an example of UGW using its default parameters, followed by a completed alignment. Note that, to complete an alignment, we must use the produced coupling matrix to project the samples in one domain into the other. Since we use euclidean distance to penalize the difference in pairwise distances (<span class="math notranslate nohighlight">\(L\)</span> function in the cost in the previous section), this projection, for a given <span class="math notranslate nohighlight">\(y_a\)</span> in the domain we are seeking to project, takes the row/column-wise (depending on the orientation of <span class="math notranslate nohighlight">\(\pi\)</span>) weighted average associated with <span class="math notranslate nohighlight">\(y_a\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(y_a\)</span> projected onto <span class="math notranslate nohighlight">\(X = \frac{\Sigma_{i=1}^{n_x}(x_i*\pi_{x_i,y_a})}{\Sigma_{i=1}^{n_x} (\pi_{x_i,y_a})}\)</span></p>
+<p>Once this process is completed for all <span class="math notranslate nohighlight">\(y_j\)</span>, we recover UGW’s predicted values for the cells from domain <span class="math notranslate nohighlight">\(y\)</span> on the features of domain <span class="math notranslate nohighlight">\(X\)</span>. In a separately assayed example (not as trivial like this case), this alignment will give us the measurement for every feature in <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(y\)</span> on the sample set of <span class="math notranslate nohighlight">\(y\)</span> – we have the measured values on <span class="math notranslate nohighlight">\(y\)</span>’s features and the predicted values on <span class="math notranslate nohighlight">\(X\)</span>’s features. Let’s see this workflow in action (UGW followed by projection) using UGW’s default parameters (except for a change in <span class="math notranslate nohighlight">\(\epsilon\)</span>, which we will examine later). Then, we will move on to the two main hyperparameters for this method. Note that for now, we will stick to KNN distance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set verbose=True to get a breakdown of the cost progression during optimization</span>
+<span class="c1"># set log=True to get extra return values, log_cost and log_ent_cost, which display the cost progression</span>
+<span class="c1"># set early stopping tol to end convergence early based on displayed costs</span>
+<span class="p">(</span><span class="n">pi_samp_1</span><span class="p">,</span> <span class="n">pi_samp_2</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 10.927032, 11.109968
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 9.653778, 9.900175
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 9.159737, 9.415975
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 9.011368, 9.274309
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 9.005905, 9.269339
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 9.005127, 9.267925
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 9.003723, 9.266100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 8.994026, 9.256955
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 8.987350, 9.251730
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 8.985947, 9.250631
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 8.985138, 9.249963
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 8.984802, 9.249677
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 8.984665, 9.249556
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 14 - Loss: 8.984795, 9.249692
+BCD Iteration 15 - Loss: 8.984825, 9.249728
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the above code, notice that we get back a lot more than just a singular coupling matrix. Since we solve for UGW by isolating a subroutine in our AGW solver (more in the AGW tutorial), we get back three coupling matrices: pi_samp, pi_samp_prime, and pi_feat (which is meaningless and uniform, in this case). If we re-examine the GW cost from above, we can see that <span class="math notranslate nohighlight">\(\pi\)</span> is called upon twice: <span class="math notranslate nohighlight">\(L(D(x_a, x_b), D(y_a, y_b)) \cdot \pi_{x_a, y_a} \cdot \pi_{x_b, y_b}\)</span>. pi_samp_prime is a second copy of pi_samp that we use in place of the second call to <span class="math notranslate nohighlight">\(\pi\)</span> in this cost function, which should theoretically converge to pi_samp (given our pairwise transport should be the same, given multiplication is commutative and our sum order over <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> can be switched easily).</p>
+<p>The next two results we get are only present if we set log=True. If we were to set log=false, we would only have three values to unpack in the above code. However, if log=True, we also get back a log of the transport cost (log_cost) in addition to the log of the entropic + transport cost (log_ent_cost) as a list. These pairs of costs are what we see printed in the verbose output of GW above, labelled “Loss.” We will go over entropic cost in the next subsection of this tutorial. For now, we move on to the application of these coupling matrices: alignment.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Be careful how you order your matrices between UGW and alignment. pi_samp will have the samples of the first matrix you input on its vertical axis and the samples of the second matrix you input on its horizontal axis. Our get_barycentre method takes in the anchor domain (the one you want to project onto) and assumes that the anchor domain samples are on the vertical axis during projection. Therefore, make sure to put your desired anchor domain first in the previous step. So, if we want to project y onto X, (as we are doing in this case), we put X before y above, and then pass in X to get_barycentre. We then get back our aligned y.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aligned_rna</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp_1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>From here, we can score the alignment. Note that we generated <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(y\)</span> such that they contain data on the same set of 1000 cells (co-assayed); this means that, in a perfect alignment, aligned_y would be identical to <span class="math notranslate nohighlight">\(X\)</span>. So, we can score aligned_y based on some measure of how close it is to <span class="math notranslate nohighlight">\(X\)</span>. To do this, we use FOSCTTM (fraction of samples closer than true match) as described in the UGW tutorial. In order to calculate a score, for each sample <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(X\)</span>, we compute a ranking of how close (l2 distance) each sample in aligned_y is to <span class="math notranslate nohighlight">\(x\)</span>. From here, we find the index at which the true match for <span class="math notranslate nohighlight">\(x\)</span> falls within this sorted ranking. This index tells us how many samples in aligned_y are closer to <span class="math notranslate nohighlight">\(x\)</span> than its true match, which is a measure of how well the alignment matched samples in y to <span class="math notranslate nohighlight">\(x\)</span>. By taking the average of these scores across all <span class="math notranslate nohighlight">\(x\)</span>, we can get a sense for how good the alignment was. The lower the FOSCTTM, the better.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this tutorial, we are not going for perfect alignments; rather, we are trying to get some intuition for how the different parameters modify the alignment. As we learn better how to tune our hyperparameters throughout the course of this core chapter, the alignment scores will gradually improve.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fracs</span> <span class="o">=</span> <span class="n">calc_domainAveraged_FOSCTTM</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average FOSCTTM score for this alignment with X onto Y is:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fracs</span><span class="p">))</span>
+<span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;UGW alignment FOSCTTM </span><span class="se">\n</span><span class="s2"> average value: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fracs</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fracs</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">fracs</span><span class="p">),</span> <span class="s2">&quot;b--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">legend_label</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Cells&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sorted FOSCTTM&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Average FOSCTTM score for this alignment with X onto Y is: 0.3822207207207207
+</pre></div>
+</div>
+<img alt="_images/ea1e58b933fbc4b0b9505dc65922bccfbb80adbfbf85f1bae4c3b7e38b736f7c.png" src="_images/ea1e58b933fbc4b0b9505dc65922bccfbb80adbfbf85f1bae4c3b7e38b736f7c.png" />
+</div>
+</div>
+<p>With the newly aligned data, we can now see how the alignment looks on UMAP and PCA:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joint_um</span><span class="o">=</span><span class="n">um</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">adt_um</span><span class="o">=</span><span class="n">joint_um</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">,]</span>
+<span class="n">aligned_rna_um</span><span class="o">=</span><span class="n">joint_um</span><span class="p">[</span><span class="mi">1000</span><span class="p">:,]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">adt_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">adt_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ADT&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">aligned_rna_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">aligned_rna_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gene Expression&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Colored based on domains&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<img alt="_images/43857c400325b15696f349a7ec1b80831af9af573dc93c5282adb167ceeabce5.png" src="_images/43857c400325b15696f349a7ec1b80831af9af573dc93c5282adb167ceeabce5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span><span class="o">=</span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">joint_pca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">adt_pca</span><span class="o">=</span><span class="n">joint_pca</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">,]</span>
+<span class="n">aligned_rna_pca</span><span class="o">=</span><span class="n">joint_pca</span><span class="p">[</span><span class="mi">1000</span><span class="p">:,]</span>
+
+<span class="c1"># Plot aligned domains, samples colored by domain identity:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">adt_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">adt_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ADT&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">aligned_rna_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">aligned_rna_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gene Expression&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Colored based on domains&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d428ba00f24e018bcd61330d7baed12bad9478b8526880bb20484d313707c85d.png" src="_images/d428ba00f24e018bcd61330d7baed12bad9478b8526880bb20484d313707c85d.png" />
+</div>
+</div>
+<p>Note that the alignments look nice (the shapes match up well). This property does not guarantee a good alignment, as we can see by our high original FOSCTTM score. In fact, it is more a representation of the sparsity of the coupling matrix – if the coupling matrix is very sparse, it will get close to attempting a 1-1 matching, which could be wrong (even though it is 1-1). Having a coupling matrix that is too sparse can be quite dangerous in cases where there is no underlying 1-1 sample map.</p>
+<p>From here, we can examine the coupling matrices themselves to see what they may tell us. Given that these sample matrices are large, rather than graphing them, we will look at the rough distance between the two matrices (total difference between cells):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total sum of pi_samp_1: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">pi_samp_1</span><span class="p">)))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total sum of pi_samp_2: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">pi_samp_2</span><span class="p">)))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total sum of differences: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">pi_samp_1</span> <span class="o">-</span> <span class="n">pi_samp_2</span><span class="p">)))))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Total sum of pi_samp_1: 1.0000033378601074
+Total sum of pi_samp_2: 1.000002145767212
+Total sum of differences: 0.0006263484247028828
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, the matrices are quite close; relative to their total size, they don’t differ much. If these matrices converged perfectly, we would see no difference, given the symmetry of the distance matrices we discussed above.</p>
+</section>
+<section id="entropic-regularization">
+<h2>Entropic Regularization<a class="headerlink" href="#entropic-regularization" title="Link to this heading">#</a></h2>
+<p>Now that we have one example done, let’s look at how entropic regularization and the <span class="math notranslate nohighlight">\(\epsilon\)</span> hyperparameter change the alignment process. In addition to the main part of the cost function as described in the previous section, UGW adds an extra cost term measuring the entropy of the coupling matrix multiplied by the hyperparameter <span class="math notranslate nohighlight">\(\epsilon\)</span>. This means that, for larger values of <span class="math notranslate nohighlight">\(\epsilon\)</span>, the coupling matrix will have more entropy, meaning it will be more dense (farther from a sparse alignment of samples). In addition, the larger <span class="math notranslate nohighlight">\(\epsilon\)</span> is, the faster Sinkhorn’s algorithm will converge and produce a cost-minimizing coupling matrix. Let’s see these effects in action:</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Entropic regularization does not apply to all OT algorithms one might use to solve the inner components of a BCD iteration (referring to a future generic Solver object). Sinkhorn is an example of an algorithm that depends on entropic regularization, and a common one we use to speed up alignment. However, conditional gradient descent, earth mover’s distance, and majorization-minimization (possible future algorithms) all do not require entropic regularization.</p>
+<p>Although entropic regularization only really applies for the Sinkhorn algorithm, Sinkhorn is the most main method we use for OT iterations (to the point that the following section is warranted).</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># increasing early_stopping_tol to demonstrate convergence properties</span>
+<span class="p">(</span><span class="n">pi_samp_sm</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_ent_cost</span><span class="p">))</span>
+
+<span class="p">(</span><span class="n">pi_samp_med</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_ent_cost</span><span class="p">))</span>
+
+<span class="p">(</span><span class="n">pi_samp_lg</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_ent_cost</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">pi_samp_lg</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note the decreasing length of the cost log. The longer cost logs for higher <span class="math notranslate nohighlight">\(\epsilon\)</span> indicate that more iterations were required for convergence to an optimal coupling matrix. This result indicates that larger values of <span class="math notranslate nohighlight">\(\epsilon\)</span> do help with faster convergence. Now, let’s align the data and examine the FOSCTTM scores for each alignment:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aligned_rna_sm</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp_sm</span><span class="p">)</span>
+<span class="n">aligned_rna_med</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp_med</span><span class="p">)</span>
+<span class="n">aligned_rna_lg</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp_lg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">aligned_rna</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">aligned_rna_sm</span><span class="p">,</span> <span class="s1">&#39;eps=5e-2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_med</span><span class="p">,</span> <span class="s1">&#39;eps=5e-1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_lg</span><span class="p">,</span> <span class="s1">&#39;eps=10&#39;</span><span class="p">)]:</span>
+    <span class="n">fracs</span> <span class="o">=</span> <span class="n">calc_domainAveraged_FOSCTTM</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;UGW alignment FOSCTTM </span><span class="se">\n</span><span class="s2"> average value for </span><span class="si">{0}</span><span class="s2">: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fracs</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fracs</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">fracs</span><span class="p">),</span> <span class="s2">&quot;b--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">legend_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Cells&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sorted FOSCTTM&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0a24d0a66480bce93066d86fe90e5f77cab792648820b205574ceb302a020dfa.png" src="_images/0a24d0a66480bce93066d86fe90e5f77cab792648820b205574ceb302a020dfa.png" />
+<img alt="_images/da691602f898825fdade2bf0d276f7c75bc27f836aa7afdeb6ef751eed45a162.png" src="_images/da691602f898825fdade2bf0d276f7c75bc27f836aa7afdeb6ef751eed45a162.png" />
+<img alt="_images/3c2ff4ba9d6ea245a0b60941053bc08d25fe76857054c2e9769a4600f12c8db9.png" src="_images/3c2ff4ba9d6ea245a0b60941053bc08d25fe76857054c2e9769a4600f12c8db9.png" />
+</div>
+</div>
+<p>Note that a smaller value of <span class="math notranslate nohighlight">\(\epsilon\)</span> does not necessarily guarantee better alignment quality. In fact, since smaller <span class="math notranslate nohighlight">\(\epsilon\)</span> encourages sparsity, it could lead to the sparsity pitfalls (confidently incorrect matchings) we looked at earlier in this section. To find the <span class="math notranslate nohighlight">\(\epsilon\)</span> best for your particular data, you can do a search of a given log space:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># an example of epsilon search</span>
+<span class="n">pi_samp_dt</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># for val in np.logspace(start=-4, stop=-1, num=10):</span>
+    <span class="c1"># (pi_samp_dt[val], _) = scot.gw(Dx_knn, Dy_knn, eps=val)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>From here, we will continue our investigation of <span class="math notranslate nohighlight">\(\epsilon\)</span> by visualizing the data. We will start with the three coupling matrices.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pi_samp</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">pi_samp_sm</span><span class="p">,</span> <span class="s1">&#39;eps=1e-2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">pi_samp_med</span><span class="p">,</span> <span class="s1">&#39;eps=5e-1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">pi_samp_lg</span><span class="p">,</span> <span class="s1">&#39;eps=10&#39;</span><span class="p">)]:</span>
+    <span class="c1"># note that we look at a corner of the coupling matrix as a proxy to look at density    </span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pi_samp</span><span class="p">[:</span><span class="mi">50</span><span class="p">,:</span><span class="mi">50</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4d255f7a00c062110308526f293ed4e799cd7706784f5d6dd538756d54720c6d.png" src="_images/4d255f7a00c062110308526f293ed4e799cd7706784f5d6dd538756d54720c6d.png" />
+<img alt="_images/ca355148f83583f39a8d61ffc03aadb6ff873b8383be7166d7a8d64ad732cc10.png" src="_images/ca355148f83583f39a8d61ffc03aadb6ff873b8383be7166d7a8d64ad732cc10.png" />
+<img alt="_images/1c0beeb2c2b0ffd2c13b5bedecd3b5d9f1d82f31518b780030952c24e56760b7.png" src="_images/1c0beeb2c2b0ffd2c13b5bedecd3b5d9f1d82f31518b780030952c24e56760b7.png" />
+</div>
+</div>
+<p>Note how, for the larger value of <span class="math notranslate nohighlight">\(\epsilon\)</span>, we get a much more dense coupling matrix. This result is as we expected: larger <span class="math notranslate nohighlight">\(\epsilon\)</span> places a larger emphasis on entropy in our cost function. Let’s see what these different coupling matrices mean for our UMAP visualization:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">aligned_rna</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">aligned_rna_sm</span><span class="p">,</span> <span class="s1">&#39;eps=1e-2&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_med</span><span class="p">,</span> <span class="s1">&#39;eps=5e-1&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_lg</span><span class="p">,</span> <span class="s1">&#39;eps=10&#39;</span><span class="p">)]:</span>    
+    <span class="n">joint_um</span><span class="o">=</span><span class="n">um</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="n">adt_um</span><span class="o">=</span><span class="n">joint_um</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">,]</span>
+    <span class="n">aligned_rna_um</span><span class="o">=</span><span class="n">joint_um</span><span class="p">[</span><span class="mi">1000</span><span class="p">:,]</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">adt_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">adt_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ADT&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">aligned_rna_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">aligned_rna_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gene Expression&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Colored based on domains, </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<img alt="_images/541fc2584cd1a6a2d7cba0a4c2e060ecbd6153fc7aeb666e16298387609f662e.png" src="_images/541fc2584cd1a6a2d7cba0a4c2e060ecbd6153fc7aeb666e16298387609f662e.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<img alt="_images/5063531bf7355c41e6fa502e3b5d704af59a79a81064d0c7ef7335699950036f.png" src="_images/5063531bf7355c41e6fa502e3b5d704af59a79a81064d0c7ef7335699950036f.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<img alt="_images/82ae5e4ef85946ebd4d9a0786859ac5798090863a3a870b99a13c0d6d15471f7.png" src="_images/82ae5e4ef85946ebd4d9a0786859ac5798090863a3a870b99a13c0d6d15471f7.png" />
+</div>
+</div>
+<p>In the low <span class="math notranslate nohighlight">\(\epsilon\)</span> case, we see a near 1-1 alignment (remember, this near 1-1 is likely mapping wrong cells to wrong cells in many cases) in UMAP, which is consistent with the sparse coupling matrix. As we raise <span class="math notranslate nohighlight">\(\epsilon\)</span> to the medium case, we start to see some deviation from 1-1 alignment, and in the large <span class="math notranslate nohighlight">\(\epsilon\)</span> case, we see something completely different. To see what is really happening in this large <span class="math notranslate nohighlight">\(\epsilon\)</span> case, let’s try linear dimensionality reduction:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pca</span><span class="o">=</span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">joint_pca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna_lg</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">adt_pca</span><span class="o">=</span><span class="n">joint_pca</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">,]</span>
+<span class="n">aligned_rna_pca</span><span class="o">=</span><span class="n">joint_pca</span><span class="p">[</span><span class="mi">1000</span><span class="p">:,]</span>
+
+<span class="c1"># Plot aligned domains, samples colored by domain identity:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">adt_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">adt_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ADT&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">aligned_rna_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">aligned_rna_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gene Expression&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Colored based on domains&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8694c7aeec96a43f297c8ee7c40c4ea0a474ee8f2d56648ca53c813a57e936cd.png" src="_images/8694c7aeec96a43f297c8ee7c40c4ea0a474ee8f2d56648ca53c813a57e936cd.png" />
+</div>
+</div>
+<p>As we can see, the projected data has little to no variance with respect to the principal components of our anchor domain. We can interpret this to mean that every point in the domain being projected was projected to an average of every point in the anchor domain; since the coupling matrix was so dense, projection just led to a weighted average of points where the weights were much closer to even. So, <span class="math notranslate nohighlight">\(\epsilon\)</span> too high and too low both have their setbacks.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Note that the <span class="math notranslate nohighlight">\(\epsilon\)</span> that produces the best alignment scores on co-assayed data like this will not necessarily generalize to separate assay data; finding a good <span class="math notranslate nohighlight">\(\epsilon\)</span> will vary case by case.</p>
+</div>
+<p>We can also demonstrate that the “entropic_mode” parameter doesn’t matter for UGW; the distinction between ‘joint’ and ‘independent’ comes in when we are hoping to regularize coupling matrices separately, which is not the case for UGW (where we expect our coupling matrices to be similar upon convergence). See our UCOOT tutorial for more detail on this parameter. See the following for an example of how they do not differ:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Independent:&quot;</span><span class="p">)</span>
+<span class="n">pi_samp_ind</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;independent&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Joint:&quot;</span><span class="p">)</span>
+<span class="n">pi_samp_jnt</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;joint&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Independent:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 10.927032, 11.109968
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 9.653778, 9.900175
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 9.159737, 9.415975
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 9.011368, 9.274309
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 9.005905, 9.269339
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 9.005127, 9.267925
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 9.003723, 9.266100
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 8.994026, 9.256955
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 8.987350, 9.251730
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 8.985947, 9.250631
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 8.985138, 9.249963
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 8.984802, 9.249677
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 8.984665, 9.249556
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 14 - Loss: 8.984795, 9.249692
+BCD Iteration 15 - Loss: 8.984825, 9.249728
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Joint:
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 10.927017, 11.109953
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 9.653740, 9.900138
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 9.159767, 9.416005
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 9.011345, 9.274285
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 9.005898, 9.269331
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 9.005127, 9.267926
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 9.003738, 9.266115
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 8.994003, 9.256931
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 8.987350, 9.251730
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 8.985939, 9.250624
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 8.985107, 9.249932
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 8.984802, 9.249677
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 8.984688, 9.249578
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">differs</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">pi_samp_ind</span> <span class="o">-</span> <span class="n">pi_samp_jnt</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">0.001</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+            <span class="n">differs</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Are the matrices the same? </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="ow">not</span><span class="p">(</span><span class="n">differs</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Are the matrices the same? True.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we will move onto a different hyperparameter. The key takeaway from this section is that increasing <span class="math notranslate nohighlight">\(\epsilon\)</span> trades higher speed for less sparsity.</p>
+</section>
+<section id="marginal-relaxation">
+<h2>Marginal Relaxation<a class="headerlink" href="#marginal-relaxation" title="Link to this heading">#</a></h2>
+<p>With a general understanding of what <span class="math notranslate nohighlight">\(\epsilon\)</span> is doing, let’s now examine the <span class="math notranslate nohighlight">\(\rho\)</span> hyperparameter. As an argument to the UGW solver, <span class="math notranslate nohighlight">\(\rho\)</span> will be a tuple of two values; <span class="math notranslate nohighlight">\(\rho_x\)</span> relates to the samples in X, while <span class="math notranslate nohighlight">\(\rho_y\)</span> relates to the samples in y. Recall that UGW treats the samples in both domains as probability distributions and decides how to move mass from one distribution to the other, producing a coupling matrix. <span class="math notranslate nohighlight">\(\rho_x\)</span> and <span class="math notranslate nohighlight">\(\rho_y\)</span> determine how close the coupling matrix sticks to these distributions; they determine, in some sense, how close the marginals of the coupling distribution will be to these original distributions.</p>
+<p>Specifically, <span class="math notranslate nohighlight">\(\rho_x\)</span> and <span class="math notranslate nohighlight">\(\rho_y\)</span> are multiplied by respective terms that measure (in terms of KL divergence) how close the desired distribution is to the marginals of the coupling matrix. So, the larger either <span class="math notranslate nohighlight">\(\rho\)</span> is, the closer its respective desired distribution will be to the marginals of the coupling matrix, as there will be a higher cost to differences between the distributions. In fact, we used <span class="math notranslate nohighlight">\(\rho\)</span> = infty in the previous examples; this forces the marginals of the coupling matrix to exactly match the desired distributions (otherwise incurring a cost of infinity). Allowing <span class="math notranslate nohighlight">\(\rho\)</span> to decrease below infinity leads to what we might call an “unbalancing” in the initial distributions, as we allow some samples to transport more or less mass than they were originally allocated. This is why we now use ugw instead of gw – the u stands for unbalanced. Let’s look at how ugw works, first on a fairly balanced set of data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">aligned_rna</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 6.091248, 6.230510
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 4.869470, 5.079669
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 4.669812, 4.894057
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 4.644800, 4.872685
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 4.632323, 4.862092
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 4.631449, 4.861610
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 4.631290, 4.861551
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 4.631252, 4.861545
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 4.631231, 4.861537
+BCD Iteration 10 - Loss: 4.631222, 4.861531
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 4.631229, 4.861543
+BCD Iteration 12 - Loss: 4.631211, 4.861534
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 4.631217, 4.861547
+BCD Iteration 14 - Loss: 4.631196, 4.861533
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 15 - Loss: 4.631194, 4.861537
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can start by scoring this alignment:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fracs</span> <span class="o">=</span> <span class="n">calc_domainAveraged_FOSCTTM</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;UGW alignment FOSCTTM </span><span class="se">\n</span><span class="s2"> average value: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fracs</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fracs</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">fracs</span><span class="p">),</span> <span class="s2">&quot;b--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">legend_label</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Cells&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sorted FOSCTTM&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9b440049ec37522474d7b333b5dff0aae3a7e4893ec36e55482d4333ca7d230c.png" src="_images/9b440049ec37522474d7b333b5dff0aae3a7e4893ec36e55482d4333ca7d230c.png" />
+</div>
+</div>
+<p>And visualizing it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">joint_um</span><span class="o">=</span><span class="n">um</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">adt_um</span><span class="o">=</span><span class="n">joint_um</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">,]</span>
+<span class="n">aligned_rna_um</span><span class="o">=</span><span class="n">joint_um</span><span class="p">[</span><span class="mi">1000</span><span class="p">:,]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">adt_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">adt_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ADT&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">aligned_rna_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">aligned_rna_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gene Expression&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Colored based on domains&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<img alt="_images/4c63b2124f2c431e8d5f61129e9a865865f50d2607200ed8c80ace90b4ba0e74.png" src="_images/4c63b2124f2c431e8d5f61129e9a865865f50d2607200ed8c80ace90b4ba0e74.png" />
+</div>
+</div>
+<p>However, we can only truly get a window into <span class="math notranslate nohighlight">\(\rho\)</span> by looking at the coupling matrix. In the uniform marginal case, which we got with GW, each row would have the same sum, <span class="math notranslate nohighlight">\(\frac{1}{1000}\)</span>. With our new unbalancing, this is no longer the case:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unbalanced coupling matrix: &#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pi_samp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Balanced coupling matrix: &#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pi_samp_ind</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="c1"># a coupling matrix from earlier, that was balanced</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Unbalanced coupling matrix: 
+tensor(0.0005)
+tensor(0.0003)
+tensor(0.0004)
+tensor(0.0007)
+tensor(0.0007)
+tensor(0.0005)
+tensor(0.0008)
+tensor(0.0007)
+tensor(0.0004)
+tensor(0.0006)
+tensor(0.0003)
+tensor(0.0008)
+tensor(0.0008)
+tensor(0.0007)
+tensor(0.0007)
+tensor(0.0003)
+tensor(0.0003)
+tensor(0.0003)
+tensor(0.0007)
+tensor(0.0007)
+
+Balanced coupling matrix: 
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+tensor(0.0010)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In our case, where we have 1000 cells without disproportionate cell type representation across domains, unbalancing these distributions doesn’t make much sense. However, if we were to have 50 cells of cell type 1 and 950 of cell type 2 in domain 1, and 500 of each in domain 2, we would want those 50 cells in domain 1 to transport much more mass. By allowing this to happen, <span class="math notranslate nohighlight">\(\rho\)</span> makes UGW much more robust to outliers and underrepresented cell types. Note that this disproportionate example would only really happen with separately assayed datasets.</p>
+<p>Let’s see how unbalancing can help by taking 90 cells from smaller clusters in the above data and 10 cells from a larger cluster. We would expect these 10 cells to transport more mass with <span class="math notranslate nohighlight">\(\rho\)</span> &lt; infinity. We can begin by isolating one large cluster in the data, which we found by searching over k (and settling on k = 4) using a kneighbors graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">kneighbors_graph</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse.csgraph</span> <span class="kn">import</span> <span class="n">connected_components</span>
+
+<span class="n">adt_graph</span> <span class="o">=</span> <span class="n">kneighbors_graph</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;correlation&#39;</span><span class="p">,</span> <span class="n">include_self</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">k</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">connected_components</span><span class="p">(</span><span class="n">adt_graph</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">labels</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    812
+1    188
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see, k = 7 gives us 9 different connected clusters on the k neighbors graph. We will treat the 0 labelled cluster as our large cluster, and sample 10 from that pool; we will treat the rest as smaller clusters, and sample 90:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm_clust</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">labels</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">lg_clust</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="n">sm_clust_smpl</span> <span class="o">=</span> <span class="n">sm_clust</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">lg_clust_smpl</span> <span class="o">=</span> <span class="n">lg_clust</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">rna_sm</span> <span class="o">=</span> <span class="n">rna_annotated</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sm_clust_smpl</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">rna_lg</span> <span class="o">=</span> <span class="n">rna_annotated</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">lg_clust_smpl</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+
+<span class="n">in_clust_vec_sm</span> <span class="o">=</span> <span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">sm_clust_smpl</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">in_clust_vec_sm</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">rna_sm</span><span class="o">.</span><span class="n">index</span>
+<span class="n">in_clust_vec_sm</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Cluster&#39;</span>
+
+<span class="n">in_clust_vec_lg</span> <span class="o">=</span> <span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">lg_clust_smpl</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<span class="n">in_clust_vec_lg</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">rna_lg</span><span class="o">.</span><span class="n">index</span>
+<span class="n">in_clust_vec_lg</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Cluster&#39;</span>
+
+<span class="n">rna_sm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">rna_sm</span><span class="p">,</span> <span class="n">in_clust_vec_sm</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">rna_lg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">rna_lg</span><span class="p">,</span> <span class="n">in_clust_vec_lg</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">rna_new</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">rna_lg</span><span class="p">,</span> <span class="n">rna_sm</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This process has given us a new version of our gene expression domain, which we will align with our original ADT domain. We expect that the top ten rows of the coupling matrix will transport more mass with <span class="math notranslate nohighlight">\(\rho\)</span> &lt; infty. Now, we can try an alignment; however, we first need a distance matrix for our new y:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="n">D_rna_knn_new</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">compute_graph_distances</span><span class="p">(</span><span class="n">rna_new</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can align:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp_u</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn_new</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">pi_samp_ctrl</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn_new</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 10.901960, 10.922110
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 10.572162, 10.603938
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 10.540407, 10.575678
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 10.533343, 10.568952
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 10.524888, 10.561310
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 10.519067, 10.556095
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 10.513914, 10.551647
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 10.509946, 10.548558
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 10.506916, 10.546493
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 10.504412, 10.544837
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 10.502377, 10.543303
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 10.501422, 10.542435
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 10.500514, 10.541537
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 14 - Loss: 10.498717, 10.539718
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 15 - Loss: 10.496578, 10.537644
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 23.839811, 23.879280
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 23.401943, 23.462212
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 23.307062, 23.373026
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 23.242388, 23.309988
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 23.205818, 23.274103
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 23.183363, 23.254223
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 23.176638, 23.248644
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 23.171129, 23.244947
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 23.168304, 23.243759
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 23.165667, 23.242325
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 23.164740, 23.242180
+BCD Iteration 12 - Loss: 23.161880, 23.240295
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 23.159889, 23.238943
+BCD Iteration 14 - Loss: 23.158251, 23.237688
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 15 - Loss: 23.157915, 23.237694
+</pre></div>
+</div>
+</div>
+</div>
+<p>From here, we can examine the coupling matrices – we care less about alignment quality and scoring, considering we now have an unbalanced case. First, let’s look at a heatmap:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pi_samp</span> <span class="ow">in</span> <span class="n">pi_samp_u</span><span class="p">,</span> <span class="n">pi_samp_ctrl</span><span class="p">:</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/ba26711bdcdd73fda4170ba59ddd614556912f2306598b55d6c13caf6ff2fae6.png" src="_images/ba26711bdcdd73fda4170ba59ddd614556912f2306598b55d6c13caf6ff2fae6.png" />
+<img alt="_images/edec35b5ac15f89069527aac1400d50a99b4c6cc591ccb1d4199ac36a4c187f3.png" src="_images/edec35b5ac15f89069527aac1400d50a99b4c6cc591ccb1d4199ac36a4c187f3.png" />
+</div>
+</div>
+<p>This visualization is not so easy to grasp; however, if we look at the column-wise sums, we can see exactly how unbalanced it is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">pi_samp_ctrl</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.00999995, 0.0099993 , 0.0099993 , 0.0099993 , 0.01000058,
+       0.0099989 , 0.01000001, 0.0099989 , 0.0099989 , 0.00999926,
+       0.00999707, 0.00999451, 0.00999672, 0.01000933, 0.010009  ,
+       0.01000884, 0.01000969, 0.01000195, 0.01000247, 0.01000988,
+       0.01001014, 0.00999647, 0.01000125, 0.01000054, 0.00999417,
+       0.00999921, 0.00999619, 0.00999638, 0.00999678, 0.00999601,
+       0.00999274, 0.00999396, 0.01000338, 0.01000014, 0.00999352,
+       0.0099992 , 0.01000239, 0.01000213, 0.00999902, 0.0100082 ,
+       0.00999939, 0.01000749, 0.00999972, 0.00999923, 0.00999875,
+       0.01000055, 0.01000948, 0.00999898, 0.00999918, 0.00999713,
+       0.01000284, 0.00999266, 0.00999746, 0.01000209, 0.00999618,
+       0.00999647, 0.00999453, 0.00999652, 0.00999645, 0.00999316,
+       0.00999631, 0.01000032, 0.0099961 , 0.01000841, 0.0099959 ,
+       0.01000449, 0.0099969 , 0.00999721, 0.00999752, 0.00999726,
+       0.00999658, 0.00999846, 0.01000256, 0.00999608, 0.01000147,
+       0.0100006 , 0.01000247, 0.01000226, 0.00999648, 0.00999648,
+       0.00999682, 0.00999932, 0.00999618, 0.01000102, 0.01000035,
+       0.00999581, 0.00999207, 0.00999252, 0.00999268, 0.00999977,
+       0.01000659, 0.01000729, 0.00999626, 0.01000717, 0.01000309,
+       0.01000842, 0.01000889, 0.01000306, 0.01000855, 0.0099985 ],
+      dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">pi_samp_u</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.0036, 0.0057, 0.0057, 0.0057, 0.0037, 0.0057, 0.0057, 0.0057, 0.0057,
+        0.0049, 0.0045, 0.0035, 0.0036, 0.0037, 0.0037, 0.0037, 0.0037, 0.0037,
+        0.0038, 0.0037, 0.0037, 0.0036, 0.0037, 0.0035, 0.0035, 0.0033, 0.0036,
+        0.0036, 0.0038, 0.0035, 0.0035, 0.0035, 0.0038, 0.0033, 0.0035, 0.0033,
+        0.0036, 0.0045, 0.0033, 0.0036, 0.0036, 0.0036, 0.0036, 0.0037, 0.0036,
+        0.0036, 0.0036, 0.0035, 0.0036, 0.0036, 0.0038, 0.0033, 0.0039, 0.0054,
+        0.0036, 0.0036, 0.0035, 0.0035, 0.0035, 0.0035, 0.0035, 0.0034, 0.0031,
+        0.0033, 0.0032, 0.0032, 0.0030, 0.0030, 0.0027, 0.0030, 0.0032, 0.0029,
+        0.0027, 0.0033, 0.0038, 0.0033, 0.0038, 0.0035, 0.0035, 0.0035, 0.0035,
+        0.0033, 0.0035, 0.0037, 0.0034, 0.0035, 0.0033, 0.0035, 0.0035, 0.0033,
+        0.0036, 0.0036, 0.0035, 0.0036, 0.0038, 0.0036, 0.0036, 0.0037, 0.0036,
+        0.0035])
+</pre></div>
+</div>
+</div>
+</div>
+<p>As we can see above, the first ten columns in the coupling matrix have generally larger sums than the others, meaning they are transporting more mass – this outcome is what we predicted! We can conclude that <span class="math notranslate nohighlight">\(\rho\)</span> is particularly helpful in cases where we have disproportionate representation of a particular subset (or subsets) of the underlying manifold shared between the two domains.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Now that we have gone through all of the most important pieces of how to run UGW on your own data, you can move onto our fused formulation or UCOOT tutorial. The fused formulation helps incorporate prior knowledge into the UGW/UCOOT procedures.</p>
+<p>Citations:</p>
+<p>Quang Huy Tran, Hicham Janati, Nicolas Courty, Rémi Flamary, Ievgen Redko, Pinar Demetci and Ritambhara Singh. Unbalanced CO-Optimal Transport. arXiv, <a class="reference external" href="http://stat.ML">stat.ML</a>, 2023.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "scotplus"
+        },
+        kernelOptions: {
+            name: "scotplus",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'scotplus'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="setup_tutorial.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Setup Tutorial</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="UCOOT_tutorial.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">UCOOT Tutorial</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-download">Data download</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-datasets-to-distance-matrices">Converting Datasets to Distance Matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-ugw">Default UGW</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropic-regularization">Entropic Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-relaxation">Marginal Relaxation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By R. Singh
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

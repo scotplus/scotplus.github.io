@@ -1,0 +1,1087 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Fused Formulation Tutorial &#8212; SCOOTR</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'fused_tutorial';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="AGW Tutorial" href="AGW_tutorial.html" />
+    <link rel="prev" title="UCOOT Tutorial" href="UCOOT_tutorial.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOOTR - Home"/>
+    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOOTR - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to SCOT+
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Core Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Getting Set Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory.html">The Evolution of SCOT+</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup_tutorial.html">Setup Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UGW_tutorial.html">UGW Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UCOOT_tutorial.html">UCOOT Tutorial</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fused Formulation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AGW_tutorial.html">AGW Tutorial</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exploration on Real World Datasets</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="placeholder.html">Applications Section</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/scotplus/book_source.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/scotplus/book_source.git/issues/new?title=Issue%20on%20page%20%2Ffused_tutorial.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/fused_tutorial.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fused Formulation Tutorial</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-download">Data Download</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-fused-formulation">Default Fused Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-wise-fused-formulation">Feature-wise Fused Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-wise-fused-formulation">Sample-wise Fused Formulation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fused-formulation-tutorial">
+<h1>Fused Formulation Tutorial<a class="headerlink" href="#fused-formulation-tutorial" title="Link to this heading">#</a></h1>
+<p>This tutorial goes over the <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> hyperparameters of the UCOOT and UGW procedures, which allow for the use of prior knowledge during alignment. By solving another optimal transport problem between a supervision matrix and the sample/feature coupling matrix at the same time as UCOOT or UGW, the fused formulation (<span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>) allows us to manipulate our coupling matrices, as we will see in this tutorial. We use the CITEseq dataset again in this tutorial (trying to recover the 1-1 alignments) and mostly focus on UCOOT alignments.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you have not yet configured a SCOT+ directory of some kind, see our installation instructions markdown. Once you complete those steps or set up your own virtual environment, continue on here.</p>
+<p>If you are unsure how to initialize a Solver object, view our setup tutorial to get a sense for how to trade speed and accuracy using its constructor parameters.</p>
+<p>If the notation and problem formulation seem confusing, try viewing our document on the theory of optimal transport to get more comfortable first.</p>
+<p>If you want a more gradual intro into this tool, start with our UGW or UCOOT tutorials.</p>
+<p>If you are already comfortable with the fused formulation, continue on to the AGW tutorial, which ties together everything we have looked at thus far.</p>
+</div>
+<section id="data-download">
+<h2>Data Download<a class="headerlink" href="#data-download" title="Link to this heading">#</a></h2>
+<p>As in previous tutorials, we provide preprocessed data on the 1000 cells we will be working with. However, if you would like to do the preprocessing yourself (for example, following the steps in Tran et al.) and do not already have the ADT and RNA files downloaded from the CITE-seq dataset, run the following commands in the terminal in the root directory of this tutorial repository:</p>
+<center> sh ./download_scripts/CITEseq_download.sh </center><p>If you have not modified our original directory structure for the data, these files will be downloaded into the same folder as the preprocessed datasets.</p>
+</section>
+<section id="preprocessing">
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
+<p>We follow the same setup tasks as we have in the past few tutorials, ending with visualization of our two pre-alignment domains.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Torch version: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CUDA available: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CUDA version: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">cuda</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CUDNN version: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">version</span><span class="p">()))</span>
+
+<span class="n">use_cuda</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span>
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:0&quot;</span> <span class="k">if</span> <span class="n">use_cuda</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span><span class="o">=</span><span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Torch version: 2.1.0
+CUDA available: False
+CUDA version: None
+CUDNN version: None
+</pre></div>
+</div>
+</div>
+</div>
+<p>First, we read in the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="kn">from</span> <span class="nn">scotplus.solvers</span> <span class="kn">import</span> <span class="n">SinkhornSolver</span>
+<span class="kn">from</span> <span class="nn">scotplus.utils.alignment</span> <span class="kn">import</span> <span class="n">compute_graph_distances</span><span class="p">,</span> <span class="n">get_barycentre</span><span class="p">,</span> <span class="n">calc_domainAveraged_FOSCTTM</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">umap</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">normalize</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Helvetica Neue&#39;</span>
+
+<span class="n">adt_raw</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/CITEseq/citeseq_adt_normalized_1000cells.csv&quot;</span><span class="p">)</span>
+<span class="n">rna_raw</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./data/CITEseq/citeseq_rna_normalizedFC_1000cells.csv&quot;</span><span class="p">)</span>
+<span class="n">adt_feat_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CD11a&quot;</span><span class="p">,</span><span class="s2">&quot;CD11c&quot;</span><span class="p">,</span><span class="s2">&quot;CD123&quot;</span><span class="p">,</span><span class="s2">&quot;CD127-IL7Ra&quot;</span><span class="p">,</span><span class="s2">&quot;CD14&quot;</span><span class="p">,</span><span class="s2">&quot;CD16&quot;</span><span class="p">,</span><span class="s2">&quot;CD161&quot;</span><span class="p">,</span><span class="s2">&quot;CD19&quot;</span><span class="p">,</span><span class="s2">&quot;CD197-CCR7&quot;</span><span class="p">,</span><span class="s2">&quot;CD25&quot;</span><span class="p">,</span><span class="s2">&quot;CD27&quot;</span><span class="p">,</span><span class="s2">&quot;CD278-ICOS&quot;</span><span class="p">,</span><span class="s2">&quot;CD28&quot;</span><span class="p">,</span><span class="s2">&quot;CD3&quot;</span><span class="p">,</span><span class="s2">&quot;CD34&quot;</span><span class="p">,</span><span class="s2">&quot;CD38&quot;</span><span class="p">,</span><span class="s2">&quot;CD4&quot;</span><span class="p">,</span><span class="s2">&quot;CD45RA&quot;</span><span class="p">,</span><span class="s2">&quot;CD45RO&quot;</span><span class="p">,</span><span class="s2">&quot;CD56&quot;</span><span class="p">,</span><span class="s2">&quot;CD57&quot;</span><span class="p">,</span><span class="s2">&quot;CD69&quot;</span><span class="p">,</span><span class="s2">&quot;CD79b&quot;</span><span class="p">,</span><span class="s2">&quot;CD8a&quot;</span><span class="p">,</span><span class="s2">&quot;HLA.DR&quot;</span><span class="p">]</span>
+<span class="n">rna_feat_labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ITGAL&quot;</span><span class="p">,</span><span class="s2">&quot;ITGAX&quot;</span><span class="p">,</span><span class="s2">&quot;IL3RA&quot;</span><span class="p">,</span><span class="s2">&quot;IL7R&quot;</span><span class="p">,</span><span class="s2">&quot;CD14&quot;</span><span class="p">,</span><span class="s2">&quot;FCGR3A&quot;</span><span class="p">,</span><span class="s2">&quot;KLRB1&quot;</span><span class="p">,</span><span class="s2">&quot;CD19&quot;</span><span class="p">,</span><span class="s2">&quot;CCR7&quot;</span><span class="p">,</span><span class="s2">&quot;IL2RA&quot;</span><span class="p">,</span><span class="s2">&quot;CD27&quot;</span><span class="p">,</span><span class="s2">&quot;ICOS&quot;</span><span class="p">,</span><span class="s2">&quot;CD28&quot;</span><span class="p">,</span><span class="s2">&quot;CD3E&quot;</span><span class="p">,</span><span class="s2">&quot;CD34&quot;</span><span class="p">,</span><span class="s2">&quot;CD38&quot;</span><span class="p">,</span><span class="s2">&quot;CD4&quot;</span><span class="p">,</span><span class="s2">&quot;PTPRC&quot;</span><span class="p">,</span><span class="s2">&quot;PTPRC&quot;</span><span class="p">,</span><span class="s2">&quot;NCAM1&quot;</span><span class="p">,</span><span class="s2">&quot;B3GAT1&quot;</span><span class="p">,</span><span class="s2">&quot;CD69&quot;</span><span class="p">,</span><span class="s2">&quot;CD79B&quot;</span><span class="p">,</span><span class="s2">&quot;CD8A&quot;</span><span class="p">,</span><span class="s2">&quot;HLA-DRA&quot;</span><span class="p">]</span> 
+<span class="n">samp_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Cell </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">adt_raw</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As in the prior tutorials, we examine a subset of 10 of the 25 gene-antibody pairs.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># l2 normalization of both datasets, which we found to help with single cell applications</span>
+<span class="n">adt_full_annotated</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">normalize</span><span class="p">(</span><span class="n">adt_raw</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()))</span>
+<span class="n">rna_full_annotated</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">normalize</span><span class="p">(</span><span class="n">rna_raw</span><span class="o">.</span><span class="n">X</span><span class="o">.</span><span class="n">transpose</span><span class="p">()))</span>
+
+<span class="c1"># annotation of both domains</span>
+<span class="n">adt_full_annotated</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">adt_full_annotated</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">samp_labels</span><span class="p">,</span> <span class="n">adt_feat_labels</span>
+<span class="n">rna_full_annotated</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">rna_full_annotated</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">samp_labels</span><span class="p">,</span> <span class="n">rna_feat_labels</span>
+
+<span class="c1"># gather full data in numpy</span>
+<span class="n">adt_full</span> <span class="o">=</span> <span class="n">adt_full_annotated</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">rna_full</span> <span class="o">=</span> <span class="n">rna_full_annotated</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="c1"># subset annotated data</span>
+<span class="n">adt_annotated</span> <span class="o">=</span> <span class="n">adt_full_annotated</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">rna_annotated</span> <span class="o">=</span> <span class="n">rna_full_annotated</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+
+<span class="c1"># gather subset in numpy</span>
+<span class="n">adt</span> <span class="o">=</span> <span class="n">adt_annotated</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">rna</span> <span class="o">=</span> <span class="n">rna_annotated</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now visualize our two domains; these visualizations are useful for later comparison with aligned data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">um</span> <span class="o">=</span> <span class="n">umap</span><span class="o">.</span><span class="n">UMAP</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">original_adt_um</span><span class="o">=</span><span class="n">um</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span>
+<span class="n">original_rna_um</span><span class="o">=</span><span class="n">um</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span>
+
+<span class="c1">#Visualization of the global geometry</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">original_adt_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">original_adt_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;ADT Domain </span><span class="se">\n</span><span class="s2"> before Alignment&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">original_rna_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">original_rna_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Gene Expression Domain </span><span class="se">\n</span><span class="s2"> before Alignment&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<img alt="_images/2713b180ab6c93781da625cde3ebef76f91b9c9e34040a550722eafb37d39191.png" src="_images/2713b180ab6c93781da625cde3ebef76f91b9c9e34040a550722eafb37d39191.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="n">pca</span><span class="o">=</span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">original_adt_pca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span>
+<span class="n">original_rna_pca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span>
+
+<span class="c1">#Visualization of the global geometry</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span><span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">original_adt_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">original_adt_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;ADT Domain </span><span class="se">\n</span><span class="s2"> Before Alignment&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">original_rna_pca</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">original_rna_pca</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Gene Expression Domain </span><span class="se">\n</span><span class="s2"> Before Alignment&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d398f98d34fd5ba6f4e8122eb9342685fa02bca708c1d06b3eb490aa7b010142.png" src="_images/d398f98d34fd5ba6f4e8122eb9342685fa02bca708c1d06b3eb490aa7b010142.png" />
+</div>
+</div>
+</section>
+<section id="default-fused-formulation">
+<h2>Default Fused Formulation<a class="headerlink" href="#default-fused-formulation" title="Link to this heading">#</a></h2>
+<p>With the data loaded and preprocessed, we can begin by instantiating a Solver object, as in the case of regular UCOOT or UGW:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">tol_uot</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we can try using <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span>. First, note that <span class="math notranslate nohighlight">\(D\)</span> is a tuple, (<span class="math notranslate nohighlight">\(D_s\)</span>, <span class="math notranslate nohighlight">\(D_f\)</span>); so is <span class="math notranslate nohighlight">\(\beta\)</span>: (<span class="math notranslate nohighlight">\(\beta_s\)</span>, <span class="math notranslate nohighlight">\(\beta_f\)</span>). In addition to all of our usual regularization terms (entropic/marginal relaxation) added to the objective function (transport cost), we now add the inner product of <span class="math notranslate nohighlight">\(D_x\)</span> and <span class="math notranslate nohighlight">\(\pi_x\)</span>, multiplied by <span class="math notranslate nohighlight">\(\beta_x\)</span>, for both <span class="math notranslate nohighlight">\(x = s\)</span> and <span class="math notranslate nohighlight">\(x = f\)</span>. So, <span class="math notranslate nohighlight">\(\beta\)</span> tells us how much to consider this part of the cost function, while <span class="math notranslate nohighlight">\(D\)</span> tells us more about what this part of the cost function is really doing. By adding the inner product of <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(\pi\)</span> for each coupling matrix to the cost, we penalize various cells in <span class="math notranslate nohighlight">\(\pi\)</span> based on our entries in <span class="math notranslate nohighlight">\(D\)</span>. For example, if <span class="math notranslate nohighlight">\(D_{s_{0,0}} = 0\)</span>, then when we add <span class="math notranslate nohighlight">\(\beta_s \langle D_s, \pi_s \rangle\)</span> to the cost function, <span class="math notranslate nohighlight">\(\pi_{s_{0,0}}\)</span> is not penalized; i.e. there is no extra penalty to transporting mass from sample 0 in domain 1 to sample 0 in domain 2. On the other hand, if we put a positive value at some cell in either <span class="math notranslate nohighlight">\(D\)</span> matrix, the equivalent cell in the <span class="math notranslate nohighlight">\(\pi\)</span> matrix will be penalized. By adding <span class="math notranslate nohighlight">\(D\)</span> as a hyperparameter, we can now penalize (or not penalize) aligning certain samples or features directly, using our prior knowledge. In addition, we can scale how we use this knowledge through modification of <span class="math notranslate nohighlight">\(\beta\)</span>. Let’s begin by trying a few different values of <span class="math notranslate nohighlight">\(\beta\)</span>, where we initialize <span class="math notranslate nohighlight">\(D_s\)</span> and <span class="math notranslate nohighlight">\(D_f\)</span> to have all 1s off diagonal and all 0s on the diagonal (encouraging matches along the diagonal). Note that we are incorporating prior knowledge here, as we know that the genes and antibodies on the diagonal should match up, and so should the samples, per Tran et al.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_feat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">D_samp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">pi_samp_sm</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_sm</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">))</span>
+
+<span class="n">pi_samp_med</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_med</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">))</span>
+
+<span class="n">pi_samp_lg</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.050847, 0.052544
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.009214, 0.012669
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.008179, 0.011854
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.008166, 0.011852
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.008165, 0.011851
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.009021, 0.017849
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.006827, 0.015535
+BCD Iteration 3 - Loss: 0.006827, 0.015535
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.007823, 0.016951
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.006543, 0.015681
+BCD Iteration 3 - Loss: 0.006543, 0.015681
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aligned_rna_sm</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp_sm</span><span class="p">)</span>
+<span class="n">aligned_rna_med</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp_med</span><span class="p">)</span>
+<span class="n">aligned_rna_lg</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp_lg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have our alignments, we can see how the different values of <span class="math notranslate nohighlight">\(\beta\)</span> changed the UCOOT performance. Note that we expect to see a perfect alignment when is <span class="math notranslate nohighlight">\(\beta\)</span> large, as we assigned no cost to any of the correct aligments in the <span class="math notranslate nohighlight">\(D_s\)</span> matrix, and cost to all of the incorrect alignments. However, when <span class="math notranslate nohighlight">\(\beta\)</span> is small, this bonus may be less of a factor than the transport or regularization costs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">aligned_rna</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">aligned_rna_sm</span><span class="p">,</span> <span class="s1">&#39;beta=0.001&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_med</span><span class="p">,</span> <span class="s1">&#39;beta=0.01&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_lg</span><span class="p">,</span> <span class="s1">&#39;beta=0.1&#39;</span><span class="p">)]:</span>
+    <span class="n">fracs</span> <span class="o">=</span> <span class="n">calc_domainAveraged_FOSCTTM</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;UCOOT alignment FOSCTTM </span><span class="se">\n</span><span class="s2"> average value for </span><span class="si">{0}</span><span class="s2">: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fracs</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fracs</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">fracs</span><span class="p">),</span> <span class="s2">&quot;b--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">legend_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Cells&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sorted FOSCTTM&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/021b879861671ccda9ed6ba00319132e0f4e4160df8534103501f0fb39117806.png" src="_images/021b879861671ccda9ed6ba00319132e0f4e4160df8534103501f0fb39117806.png" />
+<img alt="_images/ae5f58d1c48e9dab186264361f4305f339942710839fe71fa92143c2d0cb65b1.png" src="_images/ae5f58d1c48e9dab186264361f4305f339942710839fe71fa92143c2d0cb65b1.png" />
+<img alt="_images/4ed919a08c9683640968b05f732e879d9d0b4853e147dd1dc9c60d5eb2c757b0.png" src="_images/4ed919a08c9683640968b05f732e879d9d0b4853e147dd1dc9c60d5eb2c757b0.png" />
+</div>
+</div>
+<p>As predicted, increasing <span class="math notranslate nohighlight">\(\beta\)</span> moves us from the standard alignment with these hyperparameters towards a perfect alignment. Now, we can look at the matrices themselves:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="k">for</span> <span class="n">pi_feat</span><span class="p">,</span> <span class="n">pi_samp</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">pi_feat_sm</span><span class="p">,</span> <span class="n">pi_samp_sm</span><span class="p">,</span> <span class="s1">&#39;beta=0.001&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">pi_feat_med</span><span class="p">,</span> <span class="n">pi_samp_med</span><span class="p">,</span> <span class="s1">&#39;beta=0.01&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">pi_feat_lg</span><span class="p">,</span> <span class="n">pi_samp_lg</span><span class="p">,</span> <span class="s1">&#39;beta=0.1&#39;</span><span class="p">)]:</span>    
+    <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pi_feat</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">adt_annotated</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">rna_annotated</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/48e41d65bbf3e73fae4420df4e3bc57f9006cf1e9f41f597fd13bbedb5363091.png" src="_images/48e41d65bbf3e73fae4420df4e3bc57f9006cf1e9f41f597fd13bbedb5363091.png" />
+<img alt="_images/1e1d9e73c39556125a89bd4ef344c1a1e0453fd471ed8f191ad2ecdbe8ed8279.png" src="_images/1e1d9e73c39556125a89bd4ef344c1a1e0453fd471ed8f191ad2ecdbe8ed8279.png" />
+<img alt="_images/dbd8b2bc44cd27a5d18eef33976400e52e55ebe6a7cbf7aa7d8dd5afb3cbc382.png" src="_images/dbd8b2bc44cd27a5d18eef33976400e52e55ebe6a7cbf7aa7d8dd5afb3cbc382.png" />
+</div>
+</div>
+<p>From these matrices, we can see that two perfect <span class="math notranslate nohighlight">\(D\)</span> matrices push us towards a perfect alignment in the coupling matrices as <span class="math notranslate nohighlight">\(\beta\)</span> increases. As expected from the shape of the <span class="math notranslate nohighlight">\(D\)</span> matrices, we get diagonal coupling matrices for larger <span class="math notranslate nohighlight">\(\beta\)</span>. While we are certain that these D matrices will lead to good alignments in this case (given we have a 1-1 sample mapping and related features), in cases where you might be unsure, try lower <span class="math notranslate nohighlight">\(\beta\)</span> to make sure your <span class="math notranslate nohighlight">\(D\)</span> matrices aren’t pushing your alignments too far in the direction of your less certain prior knowledge. Now, we will visualize the projections of <span class="math notranslate nohighlight">\(y\)</span> onto <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">aligned_rna</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">aligned_rna_sm</span><span class="p">,</span> <span class="s1">&#39;beta=0.001&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_med</span><span class="p">,</span> <span class="s1">&#39;beta=0.01&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_lg</span><span class="p">,</span> <span class="s1">&#39;beta=0.1&#39;</span><span class="p">)]:</span>    
+    <span class="n">joint_um</span><span class="o">=</span><span class="n">um</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">()),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="n">adt_um</span><span class="o">=</span><span class="n">joint_um</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1000</span><span class="p">,]</span>
+    <span class="n">aligned_rna_um</span><span class="o">=</span><span class="n">joint_um</span><span class="p">[</span><span class="mi">1000</span><span class="p">:,]</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">adt_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">adt_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;ADT&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">aligned_rna_um</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">aligned_rna_um</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Gene Expression&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Colored based on domains, </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<img alt="_images/68469e95ef7bcadc812fdbf698f02359bdf3e6bccd0fb007d9629c07aa56977e.png" src="_images/68469e95ef7bcadc812fdbf698f02359bdf3e6bccd0fb007d9629c07aa56977e.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<img alt="_images/be21eaaf6028ced29347a64b84b646736605a9a8b0cf4bbfa6e3c43f411bf202.png" src="_images/be21eaaf6028ced29347a64b84b646736605a9a8b0cf4bbfa6e3c43f411bf202.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/umap/umap_.py:1943: UserWarning: n_jobs value -1 overridden to 1 by setting random_state. Use no seed for parallelism.
+  warn(f&quot;n_jobs value {self.n_jobs} overridden to 1 by setting random_state. Use no seed for parallelism.&quot;)
+</pre></div>
+</div>
+<img alt="_images/b7e70a9e9c629b6c3d4917eb670f1a3041d0187d95e9af37ec090eee8fe2fa11.png" src="_images/b7e70a9e9c629b6c3d4917eb670f1a3041d0187d95e9af37ec090eee8fe2fa11.png" />
+</div>
+</div>
+<p>Note that the UMAP plots look more and more like a 1-1 mapping as <span class="math notranslate nohighlight">\(\beta\)</span> increases, as is consistent with our FOSCTTM and coupling matrix analysis. Now that we understand how <span class="math notranslate nohighlight">\(\beta\)</span> and <span class="math notranslate nohighlight">\(D\)</span> work together, let’s see what they can do in slightly less contrived cases.</p>
+</section>
+<section id="feature-wise-fused-formulation">
+<h2>Feature-wise Fused Formulation<a class="headerlink" href="#feature-wise-fused-formulation" title="Link to this heading">#</a></h2>
+<p>In this section, we will try using the same <span class="math notranslate nohighlight">\(D\)</span> matrix for the features, but leave the samples unsupervised. In doing so, we will demonstrate that supervision on the feature alignment, if consistent with known biological knowledge, may improve unsupervised sample alignment. In addition to using our more extreme <span class="math notranslate nohighlight">\(D_f\)</span> matrix from the first section, we will use one with some cost added along the diagonal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_feat_m</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">D_feat</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">pi_samp_ft</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ft</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">))</span>
+
+<span class="n">pi_samp_ft_m</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ft_m</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">D_feat_m</span><span class="p">))</span>
+
+<span class="n">pi_samp_ctrl</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ctrl</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.057055, 0.080116
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.007532, 0.042059
+BCD Iteration 3 - Loss: 0.007518, 0.042060
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.499055, 0.517256
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.362228, 0.390849
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.304562, 0.334136
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.263677, 0.293924
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.233032, 0.263785
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 0.209143, 0.240293
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 0.189961, 0.221431
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 0.174202, 0.205935
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 0.161013, 0.192967
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 0.149805, 0.181948
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 0.140158, 0.172462
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 0.131764, 0.164209
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 0.124388, 0.156958
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 14 - Loss: 0.117861, 0.150540
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 15 - Loss: 0.112041, 0.144816
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.059064, 0.061400
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.036154, 0.044856
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.029880, 0.042087
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.022723, 0.038712
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.013590, 0.034578
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 0.012366, 0.034268
+BCD Iteration 7 - Loss: 0.012274, 0.034259
+BCD Iteration 8 - Loss: 0.012193, 0.034253
+BCD Iteration 9 - Loss: 0.012100, 0.034248
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 0.011993, 0.034241
+BCD Iteration 11 - Loss: 0.011888, 0.034235
+BCD Iteration 12 - Loss: 0.011801, 0.034233
+BCD Iteration 13 - Loss: 0.011735, 0.034229
+BCD Iteration 14 - Loss: 0.011696, 0.034231
+BCD Iteration 15 - Loss: 0.011671, 0.034229
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aligned_rna_ft</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">pi_samp_ft</span><span class="p">)</span>
+
+<span class="n">aligned_rna_ft_m</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">pi_samp_ft_m</span><span class="p">)</span>
+
+<span class="n">aligned_rna_ctrl</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">pi_samp_ctrl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With these new alignments, we score and visualize.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">aligned_rna</span><span class="p">,</span> <span class="n">d_status</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">aligned_rna_ft</span><span class="p">,</span> <span class="s1">&#39;with feature cost modification&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_ft_m</span><span class="p">,</span> <span class="s1">&#39;with less feature cost modification&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_ctrl</span><span class="p">,</span> <span class="s1">&#39;without feature cost modification&#39;</span><span class="p">)]:</span>
+    <span class="n">fracs</span> <span class="o">=</span> <span class="n">calc_domainAveraged_FOSCTTM</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;UCOOT alignment FOSCTTM </span><span class="se">\n</span><span class="s2"> </span><span class="si">{0}</span><span class="s2">: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d_status</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fracs</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fracs</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">fracs</span><span class="p">),</span> <span class="s2">&quot;b--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">legend_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Cells&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sorted FOSCTTM&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a9925da9f927f75dfc8e25c340f2ead9a161b19a37a01ecf9a8e32a6bc1db56a.png" src="_images/a9925da9f927f75dfc8e25c340f2ead9a161b19a37a01ecf9a8e32a6bc1db56a.png" />
+<img alt="_images/e4463a06317329c4924902f31aff79cba8b15d0dc1af19aadb972afe2b12a741.png" src="_images/e4463a06317329c4924902f31aff79cba8b15d0dc1af19aadb972afe2b12a741.png" />
+<img alt="_images/e52a6cc92d22f9ff2956ff9d1808919b83ed084a8ceab0c74fca6233bb999135.png" src="_images/e52a6cc92d22f9ff2956ff9d1808919b83ed084a8ceab0c74fca6233bb999135.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pi_feat</span><span class="p">,</span> <span class="n">pi_samp</span><span class="p">,</span> <span class="n">d_status</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">pi_feat_ft</span><span class="p">,</span> <span class="n">pi_samp_ft</span><span class="p">,</span> <span class="s1">&#39;with feature cost modification&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">pi_feat_ft_m</span><span class="p">,</span> <span class="n">pi_samp_ft_m</span><span class="p">,</span> <span class="s1">&#39;with less feature cost modification&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">pi_feat_ctrl</span><span class="p">,</span> <span class="n">pi_samp_ctrl</span><span class="p">,</span> <span class="s1">&#39;without feature cost modification&#39;</span><span class="p">)]:</span>    
+    <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pi_feat</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">adt_annotated</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">rna_annotated</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pi_samp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e6419c39568cf72c04b165bbda73a0528614d20759273d6345ee00b6babe9905.png" src="_images/e6419c39568cf72c04b165bbda73a0528614d20759273d6345ee00b6babe9905.png" />
+<img alt="_images/72c4672e375f387d9c93e3cbaab6c97095d8086e9eef98d8ff7f3086e81ae667.png" src="_images/72c4672e375f387d9c93e3cbaab6c97095d8086e9eef98d8ff7f3086e81ae667.png" />
+<img alt="_images/c7f93f10810350eba4b113d433c9df0cae820fefc274ed09567d382ff85ce99f.png" src="_images/c7f93f10810350eba4b113d433c9df0cae820fefc274ed09567d382ff85ce99f.png" />
+</div>
+</div>
+<p>As seen above in the FOSCTTM scores and the emerging diagonals in the sampling coupling matrices that received feature superivision, adding feature matrix supervision improves alignment quality.</p>
+</section>
+<section id="sample-wise-fused-formulation">
+<h2>Sample-wise Fused Formulation<a class="headerlink" href="#sample-wise-fused-formulation" title="Link to this heading">#</a></h2>
+<p>Now, we will do the same process, except this time, we will include <span class="math notranslate nohighlight">\(D_s\)</span> and ignore feature supervision. This kind of procedure is best used when you have some sense of the cell types in your data, or if you already have a good alignment and wish to extract some new information about the features. Here, we will see if sample supervision improves feature coupling.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_samp_m</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">D_samp</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.95</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">pi_samp_smp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_smp</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="n">pi_samp_smp_m</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_smp_m</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp_m</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<span class="n">aligned_rna_smp</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">pi_samp_smp</span><span class="p">)</span>
+
+<span class="n">aligned_rna_smp_m</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">pi_samp_smp_m</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.012936, 0.090179
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.011612, 0.089055
+BCD Iteration 3 - Loss: 0.011609, 0.089054
+BCD Iteration 4 - Loss: 0.011610, 0.089055
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.052560, 0.064207
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.016227, 0.037230
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.012160, 0.034881
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.011953, 0.034555
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.011818, 0.034420
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 0.011708, 0.034350
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 0.011645, 0.034315
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 0.011612, 0.034292
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 0.011599, 0.034277
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 0.011596, 0.034267
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 0.011598, 0.034260
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 0.011603, 0.034255
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 0.011607, 0.034252
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 14 - Loss: 0.011611, 0.034248
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 15 - Loss: 0.011612, 0.034244
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have our alignments, we can score the data. Note that we expect perfect alignments when <span class="math notranslate nohighlight">\(\beta\)</span> is large enough that the <span class="math notranslate nohighlight">\(D\)</span> matrix begins to dominate the transport cost, considering the <span class="math notranslate nohighlight">\(D\)</span> matrix encourages the true alignment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">aligned_rna</span><span class="p">,</span> <span class="n">d_status</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">aligned_rna_smp</span><span class="p">,</span> <span class="s1">&#39;with sample cost modification&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_smp_m</span><span class="p">,</span> <span class="s1">&#39;with less sample cost modification&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">aligned_rna_ctrl</span><span class="p">,</span> <span class="s1">&#39;without sample cost modification&#39;</span><span class="p">)]:</span>
+    <span class="n">fracs</span> <span class="o">=</span> <span class="n">calc_domainAveraged_FOSCTTM</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">legend_label</span><span class="o">=</span><span class="s2">&quot;UCOOT alignment FOSCTTM </span><span class="se">\n</span><span class="s2"> average value for </span><span class="si">{0}</span><span class="s2">: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d_status</span><span class="p">)</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fracs</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fracs</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">fracs</span><span class="p">),</span> <span class="s2">&quot;b--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">legend_label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Cells&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Sorted FOSCTTM&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/878c0e4bd64ac241a097c8ce82029d13184ca478c55c3515f595899c91db9761.png" src="_images/878c0e4bd64ac241a097c8ce82029d13184ca478c55c3515f595899c91db9761.png" />
+<img alt="_images/f88a3d2805f3419325b01e32ec25392152c3e2674d5838a51a6b788d8423cb26.png" src="_images/f88a3d2805f3419325b01e32ec25392152c3e2674d5838a51a6b788d8423cb26.png" />
+<img alt="_images/b1c91d6351f866b8119fe90bef7babc692a6bec69039d65265e290b194178824.png" src="_images/b1c91d6351f866b8119fe90bef7babc692a6bec69039d65265e290b194178824.png" />
+</div>
+</div>
+<p>As expected, we get perfect alignments when we have any sample supervision that encourages the true alignment. However, the truly interesting part of this procedure is seeing how this perfect alignment influenced the feature coupling:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">pi_feat</span><span class="p">,</span> <span class="n">pi_samp</span><span class="p">,</span> <span class="n">d_status</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">pi_feat_smp</span><span class="p">,</span> <span class="n">pi_samp_smp</span><span class="p">,</span> <span class="s1">&#39;with sample cost modification&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">pi_feat_smp_m</span><span class="p">,</span> <span class="n">pi_samp_smp_m</span><span class="p">,</span> <span class="s1">&#39;with less sample cost modification&#39;</span><span class="p">),</span> <span class="p">(</span><span class="n">pi_feat_ctrl</span><span class="p">,</span> <span class="n">pi_samp_ctrl</span><span class="p">,</span> <span class="s1">&#39;without sample cost modification&#39;</span><span class="p">)]:</span>    
+    <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+    <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pi_feat</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">adt_annotated</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">rna_annotated</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">spy</span><span class="p">(</span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/12d56948c4a7c3eb60664eccf9428d4dd1dfcc13882d055d1a9354e39886a970.png" src="_images/12d56948c4a7c3eb60664eccf9428d4dd1dfcc13882d055d1a9354e39886a970.png" />
+<img alt="_images/6805b0918e52afd79d2099099ca85dfb5bd773ea3ac6b199a52239593b58fdc9.png" src="_images/6805b0918e52afd79d2099099ca85dfb5bd773ea3ac6b199a52239593b58fdc9.png" />
+<img alt="_images/d71a261ef28d63ae0958840cfda501020481ff68c407768caa1328fa1be212ed.png" src="_images/d71a261ef28d63ae0958840cfda501020481ff68c407768caa1328fa1be212ed.png" />
+</div>
+</div>
+<p>As seen above, coupling the samples correctly uncovers the true feature coupling, which was slightly less clear without any sample supervision.</p>
+<p>Note that we have been using UCOOT throughout this tutorial, considering that it is a generalization of UGW. All of the same principles apply for UGW, except that UGW only allows for sample supervision (UGW does no feature coupling). Given we expect this tool to primarily be used on separately assayed datasets, UGW will often be fully unsupervised. UCOOT, on the other hand, allows for feature supervision, which we expect to aid sample alignments for separately assayed datasets.</p>
+<p>Hopefully, this tutorial has given you some insight into how to use the <span class="math notranslate nohighlight">\(D\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> hyperparameters to supervise your alignments. If you have knowledge of cell types or a true alignment among your samples, or some relationship among your features, consider using these supervision matrices. Now, it’s time to tie everything we’ve learned so far together and tackle AGW.</p>
+<p>Citations:</p>
+<p>Quang Huy Tran, Hicham Janati, Nicolas Courty, Rémi Flamary, Ievgen Redko, Pinar Demetci and Ritambhara Singh. Unbalanced CO-Optimal Transport. arXiv, <a class="reference external" href="http://stat.ML">stat.ML</a>, 2023.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "scotplus"
+        },
+        kernelOptions: {
+            name: "scotplus",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'scotplus'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="UCOOT_tutorial.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">UCOOT Tutorial</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="AGW_tutorial.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">AGW Tutorial</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-download">Data Download</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-fused-formulation">Default Fused Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-wise-fused-formulation">Feature-wise Fused Formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-wise-fused-formulation">Sample-wise Fused Formulation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By R. Singh
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

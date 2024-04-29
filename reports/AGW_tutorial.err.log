@@ -1,0 +1,75 @@
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
+    return future.result()
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+for aligned_rna, size in [(aligned_rna_ncoot, 'alpha=0'), (aligned_rna_half, 'alpha=0.5'), (aligned_rna_ngw, 'alpha=1')]:
+    fracs = calc_domainAveraged_FOSCTTM(adt, aligned_rna)
+    legend_label="AGW alignment FOSCTTM \n average value for {0}: ".format(size)+str(np.mean(fracs))
+    plt.plot(np.arange(len(fracs)), np.sort(fracs), "b--", label=legend_label)
+    plt.legend()
+    plt.xlabel("Cells")
+    plt.ylabel("Sorted FOSCTTM")
+    plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[16], line 2[0m
+[1;32m      1[0m [38;5;28;01mfor[39;00m aligned_rna, size [38;5;129;01min[39;00m [(aligned_rna_ncoot, [38;5;124m'[39m[38;5;124malpha=0[39m[38;5;124m'[39m), (aligned_rna_half, [38;5;124m'[39m[38;5;124malpha=0.5[39m[38;5;124m'[39m), (aligned_rna_ngw, [38;5;124m'[39m[38;5;124malpha=1[39m[38;5;124m'[39m)]:
+[0;32m----> 2[0m     fracs [38;5;241m=[39m [43mcalc_domainAveraged_FOSCTTM[49m[43m([49m[43madt[49m[43m,[49m[43m [49m[43maligned_rna[49m[43m)[49m
+[1;32m      3[0m     legend_label[38;5;241m=[39m[38;5;124m"[39m[38;5;124mAGW alignment FOSCTTM [39m[38;5;130;01m\n[39;00m[38;5;124m average value for [39m[38;5;132;01m{0}[39;00m[38;5;124m: [39m[38;5;124m"[39m[38;5;241m.[39mformat(size)[38;5;241m+[39m[38;5;28mstr[39m(np[38;5;241m.[39mmean(fracs))
+[1;32m      4[0m     plt[38;5;241m.[39mplot(np[38;5;241m.[39marange([38;5;28mlen[39m(fracs)), np[38;5;241m.[39msort(fracs), [38;5;124m"[39m[38;5;124mb--[39m[38;5;124m"[39m, label[38;5;241m=[39mlegend_label)
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/scotplus/utils/alignment.py:51[0m, in [0;36mcalc_domainAveraged_FOSCTTM[0;34m(x1_mat, x2_mat)[0m
+[1;32m     45[0m [38;5;28;01mdef[39;00m [38;5;21mcalc_domainAveraged_FOSCTTM[39m(x1_mat, x2_mat):
+[1;32m     46[0m [38;5;250m    [39m[38;5;124;03m"""[39;00m
+[1;32m     47[0m [38;5;124;03m    Outputs average FOSCTTM measure (averaged over both domains)[39;00m
+[1;32m     48[0m [38;5;124;03m    Get the fraction matched for all data points in both directions[39;00m
+[1;32m     49[0m [38;5;124;03m    Averages the fractions in both directions for each data point[39;00m
+[1;32m     50[0m [38;5;124;03m    """[39;00m
+[0;32m---> 51[0m     fracs1,xs [38;5;241m=[39m [43mcalc_frac_idx[49m[43m([49m[43mx1_mat[49m[43m,[49m[43m [49m[43mx2_mat[49m[43m)[49m
+[1;32m     52[0m     fracs2,xs [38;5;241m=[39m calc_frac_idx(x2_mat, x1_mat)
+[1;32m     53[0m     fracs [38;5;241m=[39m []
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/scotplus/utils/alignment.py:34[0m, in [0;36mcalc_frac_idx[0;34m(x1_mat, x2_mat)[0m
+[1;32m     32[0m rank[38;5;241m=[39m[38;5;241m0[39m
+[1;32m     33[0m [38;5;28;01mfor[39;00m row_idx [38;5;129;01min[39;00m [38;5;28mrange[39m(nsamp):
+[0;32m---> 34[0m     euc_dist [38;5;241m=[39m np[38;5;241m.[39msqrt([43mnp[49m[38;5;241;43m.[39;49m[43msum[49m[43m([49m[43mnp[49m[38;5;241;43m.[39;49m[43msquare[49m[43m([49m[43mnp[49m[38;5;241;43m.[39;49m[43msubtract[49m[43m([49m[43mx1_mat[49m[43m[[49m[43mrow_idx[49m[43m,[49m[43m:[49m[43m][49m[43m,[49m[43m [49m[43mx2_mat[49m[43m)[49m[43m)[49m[43m,[49m[43m [49m[43maxis[49m[38;5;241;43m=[39;49m[38;5;241;43m1[39;49m[43m)[49m)
+[1;32m     35[0m     true_nbr [38;5;241m=[39m euc_dist[row_idx]
+[1;32m     36[0m     sort_euc_dist [38;5;241m=[39m [38;5;28msorted[39m(euc_dist)
+
+File [0;32m<__array_function__ internals>:200[0m, in [0;36msum[0;34m(*args, **kwargs)[0m
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2324[0m, in [0;36msum[0;34m(a, axis, dtype, out, keepdims, initial, where)[0m
+[1;32m   2321[0m         [38;5;28;01mreturn[39;00m out
+[1;32m   2322[0m     [38;5;28;01mreturn[39;00m res
+[0;32m-> 2324[0m [38;5;28;01mreturn[39;00m [43m_wrapreduction[49m[43m([49m[43ma[49m[43m,[49m[43m [49m[43mnp[49m[38;5;241;43m.[39;49m[43madd[49m[43m,[49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43msum[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43maxis[49m[43m,[49m[43m [49m[43mdtype[49m[43m,[49m[43m [49m[43mout[49m[43m,[49m[43m [49m[43mkeepdims[49m[38;5;241;43m=[39;49m[43mkeepdims[49m[43m,[49m
+[1;32m   2325[0m [43m                      [49m[43minitial[49m[38;5;241;43m=[39;49m[43minitial[49m[43m,[49m[43m [49m[43mwhere[49m[38;5;241;43m=[39;49m[43mwhere[49m[43m)[49m
+
+File [0;32m/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/numpy/core/fromnumeric.py:84[0m, in [0;36m_wrapreduction[0;34m(obj, ufunc, method, axis, dtype, out, **kwargs)[0m
+[1;32m     82[0m             [38;5;28;01mreturn[39;00m reduction(axis[38;5;241m=[39maxis, dtype[38;5;241m=[39mdtype, out[38;5;241m=[39mout, [38;5;241m*[39m[38;5;241m*[39mpasskwargs)
+[1;32m     83[0m         [38;5;28;01melse[39;00m:
+[0;32m---> 84[0m             [38;5;28;01mreturn[39;00m [43mreduction[49m[43m([49m[43maxis[49m[38;5;241;43m=[39;49m[43maxis[49m[43m,[49m[43m [49m[43mout[49m[38;5;241;43m=[39;49m[43mout[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mpasskwargs[49m[43m)[49m
+[1;32m     86[0m [38;5;28;01mreturn[39;00m ufunc[38;5;241m.[39mreduce(obj, axis, dtype, out, [38;5;241m*[39m[38;5;241m*[39mpasskwargs)
+
+[0;31mTypeError[0m: sum() received an invalid combination of arguments - got (out=NoneType, axis=int, ), but expected one of:
+ * (*, torch.dtype dtype)
+      didn't match because some of the keywords were incorrect: out, axis
+ * (tuple of ints dim, bool keepdim, *, torch.dtype dtype)
+ * (tuple of names dim, bool keepdim, *, torch.dtype dtype)
+
+

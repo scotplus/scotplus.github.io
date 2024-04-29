@@ -1,0 +1,88 @@
+Traceback (most recent call last):
+  File "/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import scanpy as sc
+import numpy as np
+import umap
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+
+adata = sc.read_h5ad("./data/sf4_rna2_06-18_combinedNeural_pca50_res0.6_raw_annotated.h5ad")
+------------------
+
+----- stderr -----
+/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/umap/distances.py:1063: NumbaDeprecationWarning: The 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+  @numba.jit()
+/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/umap/distances.py:1071: NumbaDeprecationWarning: The 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+  @numba.jit()
+/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/umap/distances.py:1086: NumbaDeprecationWarning: The 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+  @numba.jit()
+----- stderr -----
+/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+----- stderr -----
+/Users/colinbaker/anaconda3/envs/scootr/lib/python3.9/site-packages/umap/umap_.py:660: NumbaDeprecationWarning: The 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+  @numba.jit()
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
+Cell [0;32mIn[2], line 7[0m
+[1;32m      4[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[1;32m      5[0m [38;5;28;01mfrom[39;00m [38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdecomposition[39;00m [38;5;28;01mimport[39;00m PCA
+[0;32m----> 7[0m adata [38;5;241m=[39m [43msc[49m[38;5;241;43m.[39;49m[43mread_h5ad[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43m./data/sf4_rna2_06-18_combinedNeural_pca50_res0.6_raw_annotated.h5ad[39;49m[38;5;124;43m"[39;49m[43m)[49m
+
+File [0;32m~/anaconda3/envs/scootr/lib/python3.9/site-packages/anndata/_io/h5ad.py:219[0m, in [0;36mread_h5ad[0;34m(filename, backed, as_sparse, as_sparse_fmt, chunk_size)[0m
+[1;32m    211[0m         [38;5;28;01mraise[39;00m [38;5;167;01mNotImplementedError[39;00m(
+[1;32m    212[0m             [38;5;124m"[39m[38;5;124mCurrently only `X` and `raw/X` can be read as sparse.[39m[38;5;124m"[39m
+[1;32m    213[0m         )
+[1;32m    215[0m rdasp [38;5;241m=[39m partial(
+[1;32m    216[0m     read_dense_as_sparse, sparse_format[38;5;241m=[39mas_sparse_fmt, axis_chunk[38;5;241m=[39mchunk_size
+[1;32m    217[0m )
+[0;32m--> 219[0m [38;5;28;01mwith[39;00m [43mh5py[49m[38;5;241;43m.[39;49m[43mFile[49m[43m([49m[43mfilename[49m[43m,[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mr[39;49m[38;5;124;43m"[39;49m[43m)[49m [38;5;28;01mas[39;00m f:
+[1;32m    221[0m     [38;5;28;01mdef[39;00m [38;5;21mcallback[39m(func, elem_name: [38;5;28mstr[39m, elem, iospec):
+[1;32m    222[0m         [38;5;28;01mif[39;00m iospec[38;5;241m.[39mencoding_type [38;5;241m==[39m [38;5;124m"[39m[38;5;124manndata[39m[38;5;124m"[39m [38;5;129;01mor[39;00m elem_name[38;5;241m.[39mendswith([38;5;124m"[39m[38;5;124m/[39m[38;5;124m"[39m):
+
+File [0;32m~/anaconda3/envs/scootr/lib/python3.9/site-packages/h5py/_hl/files.py:567[0m, in [0;36mFile.__init__[0;34m(self, name, mode, driver, libver, userblock_size, swmr, rdcc_nslots, rdcc_nbytes, rdcc_w0, track_order, fs_strategy, fs_persist, fs_threshold, fs_page_size, page_buf_size, min_meta_keep, min_raw_keep, locking, alignment_threshold, alignment_interval, meta_block_size, **kwds)[0m
+[1;32m    558[0m     fapl [38;5;241m=[39m make_fapl(driver, libver, rdcc_nslots, rdcc_nbytes, rdcc_w0,
+[1;32m    559[0m                      locking, page_buf_size, min_meta_keep, min_raw_keep,
+[1;32m    560[0m                      alignment_threshold[38;5;241m=[39malignment_threshold,
+[1;32m    561[0m                      alignment_interval[38;5;241m=[39malignment_interval,
+[1;32m    562[0m                      meta_block_size[38;5;241m=[39mmeta_block_size,
+[1;32m    563[0m                      [38;5;241m*[39m[38;5;241m*[39mkwds)
+[1;32m    564[0m     fcpl [38;5;241m=[39m make_fcpl(track_order[38;5;241m=[39mtrack_order, fs_strategy[38;5;241m=[39mfs_strategy,
+[1;32m    565[0m                      fs_persist[38;5;241m=[39mfs_persist, fs_threshold[38;5;241m=[39mfs_threshold,
+[1;32m    566[0m                      fs_page_size[38;5;241m=[39mfs_page_size)
+[0;32m--> 567[0m     fid [38;5;241m=[39m [43mmake_fid[49m[43m([49m[43mname[49m[43m,[49m[43m [49m[43mmode[49m[43m,[49m[43m [49m[43muserblock_size[49m[43m,[49m[43m [49m[43mfapl[49m[43m,[49m[43m [49m[43mfcpl[49m[43m,[49m[43m [49m[43mswmr[49m[38;5;241;43m=[39;49m[43mswmr[49m[43m)[49m
+[1;32m    569[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(libver, [38;5;28mtuple[39m):
+[1;32m    570[0m     [38;5;28mself[39m[38;5;241m.[39m_libver [38;5;241m=[39m libver
+
+File [0;32m~/anaconda3/envs/scootr/lib/python3.9/site-packages/h5py/_hl/files.py:231[0m, in [0;36mmake_fid[0;34m(name, mode, userblock_size, fapl, fcpl, swmr)[0m
+[1;32m    229[0m     [38;5;28;01mif[39;00m swmr [38;5;129;01mand[39;00m swmr_support:
+[1;32m    230[0m         flags [38;5;241m|[39m[38;5;241m=[39m h5f[38;5;241m.[39mACC_SWMR_READ
+[0;32m--> 231[0m     fid [38;5;241m=[39m [43mh5f[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43mname[49m[43m,[49m[43m [49m[43mflags[49m[43m,[49m[43m [49m[43mfapl[49m[38;5;241;43m=[39;49m[43mfapl[49m[43m)[49m
+[1;32m    232[0m [38;5;28;01melif[39;00m mode [38;5;241m==[39m [38;5;124m'[39m[38;5;124mr+[39m[38;5;124m'[39m:
+[1;32m    233[0m     fid [38;5;241m=[39m h5f[38;5;241m.[39mopen(name, h5f[38;5;241m.[39mACC_RDWR, fapl[38;5;241m=[39mfapl)
+
+File [0;32mh5py/_objects.pyx:54[0m, in [0;36mh5py._objects.with_phil.wrapper[0;34m()[0m
+
+File [0;32mh5py/_objects.pyx:55[0m, in [0;36mh5py._objects.with_phil.wrapper[0;34m()[0m
+
+File [0;32mh5py/h5f.pyx:106[0m, in [0;36mh5py.h5f.open[0;34m()[0m
+
+[0;31mFileNotFoundError[0m: [Errno 2] Unable to open file (unable to open file: name = './data/sf4_rna2_06-18_combinedNeural_pca50_res0.6_raw_annotated.h5ad', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+

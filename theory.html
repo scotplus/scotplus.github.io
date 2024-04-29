@@ -1,0 +1,956 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>The Evolution of SCOT+ &#8212; SCOOTR</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'theory';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Setup Tutorial" href="setup_tutorial.html" />
+    <link rel="prev" title="Getting Set Up" href="installation_instructions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOOTR - Home"/>
+    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOOTR - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to SCOT+
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Core Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="installation_instructions.html">Getting Set Up</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The Evolution of SCOT+</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup_tutorial.html">Setup Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UGW_tutorial.html">UGW Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UCOOT_tutorial.html">UCOOT Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fused_tutorial.html">Fused Formulation Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AGW_tutorial.html">AGW Tutorial</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Exploration on Real World Datasets</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="placeholder.html">Applications Section</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/scotplus/book_source.git" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/scotplus/book_source.git/issues/new?title=Issue%20on%20page%20%2Ftheory.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/theory.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>The Evolution of SCOT+</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulations">Formulations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-transport-ot">Optimal Transport (OT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formulation">Formulation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unbalanced-optimal-transport-uot">Unbalanced Optimal Transport (UOT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gromov-wasserstein-optimal-transport-gw">Gromov-Wasserstein Optimal Transport (GW)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unbalanced-gromov-wasserstein-optimal-transport-ugw">Unbalanced Gromov-Wasserstein Optimal Transport (UGW)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#co-optimal-transport-coot">Co-Optimal Transport (COOT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Formulation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Algorithm</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unbalanced-co-optimal-transport-ucoot">Unbalanced Co-Optimal Transport (UCOOT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#augmented-gromov-wasserstein-agw">Augmented Gromov-Wasserstein (AGW)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ot-uot">OT/UOT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gw-ugw">GW/UGW</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coot-ucoot">COOT/UCOOT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#agw">AGW</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="the-evolution-of-scot">
+<h1>The Evolution of SCOT+<a class="headerlink" href="#the-evolution-of-scot" title="Link to this heading">#</a></h1>
+<p>We will begin by examining the evolution of optimal transport formulations, and then
+enter into a brief description of our application of these formulations.</p>
+<section id="formulations">
+<h2>Formulations<a class="headerlink" href="#formulations" title="Link to this heading">#</a></h2>
+<p>In this section, we will examine the theoretical formulations for each optimal
+transport problem that has been applied to the problem of single-cell multi-omics
+alignment by our lab. We will begin with the standard formulation for optimal
+transport, and then move onto Gromov-Wasserstein, co-optimal transport, and our
+most recent formulation.</p>
+<section id="optimal-transport-ot">
+<h3>Optimal Transport (OT)<a class="headerlink" href="#optimal-transport-ot" title="Link to this heading">#</a></h3>
+<p>This formulation is applied to many problems in machine learning and was first
+proposed by Kantorovich. While not very applicable to data alignment, OT sets
+up our understanding of the following alignment methods.</p>
+<section id="formulation">
+<h4>Formulation<a class="headerlink" href="#formulation" title="Link to this heading">#</a></h4>
+<p>The original formulation for optimal transport seeks to minimize the cost of moving
+mass from one probability measure, <span class="math notranslate nohighlight">\(\mu\)</span> (<span class="math notranslate nohighlight">\(n_{\mu}\)</span> outcomes), to another probability
+measure, <span class="math notranslate nohighlight">\(\nu\)</span> (<span class="math notranslate nohighlight">\(n_{\nu}\)</span> outcomes). In the case of all formulations related to
+SCOT+ and its predecessors, these measures are discrete; so, for each outcome
+<span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(\mu\)</span>, OT seeks to find a cost-minimizing way (given a cost function
+<span class="math notranslate nohighlight">\(C(x_i \in \mu, y_i \in \nu)\)</span>) to move its mass to the set
+of outcomes in <span class="math notranslate nohighlight">\(\nu\)</span>. As a result, a solved OT problem will result in a coupling
+matrix, <span class="math notranslate nohighlight">\(\pi\)</span>, supported on <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span>; i.e., if a given <span class="math notranslate nohighlight">\(\pi\)</span> results from
+this formulation of optimal transport, we know it will be in the set
+<span class="math notranslate nohighlight">\(\Pi(\mu, \nu) = \{\pi | \pi 𝟙_{n_{\nu}} = \mu, \pi^{T}𝟙_{n_{\mu}} = \nu\}\)</span>.
+Therefore, the problem this basic OT formulation faces is:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\Sigma_{i = 1}^{n_\mu}\Sigma_{j = 1}^{n_\nu} (C(x_i, y_j)\pi_{ij}))\)</span></p>
+<p>or</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle C, \pi \rangle)\)</span>. Sometimes, we also refer to
+<span class="math notranslate nohighlight">\(\pi\)</span> as <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p>
+<p>Clearly, this problem requires us to find <span class="math notranslate nohighlight">\(n_{\mu}*n_{\nu}\)</span> unknowns, which will quickly
+lead to a computationally infeasible optimization as we scale. In order to remedy this issue,
+we add an entropic regularization term to the objective function:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle C, \pi \rangle - \epsilon \langle \pi, \log \pi \rangle)\)</span></p>
+<p>Note that <span class="math notranslate nohighlight">\(H(\pi) = \langle \pi, \log \pi \rangle\)</span> is a measure of entropy of <span class="math notranslate nohighlight">\(\pi\)</span>; so,
+the higher the entropy, the lower the cost. As a result, as <span class="math notranslate nohighlight">\(\epsilon\)</span> grows, the optimal <span class="math notranslate nohighlight">\(\pi\)</span>
+gets more dense (favoring entropy even more), whereas if <span class="math notranslate nohighlight">\(\epsilon\)</span> falls, we approach our original
+OT formulation.</p>
+</section>
+<section id="algorithm">
+<h4>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h4>
+<p>Although <span class="math notranslate nohighlight">\(\epsilon\)</span> adds entropy to the OT formulation, it makes solving for <span class="math notranslate nohighlight">\(\pi\)</span> computationally
+tractable. In particular, it enables Sinkhorn’s algorithm, as we can reframe our objective function
+as the equivalent:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (KL(\pi, \pi_{\textit{init}}))\)</span></p>
+<p>Where <span class="math notranslate nohighlight">\(\pi_{\textit{init}} = e^{\frac{C}{\epsilon}}\)</span>. Application of the KL divergence to these
+two matrices will reveal the equivalence of these two minimization problems. From here,
+Sinkhorn’s algorithm solves this new problem iteratively; considering the problem now seeks
+to project <span class="math notranslate nohighlight">\(\pi_{\textit{init}}\)</span> onto <span class="math notranslate nohighlight">\(\Pi\)</span>, we can solve for some vectors <span class="math notranslate nohighlight">\(u, v\)</span> in the space of
+<span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> respectively such that <span class="math notranslate nohighlight">\(\pi = diag(u)\pi_{\textit{init}}diag(v)\)</span>. Given we know the
+supports of <span class="math notranslate nohighlight">\(\pi\)</span> should be <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span>, we can iterate between the two equations:</p>
+<p><span class="math notranslate nohighlight">\(u = \mu \oslash \pi_{\textit{init}}v\)</span> and</p>
+<p><span class="math notranslate nohighlight">\(v = \nu \oslash \pi_{\textit{init}}^{T}u\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(\oslash\)</span> is element-wise division. This algorithm leads to a much faster determination of <span class="math notranslate nohighlight">\(\pi\)</span> than possible before,
+at the cost of more entropy in the final solution. Note that, the smaller <span class="math notranslate nohighlight">\(\epsilon\)</span>
+gets, the slower <span class="math notranslate nohighlight">\(u\)</span> and <span class="math notranslate nohighlight">\(v\)</span> will coverge as a result of the new initial matrix.
+Sinkhorn’s algorithm thus introduces a speed-entropy tradeoff in the final coupling matrix.</p>
+<p>While we will not go over the specifics of different algorithms used to solve the more complex cost
+functions later in this document, keep in mind that variations of Sinkhorn’s algorithm are
+generally applicable. Looking at Sinkhorn’s algorithm gives a particular understanding of how
+<span class="math notranslate nohighlight">\(\epsilon\)</span> works that is uniquely useful.</p>
+</section>
+</section>
+<section id="unbalanced-optimal-transport-uot">
+<h3>Unbalanced Optimal Transport (UOT)<a class="headerlink" href="#unbalanced-optimal-transport-uot" title="Link to this heading">#</a></h3>
+<p>Expanding on this original optimization problem, we can relax the constraint <span class="math notranslate nohighlight">\(\pi \in \Pi\)</span>.
+In particular, rather than forcing the marginals of <span class="math notranslate nohighlight">\(\pi\)</span> to equal <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span> respectively,
+we can add cost terms encouraging the marginals to approach <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span>. These terms will
+take the form of:</p>
+<p><span class="math notranslate nohighlight">\(\rho_x KL(\pi𝟙_{n_\nu}, \mu)\)</span> and</p>
+<p><span class="math notranslate nohighlight">\(\rho_y KL(\pi^{T}𝟙_{n_\mu}, \nu)\)</span></p>
+<p>Clearly, these terms will encourage <span class="math notranslate nohighlight">\(\pi\)</span> towards the constraint <span class="math notranslate nohighlight">\(\pi \in \Pi\)</span>, but will not
+force it. As <span class="math notranslate nohighlight">\(\rho_x\)</span> and <span class="math notranslate nohighlight">\(\rho_y\)</span> approach infinitely, we recover the OT formulation. As
+they decrease, the marginal distributions we recover from <span class="math notranslate nohighlight">\(\pi\)</span> will begin to vary more
+from the constraint; in effect, we are unbalancing the initial distribution of mass in
+both measures. As such, this formulation is unblanaced optimal transport. To get a sense
+for what this unbalancing might mean, consider a measure <span class="math notranslate nohighlight">\(\mu\)</span> where the outcomes are
+4 different types of dog and a type of cat, and a measure <span class="math notranslate nohighlight">\(\nu\)</span> where the outcomes are 4
+different types of cat and a type of dog. Were these measures to be uniform, under the OT formulation, some of the
+dogs in <span class="math notranslate nohighlight">\(\mu\)</span> would have to transport some of their mass to cats; otherwise, we would
+recover too much mass in the column of <span class="math notranslate nohighlight">\(\pi\)</span> relating to <span class="math notranslate nohighlight">\(\nu\)</span>’s dog. However, if we
+use UOT with a smaller <span class="math notranslate nohighlight">\(\rho\)</span> for each measure, we might allow the single cat to transport
+more mass from <span class="math notranslate nohighlight">\(\mu\)</span>, and the single dog to transport more mass from <span class="math notranslate nohighlight">\(\nu\)</span> in order to prevent
+cross-species mass transportation (assuming varying species are farther apart).
+While a silly example, it illustrates why <span class="math notranslate nohighlight">\(\rho\)</span> is a helpful extra parameter for OT problems.</p>
+<p>As another example, suppose we have 5 mines (outcomes of <span class="math notranslate nohighlight">\(\mu\)</span>) transporting to
+5 factories (outcomes of <span class="math notranslate nohighlight">\(\nu\)</span>). In the regular OT case, each mine produces a fixed
+amount of mass, decided before optimization. However, if we have some flexibility on how
+much each mine produces or each factory processes, we might add in <span class="math notranslate nohighlight">\(\rho\)</span> as a hyperparameter
+(<span class="math notranslate nohighlight">\(\rho = (\rho_x, \rho_y)\)</span>).</p>
+<p>Note that the addition of these terms is called “marginal relaxation.” Many of our cost
+functions from here will have a balanced and an unbalanced variant; the latter will
+always have the addition of these marginal relaxation terms.</p>
+<p>Our final optimization problem for UOT is:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi} (\langle C, \pi \rangle - \epsilon \langle \pi, \log \pi \rangle) + \rho_x KL(\pi 𝟙_{n_\nu}, \mu) + \rho_y KL(\pi^{T}𝟙_{n_\mu}, \nu)\)</span></p>
+</section>
+<section id="gromov-wasserstein-optimal-transport-gw">
+<h3>Gromov-Wasserstein Optimal Transport (GW)<a class="headerlink" href="#gromov-wasserstein-optimal-transport-gw" title="Link to this heading">#</a></h3>
+<p>In previous cases, the way we decide how much it costs to transport mass
+from <span class="math notranslate nohighlight">\(\mu\)</span> to <span class="math notranslate nohighlight">\(\nu\)</span> depends on the distance between each outcome in the two distributions,
+defined by some distance function <span class="math notranslate nohighlight">\(D\)</span>. In other words, the goal is to minimize how
+“far” the mass must travel for each outcome.</p>
+<p>However, suppose we instead considered two pairwise distance matrices <span class="math notranslate nohighlight">\(D_\mu\)</span> and
+<span class="math notranslate nohighlight">\(D_\nu\)</span> (size <span class="math notranslate nohighlight">\(n_{\mu} \times n_{\mu}\)</span> and <span class="math notranslate nohighlight">\(n_{\nu} \times n_{\nu}\)</span> respectively)
+within <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span>’s space of outcomes, and tried to minimize how far mass
+must travel between these pairwise distances. In this new case, if we have <span class="math notranslate nohighlight">\(x_a\)</span>
+and <span class="math notranslate nohighlight">\(x_b\)</span> in <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(y_a\)</span> and <span class="math notranslate nohighlight">\(y_b\)</span> in <span class="math notranslate nohighlight">\(\nu\)</span>, we want to transport less mass
+from <span class="math notranslate nohighlight">\(x_a\)</span> to <span class="math notranslate nohighlight">\(y_a\)</span> and <span class="math notranslate nohighlight">\(x_b\)</span> to <span class="math notranslate nohighlight">\(y_b\)</span> if the pairwise distances between
+(<span class="math notranslate nohighlight">\(x_a\)</span> and <span class="math notranslate nohighlight">\(x_b\)</span>) and (<span class="math notranslate nohighlight">\(y_a\)</span> and <span class="math notranslate nohighlight">\(y_b\)</span>) are farther apart. This objective encourages
+a transport plan <span class="math notranslate nohighlight">\(\pi\)</span> that conserves the pairwise geometry (as defined by D) of each
+domain; for example, a given <span class="math notranslate nohighlight">\(x \in \mu\)</span> will likely transport much of its mass to
+the <span class="math notranslate nohighlight">\(y \in \nu\)</span> that shares the most similar relative position to points in its domain
+as <span class="math notranslate nohighlight">\(x\)</span> does. The new minimization problem this presents is called “Gromov-Wasserstein
+Optimal Transport”, hence the abbreviation GW.</p>
+<p>In order to write this new objective as a minimization problem, we define the
+fourth order tensor L, which decides the distance between two intra-domain
+pairwise distances, <span class="math notranslate nohighlight">\(D_{\mu_{ij}}\)</span> and <span class="math notranslate nohighlight">\(D_{\nu_{kl}}\)</span>. L leads use to a new objective
+function and minimization problem for GW:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\Sigma_{i = 1}^{n_\mu}\Sigma_{j = 1}^{n_\mu}\Sigma_{k = 1}^{n_\nu}\Sigma_{l = 1}^{n_\nu} (L(D_{\mu_{ij}}, D_{\nu_{kl}})\pi_{ik}\pi_{jl}))\)</span></p>
+<p>which can also be expressed as the inner product:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle)\)</span>,</p>
+<p>where <span class="math notranslate nohighlight">\(\otimes\)</span> is the tensor product.</p>
+<p>Just as in OT, adding entropic regularization allows us to use Sinkhorn-like iterations
+when we find the new cost-minimizing <span class="math notranslate nohighlight">\(\pi\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle) - \epsilon \langle \pi, \log \pi \rangle\)</span></p>
+<p>Now, we move onto the unbalanced version of this formulation.</p>
+</section>
+<section id="unbalanced-gromov-wasserstein-optimal-transport-ugw">
+<h3>Unbalanced Gromov-Wasserstein Optimal Transport (UGW)<a class="headerlink" href="#unbalanced-gromov-wasserstein-optimal-transport-ugw" title="Link to this heading">#</a></h3>
+<p>Just as with the transition from OT to UOT, we relax the <span class="math notranslate nohighlight">\(\pi \in \Pi\)</span> marginal constraint
+using <span class="math notranslate nohighlight">\(\rho_x\)</span> and <span class="math notranslate nohighlight">\(\rho_y\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle) - \epsilon \langle \pi, 
+\log \pi \rangle + \rho_x KL(\pi𝟙_{n_\nu}, \mu) + \rho_y KL(\pi^{T}𝟙_{n_\mu}, \nu)\)</span></p>
+<p>As with UOT, the <span class="math notranslate nohighlight">\(\rho\)</span> parameters allow outcomes of either mesaure to transport
+more or less mass than they originally would have given <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span>. This time,
+if a given outcome <span class="math notranslate nohighlight">\(x\)</span> of <span class="math notranslate nohighlight">\(\mu\)</span> is quite similar to multiple outcomes in <span class="math notranslate nohighlight">\(\nu\)</span>
+in terms of relative intra-domain position, it might end up transporting more mass
+than it originally had, outweighing the new KL term (and moving away from the
+constraint of OT/GW). Again, if we let <span class="math notranslate nohighlight">\(rho_x\)</span> and <span class="math notranslate nohighlight">\(rho_y\)</span> approach infinity, we
+recover GW.</p>
+</section>
+<section id="co-optimal-transport-coot">
+<h3>Co-Optimal Transport (COOT)<a class="headerlink" href="#co-optimal-transport-coot" title="Link to this heading">#</a></h3>
+<p>Co-optimal transport expands on the original OT formulation by adding two new
+measures, which it couples in a joint optimization problem with our original
+two measures.</p>
+<section id="id1">
+<h4>Formulation<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<p>We can now introduce the COOT formulation. Although conceptually similar to OT,
+this new concept is also a generalization of GW. Recall that in GW, we had an
+objective function of the form:</p>
+<p><span class="math notranslate nohighlight">\((\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle)\)</span></p>
+<p>Suppose that, instead of having distance matrices here, we had matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> of
+information on two different sets of outcomes. We define new probability measures
+<span class="math notranslate nohighlight">\(\mu^s\)</span>, <span class="math notranslate nohighlight">\(\mu^f\)</span>, <span class="math notranslate nohighlight">\(\nu^s\)</span>, <span class="math notranslate nohighlight">\(\nu^f\)</span>. Our new goal is to find a way to transport
+mass from <span class="math notranslate nohighlight">\(\mu^s\)</span> to <span class="math notranslate nohighlight">\(\nu^s\)</span> and <span class="math notranslate nohighlight">\(\mu^f\)</span> to <span class="math notranslate nohighlight">\(\nu^f\)</span> with the least joint cost;
+in other words, we have information on the relationship between <span class="math notranslate nohighlight">\(\mu^s\)</span> and <span class="math notranslate nohighlight">\(\mu^f\)</span>
+(<span class="math notranslate nohighlight">\(A\)</span>) as well as <span class="math notranslate nohighlight">\(\nu^s\)</span> and <span class="math notranslate nohighlight">\(\nu^f\)</span> (<span class="math notranslate nohighlight">\(B\)</span>) to inform our two transport plans, <span class="math notranslate nohighlight">\(\pi_s\)</span> and
+<span class="math notranslate nohighlight">\(\pi_f\)</span>.</p>
+<p>In order to leverage this information we have between measures across
+these separate transport problems, we use a concept similar to GW. For each <span class="math notranslate nohighlight">\(x_s\)</span>
+in the space of outcomes of <span class="math notranslate nohighlight">\(\mu^s\)</span>, we determine how much mass to transport to
+each <span class="math notranslate nohighlight">\(y_s\)</span> in the outcome space of <span class="math notranslate nohighlight">\(\nu^s\)</span> based on the similarity of the relative
+positioning of <span class="math notranslate nohighlight">\(x_s\)</span> to <span class="math notranslate nohighlight">\(\mu^f\)</span> and <span class="math notranslate nohighlight">\(y_s\)</span> to <span class="math notranslate nohighlight">\(\nu^f\)</span>. This relative positioning,
+however, naturally depends on information on the correspondence between <span class="math notranslate nohighlight">\(\mu^f\)</span>
+and <span class="math notranslate nohighlight">\(\nu^f\)</span>; otherwise, the positioning itself would be meaningless.</p>
+<p>In order to get information on this correspondence, we decide how much mass to
+transport from each <span class="math notranslate nohighlight">\(x_f\)</span> in the outcome space of <span class="math notranslate nohighlight">\(\mu^f\)</span> to each <span class="math notranslate nohighlight">\(y_f\)</span> in the outcome
+space of <span class="math notranslate nohighlight">\(\nu^f\)</span> based on the difference between the relative positioning of
+<span class="math notranslate nohighlight">\(x_f\)</span> to <span class="math notranslate nohighlight">\(\mu^s\)</span> and the relativing positioning of <span class="math notranslate nohighlight">\(y_f\)</span> to <span class="math notranslate nohighlight">\(\nu^s\)</span>. However,
+this positioning depends on information on the correspondence between <span class="math notranslate nohighlight">\(\mu^s\)</span> and
+<span class="math notranslate nohighlight">\(\nu^s\)</span>, which brings us right back to where we were in the beginning of the
+previous paragraph. As we now see, there is a strong interdependence between the
+determination of <span class="math notranslate nohighlight">\(\pi_s\)</span> and <span class="math notranslate nohighlight">\(\pi_f\)</span>; each decision in either matrix depends
+on accurate correspondence information from the other matrix. Thus, we call
+the procedure of finding <span class="math notranslate nohighlight">\(\pi_s\)</span> and <span class="math notranslate nohighlight">\(\pi_f\)</span> “co-optimal transport” (COOT).</p>
+<p>Now, let’s build the objective function for COOT from what we know about its
+similarity to GW. In the GW case, we have <span class="math notranslate nohighlight">\(\mu^s = \mu^f\)</span> and <span class="math notranslate nohighlight">\(\nu^s = \nu^f\)</span>,
+if we treat <span class="math notranslate nohighlight">\(A = D_\mu\)</span> and <span class="math notranslate nohighlight">\(B = D_\nu\)</span>. The distance matrices mimic having
+information on the relationships between two pairs of measures. As a result,
+in the GW case (formulated in terms of COOT), we would have <span class="math notranslate nohighlight">\(\pi_s = \pi_f\)</span>.
+Generalizing this reformulation of GW, we get</p>
+<p><span class="math notranslate nohighlight">\((\langle L(A, B) \otimes \pi_f, \pi_s \rangle)\)</span></p>
+<p>as a new objective function. In order to get a closer look, let’s expand this:</p>
+<p><span class="math notranslate nohighlight">\((\Sigma_{i = 1}^{n_{\mu^s}}\Sigma_{j = 1}^{n_{\mu^f}}\Sigma_{k = 1}^{n_{\nu^s}}\Sigma_{l = 1}^{n_{\nu^f}} (L(A_{ij}, B_{kl})\pi_{s_{ij}}\pi_{f_{j,l}}))\)</span></p>
+<p>This new objective function describes the exact interdependence we realized earlier
+in this section – we simultaneously optimize <span class="math notranslate nohighlight">\(\pi_s\)</span> and <span class="math notranslate nohighlight">\(\pi_f\)</span>, relying on joint
+information on the relative positioning of i and k to their corresponding f-superscripted
+measures and the relative positioning of j and l to their corresponding s-superscripted
+measures. From here, we can reframe this function as a minimization problem and add
+entropic regularization (allowing for Sinkhorn iterations):</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s \in \Pi(\mu^s, \nu^s), \pi_f \in \Pi(\mu^f, \nu^f)} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) - \epsilon_s \langle \pi_s, \log \pi_s \rangle - \epsilon_f \langle \pi_f, \log \pi_f \rangle\)</span></p>
+<p>We can also do joint entropic regularization, which is equivalent to the <span class="math notranslate nohighlight">\(\epsilon_s = \epsilon_f\)</span> case:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s \in \Pi(\mu^s, \nu^s), \pi_f \in \Pi(\mu^f, \nu^f)} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) - \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle\)</span></p>
+<p>Note that, in the case of our work, we gerenally use euclidean distance (l2)
+for L. Now, we can move on to how we solve this new transport problem; clearly,
+we will now need more than Sinkhorn iterations.</p>
+</section>
+<section id="id2">
+<h4>Algorithm<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<p>In order to jointly solve for these two transport plans, we employ an algorithm
+called “block coordinate descent,” or BCD. Without getting too into the details
+(of which there are many), we will try to give some intuition on what this algorithm
+is doing.</p>
+<p>Consider the cost function we derived for standard COOT above and suppose we hold
+<span class="math notranslate nohighlight">\(\pi_f\)</span> constant. If we do so, we uncover a new minimization problem of the form (CHECK THIS, CITE):</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s \in \Pi(\mu^s, \nu^s)} (\langle L_c(A, B, \pi_f), \pi_s \rangle) - \epsilon \langle \pi_s, 
+\log \pi_s \rangle\)</span></p>
+<p>Where L is a function of <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(\pi_f\)</span> outside the scope of this document.
+With this new minimization problem, we have an opportunity to optimize <span class="math notranslate nohighlight">\(\pi_s\)</span>
+given <span class="math notranslate nohighlight">\(\pi_f\)</span> using Sinkhorn iterations, given we now have the same form as a standard
+OT problem (with a more complex cost function).</p>
+<p>Since the COOT cost function is symmetric with respect to <span class="math notranslate nohighlight">\(\pi_s\)</span> and <span class="math notranslate nohighlight">\(\pi_f\)</span>, we
+can recover the same class of problem, except with <span class="math notranslate nohighlight">\(\pi_f\)</span> as the subject of optimization.
+This reformulation of the COOT problem allows us to employ BCD - we do Sinkhorn
+iterations on <span class="math notranslate nohighlight">\(\pi_s\)</span> given <span class="math notranslate nohighlight">\(\pi_f\)</span>, and then switch to <span class="math notranslate nohighlight">\(\pi_f\)</span> given <span class="math notranslate nohighlight">\(\pi_s\)</span>
+until both of our transport plans converge.</p>
+<p>In many co-optimal transport tools, you may find hyperparameters that seem redundant,
+like nits_bcd and nits_uot. These hyperparameters refer to BCD, as well as the
+subprocess that BCD employs for individual plan optimization (like Sinkhorn). Hopefully,
+this section has helped you understand that solving a COOT problem has multiple layers
+of iteration, each of which must be considered when selecting optimization parameters.</p>
+</section>
+</section>
+<section id="unbalanced-co-optimal-transport-ucoot">
+<h3>Unbalanced Co-Optimal Transport (UCOOT)<a class="headerlink" href="#unbalanced-co-optimal-transport-ucoot" title="Link to this heading">#</a></h3>
+<p>No surprises here – we will now unbalance COOT using four marginal relaxation
+parameters: <span class="math notranslate nohighlight">\(\rho^s_x, \rho^s_y, \rho^f_x, \rho^f_y\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) - \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho^s_x KL(\pi_s 𝟙_{n_{\nu^s}}, \mu^s)\)</span></p>
+<p><span class="math notranslate nohighlight">\(+ \rho^s_y KL(\pi_s^{T}𝟙_{n_{\mu^s}}, \nu^s) + \rho^f_x KL(\pi_f 𝟙_{{n_\nu^f}}, \mu^f) + \rho^f_y KL(\pi_f^{T}𝟙_{n_{\mu^f}}, \nu^f)\)</span></p>
+<p>These parameters each allow outcomes in any of our four measures to transport more or less mass
+than originally allocated, provided <span class="math notranslate nohighlight">\(\rho &lt;\)</span> infinity. As all four <span class="math notranslate nohighlight">\(\rho\)</span> approach infinity,
+we recover COOT. We tend to relax the marginals of our transport plans with <span class="math notranslate nohighlight">\(\rho\)</span> the most
+when there is some disproportionality among outcomes of any of the measures that we wish to
+correct. Note that we have now introduced a large number of new hyperparameters. These
+marginal relaxation terms can be joined for less complexity, either by transport:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) - \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho^s KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_s^{T}𝟙_{n_{\mu^s}}, \mu^s \otimes \nu^s)\)</span></p>
+<p><span class="math notranslate nohighlight">\(+ \rho^f KL(\pi_f 𝟙_{n_{\nu^f}} \otimes \pi_f^{T}𝟙_{n_{\mu^f}}, \mu^f \otimes \nu^f)\)</span></p>
+<p>or by domain:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) - \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho_x KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_f 𝟙_{n_{\nu^f}}, \mu^s \otimes \mu^f)\)</span></p>
+<p><span class="math notranslate nohighlight">\(+ \rho_y KL(\pi_s^{T}𝟙_{n_{\mu^s}} \otimes \pi_f^{T}𝟙_{n_{\mu^f}}, \nu^s \otimes \nu^f)\)</span></p>
+<p>Transport marginal relaxation ties together the relaxation of the pairs of measures
+that transport mass back and forth (are tied by a transport plan), whereas domain
+marginal relaxation ties together the relaxation of the pairs of measures that have
+shared information on <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>. Both ways of joining lead to less flexibility;
+in SCOT+ we chose the tie together the marginal relaxation according to the transport plans.
+In other words, in SCOT+, we marginally relax both marginals of each <span class="math notranslate nohighlight">\(\pi\)</span> with the same
+value for <span class="math notranslate nohighlight">\(\rho\)</span> specific to each <span class="math notranslate nohighlight">\(\pi\)</span>. We chose this strategy rather than tying by
+domain, as for single-cell applications, we expect sets of samples and features to have
+comparable levels of representation. More on this in the application section.</p>
+</section>
+<section id="augmented-gromov-wasserstein-agw">
+<h3>Augmented Gromov-Wasserstein (AGW)<a class="headerlink" href="#augmented-gromov-wasserstein-agw" title="Link to this heading">#</a></h3>
+<p>With GW and UGW, we were able to recover non-linear relationships between outcomes
+by preserving geometry; with COOT and UCOOT, we were able to map two sets of outcomes,
+albeit using a formulation similar to the more linear OT and UOT problems. AGW (what we use in SCOT+)
+seeks to find the dual mapping of UCOOT with the potential for nonlinear relationships
+of UGW. In effect, AGW pushes together the cost functions of UCOOT and UGW, and
+assigns a hyperparameter <span class="math notranslate nohighlight">\(\alpha\)</span> that determines the relative usage of each cost function.
+As a result, we have the following minimization problem:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} \alpha(\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + (1 - \alpha) (\langle L(D_{\mu_s}, D_{\nu_s}), \pi_s \otimes \pi_s \rangle) - \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle\)</span></p>
+<p><span class="math notranslate nohighlight">\( + \rho_x KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_f 𝟙_{n_{\nu^f}}, \mu^s \otimes \mu^f) + \rho_y KL(\pi_s^{T}𝟙_{n_{\mu^s}} \otimes \pi_f^{T}𝟙_{n_{\mu^f}}, \nu^s \otimes \nu^f)\)</span></p>
+<p>While less theoretical than the previous formulations we have looked at, AGW
+allows for an improvement on UCOOT by allowing for the recovery of nonlinear
+relationships among the original measures we sought to couple, <span class="math notranslate nohighlight">\(\mu_s\)</span> and <span class="math notranslate nohighlight">\(\nu_s\)</span>.
+Now, we will move onto why we use these methods in single-cell multi-omics alignment.</p>
+</section>
+</section>
+<section id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Link to this heading">#</a></h2>
+<p>In all of the formulations above, we have thought about transporting mass between
+probability measures, which seems fairly removed from aligning single-cell datasets.
+However, if we build up from the OT formulation’s application, we can see how it
+might be useful.</p>
+<section id="ot-uot">
+<h3>OT/UOT<a class="headerlink" href="#ot-uot" title="Link to this heading">#</a></h3>
+<p>Suppose we treat the set of samples of a given dataset <span class="math notranslate nohighlight">\(A \in \mathbb{R}^2\)</span> as a probability measure,
+and another set of samples of a given dataset <span class="math notranslate nohighlight">\(B \in \mathbb{R}^2\)</span> as another probability measure.
+Suppose we call each row in <span class="math notranslate nohighlight">\(A\)</span> <span class="math notranslate nohighlight">\(a_i\)</span>, and each row in <span class="math notranslate nohighlight">\(B\)</span> <span class="math notranslate nohighlight">\(b_i\)</span>, for all i respective rows (<span class="math notranslate nohighlight">\(n_A\)</span> and <span class="math notranslate nohighlight">\(n_B\)</span>) in each matrix.
+By applying the OT/UOT framework to this problem, we would be trying to minimize:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\Sigma_{i = 1}^{n_A}\Sigma_{j = 1}^{n_B} (C(a_i, b_j)\pi_{ij}))\)</span></p>
+<p>If we allowed C to be some measure of distance between these two vectors, like
+the dot product, we would recover a transport plan that matches rows by their
+explicit similarity (i.e. <span class="math notranslate nohighlight">\(C(v, v) = 0\)</span> for vector <span class="math notranslate nohighlight">\(v\)</span>). In terms of matching samples,
+this type of transport plan would not benefit us much – unless we had the same set
+of features (columns), the function <span class="math notranslate nohighlight">\(C\)</span> would not be possible to construct, as the
+two sets of samples would not lie in the same metric space. Even if we did construct
+<span class="math notranslate nohighlight">\(C\)</span>, it would not make sense; if we are looking at different datasets, we don’t
+care if two samples have the same values for each ordered feature if those features are
+not the same. So, we conclude that the OT formulation can align samples for which
+we have data on the same set of features – a sort of vacuous problem, when we
+can just use all available samples from <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> for analysis by concatenating
+<span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> (given they have the same features).</p>
+</section>
+<section id="gw-ugw">
+<h3>GW/UGW<a class="headerlink" href="#gw-ugw" title="Link to this heading">#</a></h3>
+<p>Now, we move to GW/UGW using the same intuition from the development of our
+formulations above. Now, rather than directly comparing the two matrices,
+we begin by calculating intra-domain distance matrices <span class="math notranslate nohighlight">\(D_A\)</span> and <span class="math notranslate nohighlight">\(D_B\)</span> of size
+<span class="math notranslate nohighlight">\(n_A \times n_A\)</span> and <span class="math notranslate nohighlight">\(n_B \times n_B\)</span>. These matrices can be calculated in a number of
+ways; using euclidean distance, using a nearest neighbors graph (distance via
+connectivity or by Dijkstra’s, assuming the graph has weights), or any other
+intra-domain distance metric. From here, we apply GW to these distance matrices
+with any form of cost function, but usually euclidean distance.</p>
+<p>According to our intuition on GW, our new resulting transport plan will match
+samples based on their relative position to their own domain (by their pairwise
+distances with all other intra-domain samples). As a result, our transport plan
+will uncover the sample-sample matching that most preserves domain geometry.
+For example, if we took a dataset <span class="math notranslate nohighlight">\(A\)</span> and applied some rotation, translation, and
+scaling to get a new dataset <span class="math notranslate nohighlight">\(A'\)</span>, OT/UOT would give us a transport plan that does
+not necessarily match samples correctly, considering the transport plan is built
+from raw dataset values. However, GW/UGW would give a perfect matching from sample
+to sample in <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A'\)</span>, considering that they share an exact intra-domain geometry.
+As a result, GW/UGW applied to datasets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> find the geometry-preserving
+coupling between the two, which has better applications to aligning datasets.</p>
+<p>However, it also has its pitfalls; suppose we have a simple domain, <span class="math notranslate nohighlight">\(A\)</span>, which has
+two features. <span class="math notranslate nohighlight">\(A\)</span>’s samples all fall within a circle of radius 1 about the origin.
+Now, suppose we have <span class="math notranslate nohighlight">\(A'\)</span>, which just adds some small, random translation to each
+point in <span class="math notranslate nohighlight">\(A\)</span>. GW/UGW would not necessarily align matching samples in <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A'\)</span> –
+since the geometry of <span class="math notranslate nohighlight">\(A\)</span> can be roughly conserved with any rotation, GW/UGW might
+find a plan that conserves each local geometry, but results in a rotation of <span class="math notranslate nohighlight">\(A'\)</span>.</p>
+<p>Note also that GW/UGW, in its geometry conservation, can recover nonlinear feature
+relationships, provided they are strong enough; it does not have an inherently
+linear matching. In addition, since its only goal is to conserve geometry, its
+alignments assume some underlying manifold structure or latent embedding that these
+datasets share; if our two datasets are just clouds, GW will not (and should not) accomplish any
+meaningful coupling.</p>
+</section>
+<section id="coot-ucoot">
+<h3>COOT/UCOOT<a class="headerlink" href="#coot-ucoot" title="Link to this heading">#</a></h3>
+<p>With COOT, on the same datasets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, we seek to find co-optimal coupling matrices <span class="math notranslate nohighlight">\(\pi_s\)</span> and
+<span class="math notranslate nohighlight">\(\pi_f\)</span>. COOT ensures that the highly related features of highly related samples
+(according to the optimal coupling matrices) have explicit values close together
+(based on the cost function); i.e., for large <span class="math notranslate nohighlight">\(\pi_{s_{ik}}\)</span> and <span class="math notranslate nohighlight">\(\pi_{f_{jl}}\)</span>,
+<span class="math notranslate nohighlight">\(A_ij\)</span> must be close to <span class="math notranslate nohighlight">\(B_kl\)</span>, which is consistent with our COOT objective function:</p>
+<p><span class="math notranslate nohighlight">\(\langle L(A, B) \otimes \pi_f, \pi_s \rangle\)</span></p>
+<p>This feature of COOT allows us to generate sample coupling matrices that provide meaningful
+alignments, even though we are comparing direct feature values as in OT/UOT. We achieve this new result because
+when we are comparing these feature values (distinct samples with distinct features),
+we have a sense of how the features are related. Since the problem is symmetric,
+we also get a feature coupling matrix that gives us meaningful relationships between features,
+an added bonus.</p>
+<p>Note, however, that these relationships are all inherently linear, since the information
+we gain from features is now in the form of a matrix (clearly linear) when generating a sample
+coupling matrix. So, while our new sample alignment will be informed by feature relationships
+more directly, as well as allowing for feature supervision (can penalize how far <span class="math notranslate nohighlight">\(\pi_f\)</span>
+diverges from some prior), it will recover strictly linear results. Again, we see that
+COOT also assumes some underlying manifold structure – without meaningful relationships between
+features, COOT will not accomplish a meaningful alignment.</p>
+<p>In addition, COOT is clearly not robust to transformations like our GW alignment.
+If we scale, rotate, and translate a given matrix <span class="math notranslate nohighlight">\(A\)</span> into <span class="math notranslate nohighlight">\(A'\)</span>, COOT will not necessarily
+produce a perfect alignment between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A'\)</span>, as it compares direct values instead of distances.
+For example, while a translation may not change the optimal coupling matrix, the
+minimum COOT cost will directly rise, unlike in the case of GW.</p>
+</section>
+<section id="agw">
+<h3>AGW<a class="headerlink" href="#agw" title="Link to this heading">#</a></h3>
+<p>The pitfalls of GW and COOT motivated us to see if we could find the best of both
+alignments. By combining GW and COOT in our formulation above, we allow for
+the determination and recovery (in the form of <span class="math notranslate nohighlight">\(\pi_f\)</span>) of nonlinear feature
+relationships. In addition, we now get to distinguish between geometry-conserving
+alignments from GW (our pitfall before) using the extra COOT term. As a result,
+SCOT+ (AGW) allows us to align two datasets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> using optimal transport better
+than ever before; we get the alignment power of GW without its pitfalls. In
+addition, we can utilize the potential feature supervision from COOT to further
+improve GW’s results.</p>
+<p>Note that, since GW and COOT share the assumption of an underlying manifold structure
+shared between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, SCOT+ also shares this assumption. Without some underlying
+embedding to learn, SCOT+ would not be able to produce coupling matrices; it assumes
+that a geometry-conserving coupling has meaning, which is not the case for many
+datasets. Otherwise, SCOT+ really would be a silver bullet for data alignment.</p>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>If this information is all a little confusing, don’t worry – seeing these different
+OT formulations in practice will help consolidate how you might use all of the
+different OT tools available to align your data. In addition, seeing what <span class="math notranslate nohighlight">\(\epsilon\)</span>,
+<span class="math notranslate nohighlight">\(\rho\)</span>, and other hyperparameters do to our alignments will help make this document
+more clear. You’re more than ready to move onto some code if you’ve made it this far!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="installation_instructions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Getting Set Up</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="setup_tutorial.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Setup Tutorial</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formulations">Formulations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimal-transport-ot">Optimal Transport (OT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formulation">Formulation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">Algorithm</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unbalanced-optimal-transport-uot">Unbalanced Optimal Transport (UOT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gromov-wasserstein-optimal-transport-gw">Gromov-Wasserstein Optimal Transport (GW)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unbalanced-gromov-wasserstein-optimal-transport-ugw">Unbalanced Gromov-Wasserstein Optimal Transport (UGW)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#co-optimal-transport-coot">Co-Optimal Transport (COOT)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Formulation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Algorithm</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unbalanced-co-optimal-transport-ucoot">Unbalanced Co-Optimal Transport (UCOOT)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#augmented-gromov-wasserstein-agw">Augmented Gromov-Wasserstein (AGW)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applications">Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ot-uot">OT/UOT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gw-ugw">GW/UGW</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coot-ucoot">COOT/UCOOT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#agw">AGW</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By R. Singh
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
