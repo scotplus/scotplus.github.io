@@ -437,14 +437,14 @@ most recent formulation.</p>
 <section id="optimal-transport-ot">
 <h3>Optimal Transport (OT)<a class="headerlink" href="#optimal-transport-ot" title="Link to this heading">#</a></h3>
 <p>This formulation is applied to many problems in machine learning and was first
-proposed by ?Kantorovich?. While not very applicable to data alignment, OT sets
+proposed by Kantorovich. While not very applicable to data alignment, OT sets
 up our understanding of the following alignment methods.</p>
 <section id="formulation">
 <h4>Formulation<a class="headerlink" href="#formulation" title="Link to this heading">#</a></h4>
 <p>The original formulation for optimal transport seeks to minimize the cost of moving
 mass from one probability measure, <span class="math notranslate nohighlight">\(\mu\)</span> (<span class="math notranslate nohighlight">\(n_{\mu}\)</span> outcomes), to another probability
 measure, <span class="math notranslate nohighlight">\(\nu\)</span> (<span class="math notranslate nohighlight">\(n_{\nu}\)</span> outcomes). In the case of all formulations related to
-AGW and its predecessors, these measures are discrete; so, for each outcome
+SCOT+ and its predecessors, these measures are discrete; so, for each outcome
 <span class="math notranslate nohighlight">\(x\)</span> in <span class="math notranslate nohighlight">\(\mu\)</span>, OT seeks to find a cost-minimizing way (given a cost function
 <span class="math notranslate nohighlight">\(C(x_i \in \mu, y_i \in \nu)\)</span>) to move its mass to the set
 of outcomes in <span class="math notranslate nohighlight">\(\nu\)</span>. As a result, a solved OT problem will result in a coupling
@@ -455,15 +455,15 @@ Therefore, the problem this basic OT formulation faces is:</p>
 <p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\Sigma_{i = 1}^{n_\mu}\Sigma_{j = 1}^{n_\nu} (C(x_i, y_j)\pi_{ij}))\)</span></p>
 <p>or</p>
 <p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle C, \pi \rangle)\)</span>. Sometimes, we also refer to
-<span class="math notranslate nohighlight">\(\pi\)</span> as <span class="math notranslate nohighlight">\(\Gamma\)</span> or <span class="math notranslate nohighlight">\(P\)</span>.</p>
+<span class="math notranslate nohighlight">\(\pi\)</span> as <span class="math notranslate nohighlight">\(\Gamma\)</span>.</p>
 <p>Clearly, this problem requires us to find <span class="math notranslate nohighlight">\(n_{\mu}*n_{\nu}\)</span> unknowns, which will quickly
 lead to a computationally infeasible optimization as we scale. In order to remedy this issue,
 we add an entropic regularization term to the objective function:</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle C, \pi \rangle + \epsilon \langle \pi, \log \pi \rangle)\)</span></p>
-<p>Note that <span class="math notranslate nohighlight">\(H(\pi) = \langle \pi, \log \pi \rangle\)</span> is a measure of entropy of <span class="math notranslate nohighlight">\(\pi\)</span>; so,
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle C, \pi \rangle + \epsilon \langle \pi, \log{\frac{\mu \otimes \nu}{\pi}} \rangle)\)</span></p>
+<p>Note that <span class="math notranslate nohighlight">\(H(\pi, \mu, \nu) = \langle \pi, \log{\frac{\mu \otimes \nu}{\pi}} \rangle\)</span> is a measure of entropy of <span class="math notranslate nohighlight">\(\pi\)</span>; so,
 the higher the entropy, the lower the cost. As a result, as <span class="math notranslate nohighlight">\(\epsilon\)</span> grows, the optimal <span class="math notranslate nohighlight">\(\pi\)</span>
 gets more dense (favoring entropy even more), whereas if <span class="math notranslate nohighlight">\(\epsilon\)</span> falls, we approach our original
-OT formulation.</p>
+OT formulation. Another nice note is that <span class="math notranslate nohighlight">\(H(\pi, \mu, \nu) = KL(\pi|\mu \otimes \nu)\)</span>!</p>
 </section>
 <section id="algorithm">
 <h4>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h4>
@@ -520,7 +520,7 @@ much each mine produces or each factory processes, we might add in <span class="
 functions from here will have a balanced and an unbalanced variant; the latter will
 always have the addition of these marginal relaxation terms.</p>
 <p>Our final optimization problem for UOT is:</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi} (\langle C, \pi \rangle + \epsilon \langle \pi, \log \pi \rangle) + \rho_x KL(\pi 𝟙_{n_\nu}, \mu) + \rho_y KL(\pi^{T}𝟙_{n_\mu}, \nu)\)</span></p>
+<p><span class="math notranslate nohighlight">\(min_{\pi} \langle C, \pi \rangle + \epsilon KL(\pi|\mu \otimes \nu) + \rho_x KL(\pi 𝟙_{n_\nu}, \mu) + \rho_y KL(\pi^{T}𝟙_{n_\mu}, \nu)\)</span></p>
 </section>
 <section id="gromov-wasserstein-optimal-transport-gw">
 <h3>Gromov-Wasserstein Optimal Transport (GW)<a class="headerlink" href="#gromov-wasserstein-optimal-transport-gw" title="Link to this heading">#</a></h3>
@@ -546,19 +546,18 @@ pairwise distances, <span class="math notranslate nohighlight">\(D_{\mu_{ij}}\)<
 function and minimization problem for GW:</p>
 <p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\Sigma_{i = 1}^{n_\mu}\Sigma_{j = 1}^{n_\mu}\Sigma_{k = 1}^{n_\nu}\Sigma_{l = 1}^{n_\nu} (L(D_{\mu_{ij}}, D_{\nu_{kl}})\pi_{ik}\pi_{jl}))\)</span></p>
 <p>which can also be expressed as the inner product:</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle)\)</span>,</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle L(D_\mu, D_\nu), \pi \otimes \pi \rangle)\)</span>,</p>
 <p>where <span class="math notranslate nohighlight">\(\otimes\)</span> is the tensor product.</p>
 <p>Just as in OT, adding entropic regularization allows us to use Sinkhorn-like iterations
 when we find the new cost-minimizing <span class="math notranslate nohighlight">\(\pi\)</span>:</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle) + \epsilon \langle \pi, \log \pi \rangle\)</span></p>
+<p><span class="math notranslate nohighlight">\(min_{\pi \in \Pi(\mu, \nu)} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle) + \epsilon KL(\pi|\mu \otimes \nu)\)</span></p>
 <p>Now, we move onto the unbalanced version of this formulation.</p>
 </section>
 <section id="unbalanced-gromov-wasserstein-optimal-transport-ugw">
 <h3>Unbalanced Gromov-Wasserstein Optimal Transport (UGW)<a class="headerlink" href="#unbalanced-gromov-wasserstein-optimal-transport-ugw" title="Link to this heading">#</a></h3>
 <p>Just as with the transition from OT to UOT, we relax the <span class="math notranslate nohighlight">\(\pi \in \Pi\)</span> marginal constraint
 using <span class="math notranslate nohighlight">\(\rho_x\)</span> and <span class="math notranslate nohighlight">\(\rho_y\)</span>:</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle) + \epsilon \langle \pi, 
-\log \pi \rangle + \rho_x KL(\pi𝟙_{n_\nu}, \mu) + \rho_y KL(\pi^{T}𝟙_{n_\mu}, \nu)\)</span></p>
+<p><span class="math notranslate nohighlight">\(min_{\pi} (\langle L(D_\mu, D_\nu), \pi \otimes \pi \rangle) + \epsilon KL(\pi|\mu \otimes \nu) + \rho_x KL(\pi𝟙_{n_\nu}, \mu) + \rho_y KL(\pi^{T}𝟙_{n_\mu}, \nu)\)</span></p>
 <p>As with UOT, the <span class="math notranslate nohighlight">\(\rho\)</span> parameters allow outcomes of either mesaure to transport
 more or less mass than they originally would have given <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\nu\)</span>. This time,
 if a given outcome <span class="math notranslate nohighlight">\(x\)</span> of <span class="math notranslate nohighlight">\(\mu\)</span> is quite similar to multiple outcomes in <span class="math notranslate nohighlight">\(\nu\)</span>
@@ -577,7 +576,7 @@ two measures.</p>
 <p>We can now introduce the COOT formulation. Although conceptually similar to OT,
 this new concept is also a generalization of GW. Recall that in GW, we had an
 objective function of the form:</p>
-<p><span class="math notranslate nohighlight">\((\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle)\)</span></p>
+<p><span class="math notranslate nohighlight">\((\langle L(D_\mu, D_\nu), \pi \otimes \pi \rangle)\)</span></p>
 <p>Suppose that, instead of having distance matrices here, we had matrices <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> of
 information on two different sets of outcomes. We define new probability measures
 <span class="math notranslate nohighlight">\(\mu^s\)</span>, <span class="math notranslate nohighlight">\(\mu^f\)</span>, <span class="math notranslate nohighlight">\(\nu^s\)</span>, <span class="math notranslate nohighlight">\(\nu^f\)</span>. Our new goal is to find a way to transport
@@ -608,7 +607,7 @@ if we treat <span class="math notranslate nohighlight">\(A = D_\mu\)</span> and 
 information on the relationships between two pairs of measures. As a result,
 in the GW case (formulated in terms of COOT), we would have <span class="math notranslate nohighlight">\(\pi_s = \pi_f\)</span>.
 Generalizing this reformulation of GW, we get</p>
-<p><span class="math notranslate nohighlight">\((\langle L(A, B) \otimes \pi_f, \pi_s \rangle)\)</span></p>
+<p><span class="math notranslate nohighlight">\((\langle L(A, B), \pi_f \otimes \pi_s \rangle)\)</span></p>
 <p>as a new objective function. In order to get a closer look, let’s expand this:</p>
 <p><span class="math notranslate nohighlight">\((\Sigma_{i = 1}^{n_{\mu^s}}\Sigma_{j = 1}^{n_{\mu^f}}\Sigma_{k = 1}^{n_{\nu^s}}\Sigma_{l = 1}^{n_{\nu^f}} (L(A_{ij}, B_{kl})\pi_{s_{ij}}\pi_{f_{j,l}}))\)</span></p>
 <p>This new objective function describes the exact interdependence we realized earlier
@@ -617,9 +616,9 @@ information on the relative positioning of i and k to their corresponding f-supe
 measures and the relative positioning of j and l to their corresponding s-superscripted
 measures. From here, we can reframe this function as a minimization problem and add
 entropic regularization (allowing for Sinkhorn iterations):</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi_s \in \Pi(\mu^s, \nu^s), \pi_f \in \Pi(\mu^f, \nu^f)} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + \epsilon_s \langle \pi_s, \log \pi_s \rangle + \epsilon_f \langle \pi_f, \log \pi_f \rangle\)</span></p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s \in \Pi(\mu^s, \nu^s), \pi_f \in \Pi(\mu^f, \nu^f)} (\langle L(A, B), \pi_s \otimes \pi_f \rangle) + \epsilon_s KL(\pi_s|\mu^s \otimes \nu^s)+ \epsilon_f KL(\pi_f|\mu^f \otimes \nu^f)\)</span></p>
 <p>We can also do joint entropic regularization, which is equivalent to the <span class="math notranslate nohighlight">\(\epsilon_s = \epsilon_f\)</span> case:</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi_s \in \Pi(\mu^s, \nu^s), \pi_f \in \Pi(\mu^f, \nu^f)} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle\)</span></p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s \in \Pi(\mu^s, \nu^s), \pi_f \in \Pi(\mu^f, \nu^f)} (\langle L(A, B), \pi_s \otimes \pi_f \rangle) + \epsilon KL(\pi_s \otimes \pi_f | \mu^s \otimes \nu^s \otimes \mu^f \otimes \nu^f)\)</span></p>
 <p>Note that, in the case of our work, we gerenally use euclidean distance (l2)
 for L. Now, we can move on to how we solve this new transport problem; clearly,
 we will now need more than Sinkhorn iterations.</p>
@@ -630,10 +629,12 @@ we will now need more than Sinkhorn iterations.</p>
 called “block coordinate descent,” or BCD. Without getting too into the details
 (of which there are many), we will try to give some intuition on what this algorithm
 is doing.</p>
-<p>Consider the cost function we derived for standard COOT above and suppose we hold
-<span class="math notranslate nohighlight">\(\pi_f\)</span> constant. If we do so, we uncover a new minimization problem of the form (CHECK THIS, CITE):</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi_s \in \Pi(\mu^s, \nu^s)} (\langle L_c(A, B, \pi_f), \pi_s \rangle) + \epsilon \langle \pi_s, 
-\log \pi_s \rangle\)</span></p>
+<p>Consider the cost function we derived for standard, independently regularized COOT
+above and suppose we hold <span class="math notranslate nohighlight">\(\pi_f\)</span> constant. If we do so, we uncover a new
+minimization problem of the form:</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s \in \Pi(\mu^s, \nu^s)} (\langle L_{\epsilon}, \pi_s \rangle) + \epsilon_s KL(\pi_s|\mu^s \otimes \nu^s)\)</span></p>
+<p>Where</p>
+<p><span class="math notranslate nohighlight">\(L_{\epsilon} = X^{\odot 2}\pi_f 𝟙_{n_\nu} + Y^{\odot 2}\pi_f^T 𝟙_{n_\mu} + 2X\pi_fY^T\)</span></p>
 <p>Where L is a function of <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, and <span class="math notranslate nohighlight">\(\pi_f\)</span> outside the scope of this document.
 With this new minimization problem, we have an opportunity to optimize <span class="math notranslate nohighlight">\(\pi_s\)</span>
 given <span class="math notranslate nohighlight">\(\pi_f\)</span> using Sinkhorn iterations, given we now have the same form as a standard
@@ -654,7 +655,7 @@ of iteration, each of which must be considered when selecting optimization param
 <h3>Unbalanced Co-Optimal Transport (UCOOT)<a class="headerlink" href="#unbalanced-co-optimal-transport-ucoot" title="Link to this heading">#</a></h3>
 <p>No surprises here – we will now unbalance COOT using four marginal relaxation
 parameters: <span class="math notranslate nohighlight">\(\rho^s_x, \rho^s_y, \rho^f_x, \rho^f_y\)</span>:</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho^s_x KL(\pi_s 𝟙_{n_{\nu^s}}, \mu^s)\)</span></p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} (\langle L(A, B), \pi_s \otimes \pi_f \rangle)  + \epsilon KL(\pi_s \otimes \pi_f | \mu^s \otimes \nu^s \otimes \mu^f \otimes \nu^f) + \rho^s_x KL(\pi_s 𝟙_{n_{\nu^s}}, \mu^s)\)</span></p>
 <p><span class="math notranslate nohighlight">\(+ \rho^s_y KL(\pi_s^{T}𝟙_{n_{\mu^s}}, \nu^s) + \rho^f_x KL(\pi_f 𝟙_{{n_\nu^f}}, \mu^f) + \rho^f_y KL(\pi_f^{T}𝟙_{n_{\mu^f}}, \nu^f)\)</span></p>
 <p>These parameters each allow outcomes in any of our four measures to transport more or less mass
 than originally allocated, provided <span class="math notranslate nohighlight">\(\rho &lt;\)</span> infinity. As all four <span class="math notranslate nohighlight">\(\rho\)</span> approach infinity,
@@ -662,32 +663,31 @@ we recover COOT. We tend to relax the marginals of our transport plans with <spa
 when there is some disproportionality among outcomes of any of the measures that we wish to
 correct. Note that we have now introduced a large number of new hyperparameters. These
 marginal relaxation terms can be joined for less complexity, either by transport:</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho^s KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_s^{T}𝟙_{n_{\mu^s}}, \mu^s \otimes \nu^s)\)</span></p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle)  + \epsilon KL(\pi_s \otimes \pi_f | \mu^s \otimes \nu^s \otimes \mu^f \otimes \nu^f) + \rho^s KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_s^{T}𝟙_{n_{\mu^s}}, \mu^s \otimes \nu^s)\)</span></p>
 <p><span class="math notranslate nohighlight">\(+ \rho^f KL(\pi_f 𝟙_{n_{\nu^f}} \otimes \pi_f^{T}𝟙_{n_{\mu^f}}, \mu^f \otimes \nu^f)\)</span></p>
 <p>or by domain:</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho_x KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_f 𝟙_{n_{\nu^f}}, \mu^s \otimes \mu^f)\)</span></p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle)  + \epsilon KL(\pi_s \otimes \pi_f | \mu^s \otimes \nu^s \otimes \mu^f \otimes \nu^f) + \rho_x KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_f 𝟙_{n_{\nu^f}}, \mu^s \otimes \mu^f)\)</span></p>
 <p><span class="math notranslate nohighlight">\(+ \rho_y KL(\pi_s^{T}𝟙_{n_{\mu^s}} \otimes \pi_f^{T}𝟙_{n_{\mu^f}}, \nu^s \otimes \nu^f)\)</span></p>
 <p>Transport marginal relaxation ties together the relaxation of the pairs of measures
 that transport mass back and forth (are tied by a transport plan), whereas domain
 marginal relaxation ties together the relaxation of the pairs of measures that have
 shared information on <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>. Both ways of joining lead to less flexibility;
-in AGW we chose the tie together the marginal relaxation according to the transport plans.
-In other words, in AGW, we marginally relax both marginals of each <span class="math notranslate nohighlight">\(\pi\)</span> with the same
+in SCOT+ we chose the tie together the marginal relaxation according to the transport plans.
+In other words, in SCOT+, we marginally relax both marginals of each <span class="math notranslate nohighlight">\(\pi\)</span> with the same
 value for <span class="math notranslate nohighlight">\(\rho\)</span> specific to each <span class="math notranslate nohighlight">\(\pi\)</span>. We chose this strategy rather than tying by
 domain, as for single-cell applications, we expect sets of samples and features to have
-comparable levels of representation. More on this in the application section.</p>
+comparable levels of representation.</p>
 </section>
 <section id="augmented-gromov-wasserstein-agw">
 <h3>Augmented Gromov-Wasserstein (AGW)<a class="headerlink" href="#augmented-gromov-wasserstein-agw" title="Link to this heading">#</a></h3>
 <p>With GW and UGW, we were able to recover non-linear relationships between outcomes
 by preserving geometry; with COOT and UCOOT, we were able to map two sets of outcomes,
-albeit using a formulation similar to the more linear OT and UOT problems. AGW
+albeit using a formulation similar to the more linear OT and UOT problems. AGW (what we use in SCOT+)
 seeks to find the dual mapping of UCOOT with the potential for nonlinear relationships
 of UGW. In effect, AGW pushes together the cost functions of UCOOT and UGW, and
 assigns a hyperparameter <span class="math notranslate nohighlight">\(\alpha\)</span> that determines the relative usage of each cost function.
-As a result, we have the following minimization problem:</p>
-<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} \alpha(\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + (1 - \alpha) (\langle L(D_{\mu_s}, D_{\nu_s}), \pi_s \otimes \pi_s \rangle) + \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle\)</span></p>
-<p><span class="math notranslate nohighlight">\( + \rho_x KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_f 𝟙_{n_{\nu^f}}, \mu^s \otimes \mu^f) + \rho_y KL(\pi_s^{T}𝟙_{n_{\mu^s}} \otimes \pi_f^{T}𝟙_{n_{\mu^f}}, \nu^s \otimes \nu^f)\)</span></p>
+As a result, we have the following minimization problem (for balanced AGW, which is what SCOT+ supports for now):</p>
+<p><span class="math notranslate nohighlight">\(min_{\pi_s, \pi_f} \alpha(\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + (1 - \alpha) (\langle L(D_{\mu_s}, D_{\nu_s}), \pi_s \otimes \pi_s \rangle)  + \epsilon KL(\pi_s \otimes \pi_f | \mu^s \otimes \nu^s \otimes \mu^f \otimes \nu^f)\)</span></p>
 <p>While less theoretical than the previous formulations we have looked at, AGW
 allows for an improvement on UCOOT by allowing for the recovery of nonlinear
 relationships among the original measures we sought to couple, <span class="math notranslate nohighlight">\(\mu_s\)</span> and <span class="math notranslate nohighlight">\(\nu_s\)</span>.
@@ -744,7 +744,7 @@ coupling between the two, which has better applications to aligning datasets.</p
 <p>However, it also has its pitfalls; suppose we have a simple domain, <span class="math notranslate nohighlight">\(A\)</span>, which has
 two features. <span class="math notranslate nohighlight">\(A\)</span>’s samples all fall within a circle of radius 1 about the origin.
 Now, suppose we have <span class="math notranslate nohighlight">\(A'\)</span>, which just adds some small, random translation to each
-point in <span class="math notranslate nohighlight">\(A\)</span>. GW/UGW would not necessarily align matching samples in <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A'\)</span> –
+point in <span class="math notranslate nohighlight">\(A\)</span>. GW/UGW would not necessarily align matching samples in <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(A'\)</span> –
 since the geometry of <span class="math notranslate nohighlight">\(A\)</span> can be roughly conserved with any rotation, GW/UGW might
 find a plan that conserves each local geometry, but results in a rotation of <span class="math notranslate nohighlight">\(A'\)</span>.</p>
 <p>Note also that GW/UGW, in its geometry conservation, can recover nonlinear feature
@@ -788,15 +788,15 @@ alignments. By combining GW and COOT in our formulation above, we allow for
 the determination and recovery (in the form of <span class="math notranslate nohighlight">\(\pi_f\)</span>) of nonlinear feature
 relationships. In addition, we now get to distinguish between geometry-conserving
 alignments from GW (our pitfall before) using the extra COOT term. As a result,
-AGW allows us to align two datasets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> using optimal transport better
+SCOT+ (AGW) allows us to align two datasets <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> using optimal transport better
 than ever before; we get the alignment power of GW without its pitfalls. In
 addition, we can utilize the potential feature supervision from COOT to further
 improve GW’s results.</p>
 <p>Note that, since GW and COOT share the assumption of an underlying manifold structure
-shared between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, AGW also shares this assumption. Without some underlying
-embedding to learn, AGW would not be able to produce coupling matrices; it assumes
+shared between <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span>, SCOT+ also shares this assumption. Without some underlying
+embedding to learn, SCOT+ would not be able to produce coupling matrices; it assumes
 that a geometry-conserving coupling has meaning, which is not the case for many
-datasets. Otherwise, AGW really would be a silver bullet for data alignment.</p>
+datasets. Otherwise, SCOT+ really would be a silver bullet for data alignment.</p>
 </section>
 </section>
 <section id="conclusion">
