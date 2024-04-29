@@ -190,7 +190,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exploration on Real World Datasets</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="placeholder.html">Applications Section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pbmc_unbalanced.html">Unbalanced Cell Type Alignment</a></li>
 </ul>
 
     </div>
@@ -676,7 +676,7 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d7aeea70479f5909043b84d4f4ee680b23ec156675f45672f4b68903422b418d.png" src="_images/d7aeea70479f5909043b84d4f4ee680b23ec156675f45672f4b68903422b418d.png" />
+<img alt="_images/87802e0d2818cab9a98a50e06b54d78f85180ed6c1dfb0efa88b8bc63ff6d7f5.png" src="_images/87802e0d2818cab9a98a50e06b54d78f85180ed6c1dfb0efa88b8bc63ff6d7f5.png" />
 </div>
 </div>
 <p>Note that the alignments look nice (the shapes match up well). This property does not guarantee a good alignment, as we can see by our high original FOSCTTM score. In fact, it is more a representation of the sparsity of the coupling matrix – if the coupling matrix is very sparse, it will get close to attempting a 1-1 matching, which could be wrong (even though it is 1-1). Having a coupling matrix that is too sparse can be quite dangerous in cases where there is no underlying 1-1 sample map.</p>
@@ -850,7 +850,7 @@ Total sum of differences: 0.0006263484247028828
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8694c7aeec96a43f297c8ee7c40c4ea0a474ee8f2d56648ca53c813a57e936cd.png" src="_images/8694c7aeec96a43f297c8ee7c40c4ea0a474ee8f2d56648ca53c813a57e936cd.png" />
+<img alt="_images/f3fd9dbcec49d70b09213557d1da13016fc4d6e5407268945f34ed85d45c8f2e.png" src="_images/f3fd9dbcec49d70b09213557d1da13016fc4d6e5407268945f34ed85d45c8f2e.png" />
 </div>
 </div>
 <p>As we can see, the projected data has little to no variance with respect to the principal components of our anchor domain. We can interpret this to mean that every point in the domain being projected was projected to an average of every point in the anchor domain; since the coupling matrix was so dense, projection just led to a weighted average of points where the weights were much closer to even. So, <span class="math notranslate nohighlight">\(\epsilon\)</span> too high and too low both have their setbacks.</p>

@@ -188,7 +188,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exploration on Real World Datasets</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="placeholder.html">Applications Section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pbmc_unbalanced.html">Unbalanced Cell Type Alignment</a></li>
 </ul>
 
     </div>
@@ -483,8 +483,8 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b232a914c47e70d1fa70548e61d121b247a604db57b9581e3a4d8826e06e3316.png" src="_images/b232a914c47e70d1fa70548e61d121b247a604db57b9581e3a4d8826e06e3316.png" />
-<img alt="_images/7f18989af06350489df074e11ac37b1cc93a592b6e7d4a20116b4447b0d69d00.png" src="_images/7f18989af06350489df074e11ac37b1cc93a592b6e7d4a20116b4447b0d69d00.png" />
+<img alt="_images/8f868745d08c0e28e1de3b54acf65439c951f62ed7eadb6c49af7a32b4350502.png" src="_images/8f868745d08c0e28e1de3b54acf65439c951f62ed7eadb6c49af7a32b4350502.png" />
+<img alt="_images/116364412cb704d4fbb82f766f5e3b0c6384d2e14c58920bd385ce3322d145d1.png" src="_images/116364412cb704d4fbb82f766f5e3b0c6384d2e14c58920bd385ce3322d145d1.png" />
 </div>
 </div>
 <p>Note that the coupling matrices in the first case are not perfectly sparse. We see this result because each individual matrix was not evaluated as much individually (small nits_uot) as they were jointly (normal nits_bcd).</p>
@@ -517,8 +517,8 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3120244f9c9c29e39c56c1d9a309c120d5656e165ce025fd3a8e0589a428de3c.png" src="_images/3120244f9c9c29e39c56c1d9a309c120d5656e165ce025fd3a8e0589a428de3c.png" />
-<img alt="_images/7f18989af06350489df074e11ac37b1cc93a592b6e7d4a20116b4447b0d69d00.png" src="_images/7f18989af06350489df074e11ac37b1cc93a592b6e7d4a20116b4447b0d69d00.png" />
+<img alt="_images/df7e4cc4f0d8d60360fd654656013b5f8ad1bb848e86274b335723a958d07a61.png" src="_images/df7e4cc4f0d8d60360fd654656013b5f8ad1bb848e86274b335723a958d07a61.png" />
+<img alt="_images/116364412cb704d4fbb82f766f5e3b0c6384d2e14c58920bd385ce3322d145d1.png" src="_images/116364412cb704d4fbb82f766f5e3b0c6384d2e14c58920bd385ce3322d145d1.png" />
 </div>
 </div>
 <p>As seen in the matrices above, limiting nits_uot and nits_bcd leads to a lack of convergence to a sparse solution as we would expect from this level of epsilon (see UCOOT/UGW tutorial to learn more about epsilon).</p>
@@ -536,7 +536,7 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 60
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 46
 </pre></div>
 </div>
 </div>
@@ -644,7 +644,7 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b232a914c47e70d1fa70548e61d121b247a604db57b9581e3a4d8826e06e3316.png" src="_images/b232a914c47e70d1fa70548e61d121b247a604db57b9581e3a4d8826e06e3316.png" />
+<img alt="_images/8f868745d08c0e28e1de3b54acf65439c951f62ed7eadb6c49af7a32b4350502.png" src="_images/8f868745d08c0e28e1de3b54acf65439c951f62ed7eadb6c49af7a32b4350502.png" />
 </div>
 </div>
 <p>Here, we see a similar result as when we limited nits_uot in the first section, which is consistent, since our high tol_uot is roughly equivalent (in practice) to nits_uot = 1.</p>
