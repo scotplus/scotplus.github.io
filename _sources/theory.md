@@ -21,7 +21,7 @@ most recent formulation.
 ### Optimal Transport (OT)
 
 This formulation is applied to many problems in machine learning and was first
-proposed by Kantorovich. While not very applicable to data alignment, OT sets
+proposed by ?Kantorovich?. While not very applicable to data alignment, OT sets
 up our understanding of the following alignment methods.
 
 #### Formulation
@@ -29,7 +29,7 @@ up our understanding of the following alignment methods.
 The original formulation for optimal transport seeks to minimize the cost of moving
 mass from one probability measure, $\mu$ ($n_{\mu}$ outcomes), to another probability 
 measure, $\nu$ ($n_{\nu}$ outcomes). In the case of all formulations related to 
-SCOT+ and its predecessors, these measures are discrete; so, for each outcome 
+AGW and its predecessors, these measures are discrete; so, for each outcome 
 $x$ in $\mu$, OT seeks to find a cost-minimizing way (given a cost function 
 $C(x_i \in \mu, y_i \in \nu)$) to move its mass to the set 
 of outcomes in $\nu$. As a result, a solved OT problem will result in a coupling 
@@ -43,13 +43,13 @@ $min_{\pi \in \Pi(\mu, \nu)} (\Sigma_{i = 1}^{n_\mu}\Sigma_{j = 1}^{n_\nu} (C(x_
 or 
 
 $min_{\pi \in \Pi(\mu, \nu)} (\langle C, \pi \rangle)$. Sometimes, we also refer to
-$\pi$ as $\Gamma$.
+$\pi$ as $\Gamma$ or $P$.
 
 Clearly, this problem requires us to find $n_{\mu}*n_{\nu}$ unknowns, which will quickly
 lead to a computationally infeasible optimization as we scale. In order to remedy this issue,
 we add an entropic regularization term to the objective function:
 
-$min_{\pi \in \Pi(\mu, \nu)} (\langle C, \pi \rangle - \epsilon \langle \pi, \log \pi \rangle)$
+$min_{\pi \in \Pi(\mu, \nu)} (\langle C, \pi \rangle + \epsilon \langle \pi, \log \pi \rangle)$
 
 Note that $H(\pi) = \langle \pi, \log \pi \rangle$ is a measure of entropy of $\pi$; so,
 the higher the entropy, the lower the cost. As a result, as $\epsilon$ grows, the optimal $\pi$
@@ -123,7 +123,7 @@ always have the addition of these marginal relaxation terms.
 
 Our final optimization problem for UOT is:
 
-$min_{\pi} (\langle C, \pi \rangle - \epsilon \langle \pi, \log \pi \rangle) + \rho_x KL(\pi 𝟙_{n_\nu}, \mu) + \rho_y KL(\pi^{T}𝟙_{n_\mu}, \nu)$
+$min_{\pi} (\langle C, \pi \rangle + \epsilon \langle \pi, \log \pi \rangle) + \rho_x KL(\pi 𝟙_{n_\nu}, \mu) + \rho_y KL(\pi^{T}𝟙_{n_\mu}, \nu)$
 
 ### Gromov-Wasserstein Optimal Transport (GW)
 
@@ -161,7 +161,7 @@ where $\otimes$ is the tensor product.
 Just as in OT, adding entropic regularization allows us to use Sinkhorn-like iterations
 when we find the new cost-minimizing $\pi$:
 
-$min_{\pi \in \Pi(\mu, \nu)} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle) - \epsilon \langle \pi, \log \pi \rangle$
+$min_{\pi \in \Pi(\mu, \nu)} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle) + \epsilon \langle \pi, \log \pi \rangle$
 
 Now, we move onto the unbalanced version of this formulation.
 
@@ -170,7 +170,7 @@ Now, we move onto the unbalanced version of this formulation.
 Just as with the transition from OT to UOT, we relax the $\pi \in \Pi$ marginal constraint
 using $\rho_x$ and $\rho_y$:
 
-$min_{\pi} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle) - \epsilon \langle \pi, 
+$min_{\pi} (\langle L(D_\mu, D_\nu) \otimes \pi, \pi \rangle) + \epsilon \langle \pi, 
 \log \pi \rangle + \rho_x KL(\pi𝟙_{n_\nu}, \mu) + \rho_y KL(\pi^{T}𝟙_{n_\mu}, \nu)$
 
 As with UOT, the $\rho$ parameters allow outcomes of either mesaure to transport
@@ -242,11 +242,11 @@ measures and the relative positioning of j and l to their corresponding s-supers
 measures. From here, we can reframe this function as a minimization problem and add
 entropic regularization (allowing for Sinkhorn iterations):
 
-$min_{\pi_s \in \Pi(\mu^s, \nu^s), \pi_f \in \Pi(\mu^f, \nu^f)} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) - \epsilon_s \langle \pi_s, \log \pi_s \rangle - \epsilon_f \langle \pi_f, \log \pi_f \rangle$
+$min_{\pi_s \in \Pi(\mu^s, \nu^s), \pi_f \in \Pi(\mu^f, \nu^f)} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + \epsilon_s \langle \pi_s, \log \pi_s \rangle + \epsilon_f \langle \pi_f, \log \pi_f \rangle$
 
 We can also do joint entropic regularization, which is equivalent to the $\epsilon_s = \epsilon_f$ case:
 
-$min_{\pi_s \in \Pi(\mu^s, \nu^s), \pi_f \in \Pi(\mu^f, \nu^f)} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) - \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle$
+$min_{\pi_s \in \Pi(\mu^s, \nu^s), \pi_f \in \Pi(\mu^f, \nu^f)} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle$
 
 Note that, in the case of our work, we gerenally use euclidean distance (l2)
 for L. Now, we can move on to how we solve this new transport problem; clearly,
@@ -262,7 +262,7 @@ is doing.
 Consider the cost function we derived for standard COOT above and suppose we hold
 $\pi_f$ constant. If we do so, we uncover a new minimization problem of the form (CHECK THIS, CITE):
 
-$min_{\pi_s \in \Pi(\mu^s, \nu^s)} (\langle L_c(A, B, \pi_f), \pi_s \rangle) - \epsilon \langle \pi_s, 
+$min_{\pi_s \in \Pi(\mu^s, \nu^s)} (\langle L_c(A, B, \pi_f), \pi_s \rangle) + \epsilon \langle \pi_s, 
 \log \pi_s \rangle$
 
 Where L is a function of $A$, $B$, and $\pi_f$ outside the scope of this document.
@@ -287,7 +287,7 @@ of iteration, each of which must be considered when selecting optimization param
 No surprises here – we will now unbalance COOT using four marginal relaxation
 parameters: $\rho^s_x, \rho^s_y, \rho^f_x, \rho^f_y$:
 
-$min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) - \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho^s_x KL(\pi_s 𝟙_{n_{\nu^s}}, \mu^s)$ 
+$min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho^s_x KL(\pi_s 𝟙_{n_{\nu^s}}, \mu^s)$ 
 
 $+ \rho^s_y KL(\pi_s^{T}𝟙_{n_{\mu^s}}, \nu^s) + \rho^f_x KL(\pi_f 𝟙_{{n_\nu^f}}, \mu^f) + \rho^f_y KL(\pi_f^{T}𝟙_{n_{\mu^f}}, \nu^f)$
 
@@ -298,13 +298,13 @@ when there is some disproportionality among outcomes of any of the measures that
 correct. Note that we have now introduced a large number of new hyperparameters. These
 marginal relaxation terms can be joined for less complexity, either by transport:
 
-$min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) - \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho^s KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_s^{T}𝟙_{n_{\mu^s}}, \mu^s \otimes \nu^s)$
+$min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho^s KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_s^{T}𝟙_{n_{\mu^s}}, \mu^s \otimes \nu^s)$
 
 $+ \rho^f KL(\pi_f 𝟙_{n_{\nu^f}} \otimes \pi_f^{T}𝟙_{n_{\mu^f}}, \mu^f \otimes \nu^f)$
 
 or by domain:
 
-$min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) - \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho_x KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_f 𝟙_{n_{\nu^f}}, \mu^s \otimes \mu^f)$ 
+$min_{\pi_s, \pi_f} (\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle + \rho_x KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_f 𝟙_{n_{\nu^f}}, \mu^s \otimes \mu^f)$ 
 
 $+ \rho_y KL(\pi_s^{T}𝟙_{n_{\mu^s}} \otimes \pi_f^{T}𝟙_{n_{\mu^f}}, \nu^s \otimes \nu^f)$
 
@@ -312,8 +312,8 @@ Transport marginal relaxation ties together the relaxation of the pairs of measu
 that transport mass back and forth (are tied by a transport plan), whereas domain
 marginal relaxation ties together the relaxation of the pairs of measures that have
 shared information on $A$ and $B$. Both ways of joining lead to less flexibility;
-in SCOT+ we chose the tie together the marginal relaxation according to the transport plans.
-In other words, in SCOT+, we marginally relax both marginals of each $\pi$ with the same
+in AGW we chose the tie together the marginal relaxation according to the transport plans.
+In other words, in AGW, we marginally relax both marginals of each $\pi$ with the same
 value for $\rho$ specific to each $\pi$. We chose this strategy rather than tying by
 domain, as for single-cell applications, we expect sets of samples and features to have
 comparable levels of representation. More on this in the application section.
@@ -322,13 +322,13 @@ comparable levels of representation. More on this in the application section.
 
 With GW and UGW, we were able to recover non-linear relationships between outcomes
 by preserving geometry; with COOT and UCOOT, we were able to map two sets of outcomes,
-albeit using a formulation similar to the more linear OT and UOT problems. AGW (what we use in SCOT+)
+albeit using a formulation similar to the more linear OT and UOT problems. AGW
 seeks to find the dual mapping of UCOOT with the potential for nonlinear relationships
 of UGW. In effect, AGW pushes together the cost functions of UCOOT and UGW, and
 assigns a hyperparameter $\alpha$ that determines the relative usage of each cost function.
 As a result, we have the following minimization problem:
 
-$min_{\pi_s, \pi_f} \alpha(\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + (1 - \alpha) (\langle L(D_{\mu_s}, D_{\nu_s}), \pi_s \otimes \pi_s \rangle) - \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle$
+$min_{\pi_s, \pi_f} \alpha(\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + (1 - \alpha) (\langle L(D_{\mu_s}, D_{\nu_s}), \pi_s \otimes \pi_s \rangle) + \epsilon \langle \pi_s \otimes \pi_f, \log (\pi_s \otimes \pi_f) \rangle$
 
 $ + \rho_x KL(\pi_s 𝟙_{n_{\nu^s}} \otimes \pi_f 𝟙_{n_{\nu^f}}, \mu^s \otimes \mu^f) + \rho_y KL(\pi_s^{T}𝟙_{n_{\mu^s}} \otimes \pi_f^{T}𝟙_{n_{\mu^f}}, \nu^s \otimes \nu^f)$
 
@@ -392,7 +392,7 @@ coupling between the two, which has better applications to aligning datasets.
 However, it also has its pitfalls; suppose we have a simple domain, $A$, which has
 two features. $A$'s samples all fall within a circle of radius 1 about the origin.
 Now, suppose we have $A'$, which just adds some small, random translation to each
-point in $A$. GW/UGW would not necessarily align matching samples in $A$ and $A'$ –
+point in $A$. GW/UGW would not necessarily align matching samples in $A$ and $A'$ –
 since the geometry of $A$ can be roughly conserved with any rotation, GW/UGW might
 find a plan that conserves each local geometry, but results in a rotation of $A'$.
 
@@ -441,16 +441,16 @@ alignments. By combining GW and COOT in our formulation above, we allow for
 the determination and recovery (in the form of $\pi_f$) of nonlinear feature
 relationships. In addition, we now get to distinguish between geometry-conserving
 alignments from GW (our pitfall before) using the extra COOT term. As a result,
-SCOT+ (AGW) allows us to align two datasets $A$ and $B$ using optimal transport better 
+AGW allows us to align two datasets $A$ and $B$ using optimal transport better 
 than ever before; we get the alignment power of GW without its pitfalls. In
 addition, we can utilize the potential feature supervision from COOT to further
 improve GW's results.
 
 Note that, since GW and COOT share the assumption of an underlying manifold structure
-shared between $A$ and $B$, SCOT+ also shares this assumption. Without some underlying
-embedding to learn, SCOT+ would not be able to produce coupling matrices; it assumes
+shared between $A$ and $B$, AGW also shares this assumption. Without some underlying
+embedding to learn, AGW would not be able to produce coupling matrices; it assumes
 that a geometry-conserving coupling has meaning, which is not the case for many
-datasets. Otherwise, SCOT+ really would be a silver bullet for data alignment.
+datasets. Otherwise, AGW really would be a silver bullet for data alignment.
 
 ## Conclusion
 
@@ -459,4 +459,3 @@ OT formulations in practice will help consolidate how you might use all of the
 different OT tools available to align your data. In addition, seeing what $\epsilon$, 
 $\rho$, and other hyperparameters do to our alignments will help make this document
 more clear. You're more than ready to move onto some code if you've made it this far!
-

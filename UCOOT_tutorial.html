@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>UCOOT Tutorial &#8212; SCOOTR</title>
+    <title>UCOOT Tutorial &#8212; SCOT+</title>
   
   
   
@@ -152,8 +152,8 @@
       
     
     
-    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOOTR - Home"/>
-    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOOTR - Home"/>`);</script>
+    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOT+ - Home"/>
+    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOT+ - Home"/>`);</script>
   
   
 </a></div>
@@ -548,7 +548,7 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6692e3dd02e734ad2ca3ad31ac5fac389ec711407b609a1ac7358a4ef1fc1363.png" src="_images/6692e3dd02e734ad2ca3ad31ac5fac389ec711407b609a1ac7358a4ef1fc1363.png" />
+<img alt="_images/d398f98d34fd5ba6f4e8122eb9342685fa02bca708c1d06b3eb490aa7b010142.png" src="_images/d398f98d34fd5ba6f4e8122eb9342685fa02bca708c1d06b3eb490aa7b010142.png" />
 </div>
 </div>
 </section>
@@ -571,22 +571,7 @@ CUDNN version: None
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set verbose=True to get a breakdown of the cost progression during optimization</span>
 <span class="c1"># set log=True to get extra return values, log_cost and log_ent_cost, which display the cost progression</span>
-<span class="p">(</span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.051248, 0.052950
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.007932, 0.011220
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.007174, 0.010670
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.007149, 0.010664
-BCD Iteration 5 - Loss: 0.007146, 0.010664
+<span class="p">(</span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -698,72 +683,25 @@ BCD Iteration 5 - Loss: 0.007146, 0.010664
 <p>First, we will experiment with <span class="math notranslate nohighlight">\(\epsilon\)</span>. The <span class="math notranslate nohighlight">\(\epsilon\)</span> parameter changes the weight of the entropy term, which we add to the transport cost term discussed above when minimizing cost and optimizing our two coupling matrices. The more weight the entropy term has, the more entropy we will see in the final convergence of the UCOOT algorithm. This means that the resulting coupling matrices for both samples and features will be more dense (further away from 1-1 alignment). However, a higher value of <span class="math notranslate nohighlight">\(\epsilon\)</span> makes the UCOOT algorithm converge faster. As a result, <span class="math notranslate nohighlight">\(\epsilon\)</span> serves as a tradeoff between speed and precision, at least to some extent. Let’s compare three values: a reasonable <span class="math notranslate nohighlight">\(\epsilon\)</span> value for this data, a large <span class="math notranslate nohighlight">\(\epsilon\)</span> value, and a small <span class="math notranslate nohighlight">\(\epsilon\)</span> value. Note that this is performed with independent entropic regularization (we will go over joint later).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">pi_samp_small</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_small</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">pi_samp_small</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_small</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_ent_cost</span><span class="p">))</span>
 
-<span class="p">(</span><span class="n">pi_samp_med</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_med</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_med</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_med</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_ent_cost</span><span class="p">))</span>
 
-<span class="p">(</span><span class="n">pi_samp_lg</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_lg</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg</span><span class="p">),</span> <span class="n">_</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_ent_cost</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.047160, 0.047474
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.008839, 0.009266
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.008696, 0.009130
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.008705, 0.009140
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.008687, 0.009121
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 0.008669, 0.009103
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 0.008651, 0.009085
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 0.008648, 0.009083
-BCD Iteration 9 - Loss: 0.008648, 0.009083
-9
-BCD Iteration 1 - Loss: 0.061881, 0.064542
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.036687, 0.046061
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.028733, 0.042182
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.021220, 0.038847
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.012737, 0.034812
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 0.012277, 0.034751
-BCD Iteration 7 - Loss: 0.012133, 0.034734
-BCD Iteration 8 - Loss: 0.011947, 0.034716
-BCD Iteration 9 - Loss: 0.011746, 0.034699
-BCD Iteration 10 - Loss: 0.011587, 0.034690
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 0.011498, 0.034687
-BCD Iteration 12 - Loss: 0.011457, 0.034686
-12
-BCD Iteration 1 - Loss: 0.067721, 0.067742
-BCD Iteration 2 - Loss: 0.067721, 0.067743
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
 2
 </pre></div>
 </div>
@@ -883,7 +821,7 @@ BCD Iteration 2 - Loss: 0.067721, 0.067743
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fa4d7cd361f014bc7d6ae324df3fcfe3df3beb17543e21c7e48043c05f711870.png" src="_images/fa4d7cd361f014bc7d6ae324df3fcfe3df3beb17543e21c7e48043c05f711870.png" />
+<img alt="_images/339893c5a5956aa5323d8e8e1609cdf5efe64d471e983a132fccd3b2dd1aa765.png" src="_images/339893c5a5956aa5323d8e8e1609cdf5efe64d471e983a132fccd3b2dd1aa765.png" />
 </div>
 </div>
 <p>We can see that the gene expression data all gets projected near the origin on the PCA graph of the original ADT data – this indicates that the projection is getting closer to a weighted average of all samples in the original ADT domain, applied to each sample in the gene expression domain (low variance in aligned values). This result is exactly what we would expect, given a very dense sample coupling matrix.</p>
@@ -892,37 +830,9 @@ BCD Iteration 2 - Loss: 0.067721, 0.067743
 <p>To specify the type of entropic regularization you are using, pass in ‘joint’ or ‘independent’ to the entropic_mode parameter of the fucoot_solver function. If you use joint regularization, only the first term of your <span class="math notranslate nohighlight">\(\epsilon\)</span> tuple will be used in solving. Let’s make one comparison of joint vs. independent entropic regulariztion:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp_ind</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ind</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;independent&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp_ind</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ind</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;independent&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">pi_samp_jnt</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_jnt</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;joint&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.051248, 0.052950
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.007932, 0.011220
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.007174, 0.010670
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.007149, 0.010664
-BCD Iteration 5 - Loss: 0.007146, 0.010664
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.051248, 0.052950
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.007932, 0.011220
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.007174, 0.010670
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.007149, 0.010664
-BCD Iteration 5 - Loss: 0.007146, 0.010664
+<span class="n">pi_samp_jnt</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_jnt</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;joint&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -947,29 +857,9 @@ BCD Iteration 5 - Loss: 0.007146, 0.010664
 <p>Note that these are the same, considering that we didn’t let the <span class="math notranslate nohighlight">\(\epsilon\)</span> values differ in the independent case. Let’s try doing so, and comparing again:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp_ind</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ind</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;independent&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp_ind</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ind</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;independent&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">pi_samp_jnt</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_jnt</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;joint&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.067760, 0.067759
-BCD Iteration 2 - Loss: 0.067760, 0.067758
-BCD Iteration 3 - Loss: 0.067760, 0.067758
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.051248, 0.052950
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.007932, 0.011220
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.007174, 0.010670
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.007149, 0.010664
-BCD Iteration 5 - Loss: 0.007146, 0.010664
+<span class="n">pi_samp_jnt</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_jnt</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;joint&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1005,50 +895,13 @@ BCD Iteration 5 - Loss: 0.007146, 0.010664
 <p>First, we have the same balanced problem from earlier; this time, we significantly relax the uniform marginal constraint (which was enforced in earlier parts of this tutorial with <span class="math notranslate nohighlight">\(\rho\)</span>=infinity, our default):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">aligned_rna</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp</span><span class="p">)</span>
 <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.051050, 0.052743
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.007939, 0.011225
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.007170, 0.010663
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.007131, 0.010646
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.007106, 0.010623
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 0.007127, 0.010644
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 0.007122, 0.010640
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 0.007127, 0.010644
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 0.007119, 0.010637
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 0.007122, 0.010640
-BCD Iteration 11 - Loss: 0.007119, 0.010637
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 0.007117, 0.010635
-BCD Iteration 13 - Loss: 0.007126, 0.010644
-BCD Iteration 14 - Loss: 0.007125, 0.010643
-BCD Iteration 15 - Loss: 0.007119, 0.010637
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1000, 10)
 </pre></div>
 </div>
@@ -1112,7 +965,7 @@ BCD Iteration 15 - Loss: 0.007119, 0.010637
 <p>Before, we did not see any disparity in color at this level of <span class="math notranslate nohighlight">\(\epsilon\)</span>; we saw what was essentially a 1-1 mapping, at least for features. Now, we can see that we no longer have this result. In fact, the sum of values in each row is no longer uniform, meaning some features/samples transport less mass than others. This result is exactly what we would expect when modifying <span class="math notranslate nohighlight">\(\rho\)</span>. Modifying <span class="math notranslate nohighlight">\(\rho\)</span> can be even more useful in a disproportionate case; for example, if we add more genes into X, we want the genes associated with the 10 antibodies we have examined so far to transport more mass, in theory. Let’s see if this result occurs with UCOOT; we will only lower the <span class="math notranslate nohighlight">\(\rho_y\)</span> value in this case, as we expect the gene transport distribution to vary from uniform, while the ADT transport distribution would remain uniform.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna_full</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna_full</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span><span class="mi">10</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">aligned_rna</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp</span><span class="p">)</span>
 <span class="n">aligned_rna</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span>
@@ -1120,34 +973,6 @@ BCD Iteration 15 - Loss: 0.007119, 0.010637
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.063426, 0.064408
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.042120, 0.044856
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.039114, 0.042568
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.038568, 0.042198
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.038528, 0.042174
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 0.038542, 0.042164
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 0.038538, 0.042146
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 0.038551, 0.042153
-BCD Iteration 9 - Loss: 0.038549, 0.042148
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 0.038549, 0.042148
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1000, 10)
 </pre></div>
 </div>
@@ -1304,7 +1129,7 @@ BCD Iteration 9 - Loss: 0.038549, 0.042148
   <div class="footer-item">
     
 <p class="component-author">
-By R. Singh
+By C. Baker
 </p>
 
   </div>

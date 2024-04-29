@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Fused Formulation Tutorial &#8212; SCOOTR</title>
+    <title>Fused Formulation Tutorial &#8212; SCOT+</title>
   
   
   
@@ -152,8 +152,8 @@
       
     
     
-    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOOTR - Home"/>
-    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOOTR - Home"/>`);</script>
+    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOT+ - Home"/>
+    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOT+ - Home"/>`);</script>
   
   
 </a></div>
@@ -547,7 +547,7 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d398f98d34fd5ba6f4e8122eb9342685fa02bca708c1d06b3eb490aa7b010142.png" src="_images/d398f98d34fd5ba6f4e8122eb9342685fa02bca708c1d06b3eb490aa7b010142.png" />
+<img alt="_images/6692e3dd02e734ad2ca3ad31ac5fac389ec711407b609a1ac7358a4ef1fc1363.png" src="_images/6692e3dd02e734ad2ca3ad31ac5fac389ec711407b609a1ac7358a4ef1fc1363.png" />
 </div>
 </div>
 </section>
@@ -567,42 +567,11 @@ CUDNN version: None
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_feat</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 <span class="n">D_samp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
-<span class="n">pi_samp_sm</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_sm</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">))</span>
+<span class="n">pi_samp_sm</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_sm</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-3</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">pi_samp_med</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_med</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">))</span>
+<span class="n">pi_samp_med</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_med</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-2</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">pi_samp_lg</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.050847, 0.052544
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.009214, 0.012669
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.008179, 0.011854
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.008166, 0.011852
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.008165, 0.011851
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.009021, 0.017849
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.006827, 0.015535
-BCD Iteration 3 - Loss: 0.006827, 0.015535
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.007823, 0.016951
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.006543, 0.015681
-BCD Iteration 3 - Loss: 0.006543, 0.015681
+<span class="n">pi_samp_lg</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-1</span><span class="p">,</span> <span class="mf">1e-1</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -700,94 +669,11 @@ BCD Iteration 3 - Loss: 0.006543, 0.015681
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_feat_m</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">D_feat</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
-<span class="n">pi_samp_ft</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ft</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">))</span>
+<span class="n">pi_samp_ft</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ft</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">D_feat</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">pi_samp_ft_m</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ft_m</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">D_feat_m</span><span class="p">))</span>
+<span class="n">pi_samp_ft_m</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ft_m</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">D_feat_m</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">pi_samp_ctrl</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ctrl</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.057055, 0.080116
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.007532, 0.042059
-BCD Iteration 3 - Loss: 0.007518, 0.042060
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.499055, 0.517256
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.362228, 0.390849
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.304562, 0.334136
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.263677, 0.293924
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.233032, 0.263785
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 0.209143, 0.240293
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 0.189961, 0.221431
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 0.174202, 0.205935
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 0.161013, 0.192967
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 0.149805, 0.181948
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 0.140158, 0.172462
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 0.131764, 0.164209
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 0.124388, 0.156958
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 14 - Loss: 0.117861, 0.150540
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 15 - Loss: 0.112041, 0.144816
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.059064, 0.061400
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.036154, 0.044856
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.029880, 0.042087
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.022723, 0.038712
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.013590, 0.034578
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 0.012366, 0.034268
-BCD Iteration 7 - Loss: 0.012274, 0.034259
-BCD Iteration 8 - Loss: 0.012193, 0.034253
-BCD Iteration 9 - Loss: 0.012100, 0.034248
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 0.011993, 0.034241
-BCD Iteration 11 - Loss: 0.011888, 0.034235
-BCD Iteration 12 - Loss: 0.011801, 0.034233
-BCD Iteration 13 - Loss: 0.011735, 0.034229
-BCD Iteration 14 - Loss: 0.011696, 0.034231
-BCD Iteration 15 - Loss: 0.011671, 0.034229
+<span class="n">pi_samp_ctrl</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_ctrl</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -818,9 +704,9 @@ BCD Iteration 15 - Loss: 0.011671, 0.034229
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a9925da9f927f75dfc8e25c340f2ead9a161b19a37a01ecf9a8e32a6bc1db56a.png" src="_images/a9925da9f927f75dfc8e25c340f2ead9a161b19a37a01ecf9a8e32a6bc1db56a.png" />
-<img alt="_images/e4463a06317329c4924902f31aff79cba8b15d0dc1af19aadb972afe2b12a741.png" src="_images/e4463a06317329c4924902f31aff79cba8b15d0dc1af19aadb972afe2b12a741.png" />
-<img alt="_images/e52a6cc92d22f9ff2956ff9d1808919b83ed084a8ceab0c74fca6233bb999135.png" src="_images/e52a6cc92d22f9ff2956ff9d1808919b83ed084a8ceab0c74fca6233bb999135.png" />
+<img alt="_images/0d9def1063914b411c0fb099f8c39ef316204e589295126527220e9f5de0a851.png" src="_images/0d9def1063914b411c0fb099f8c39ef316204e589295126527220e9f5de0a851.png" />
+<img alt="_images/60e387e4fabde2bfd67ff444fbee92011e6878f54cd480b9c6d12fc323fd4a49.png" src="_images/60e387e4fabde2bfd67ff444fbee92011e6878f54cd480b9c6d12fc323fd4a49.png" />
+<img alt="_images/e389903623a5d2cf7b72bd106eedc60bd5d90ce452ac241f247e093fd0fc3734.png" src="_images/e389903623a5d2cf7b72bd106eedc60bd5d90ce452ac241f247e093fd0fc3734.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -835,9 +721,9 @@ BCD Iteration 15 - Loss: 0.011671, 0.034229
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e6419c39568cf72c04b165bbda73a0528614d20759273d6345ee00b6babe9905.png" src="_images/e6419c39568cf72c04b165bbda73a0528614d20759273d6345ee00b6babe9905.png" />
-<img alt="_images/72c4672e375f387d9c93e3cbaab6c97095d8086e9eef98d8ff7f3086e81ae667.png" src="_images/72c4672e375f387d9c93e3cbaab6c97095d8086e9eef98d8ff7f3086e81ae667.png" />
-<img alt="_images/c7f93f10810350eba4b113d433c9df0cae820fefc274ed09567d382ff85ce99f.png" src="_images/c7f93f10810350eba4b113d433c9df0cae820fefc274ed09567d382ff85ce99f.png" />
+<img alt="_images/a64b105c38292ab70af04d1884dcddaae3e7574789e930053bde8de2d2d8a9a7.png" src="_images/a64b105c38292ab70af04d1884dcddaae3e7574789e930053bde8de2d2d8a9a7.png" />
+<img alt="_images/00a0c35cda556bb33819c452b1c08c7f7c79468662a5945a99856c9cc66f32a9.png" src="_images/00a0c35cda556bb33819c452b1c08c7f7c79468662a5945a99856c9cc66f32a9.png" />
+<img alt="_images/de618c13d8873553dc66d4dd6999a99cb0ded909384f89f810a34df9237d7707.png" src="_images/de618c13d8873553dc66d4dd6999a99cb0ded909384f89f810a34df9237d7707.png" />
 </div>
 </div>
 <p>As seen above in the FOSCTTM scores and the emerging diagonals in the sampling coupling matrices that received feature superivision, adding feature matrix supervision improves alignment quality.</p>
@@ -849,68 +735,13 @@ BCD Iteration 15 - Loss: 0.011671, 0.034229
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D_samp_m</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">D_samp</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.95</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
-<span class="n">pi_samp_smp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_smp</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">pi_samp_smp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_smp</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="n">pi_samp_smp_m</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_smp_m</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp_m</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">pi_samp_smp_m</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_smp_m</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ucoot</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">rna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">D</span><span class="o">=</span><span class="p">(</span><span class="n">D_samp_m</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">aligned_rna_smp</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">pi_samp_smp</span><span class="p">)</span>
 
 <span class="n">aligned_rna_smp_m</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">adt</span><span class="p">,</span> <span class="n">pi_samp_smp_m</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.012936, 0.090179
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.011612, 0.089055
-BCD Iteration 3 - Loss: 0.011609, 0.089054
-BCD Iteration 4 - Loss: 0.011610, 0.089055
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 0.052560, 0.064207
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 0.016227, 0.037230
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 0.012160, 0.034881
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 0.011953, 0.034555
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 0.011818, 0.034420
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 0.011708, 0.034350
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 0.011645, 0.034315
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 0.011612, 0.034292
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 0.011599, 0.034277
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 0.011596, 0.034267
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 0.011598, 0.034260
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 0.011603, 0.034255
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 0.011607, 0.034252
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 14 - Loss: 0.011611, 0.034248
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 15 - Loss: 0.011612, 0.034244
 </pre></div>
 </div>
 </div>
@@ -931,8 +762,8 @@ BCD Iteration 4 - Loss: 0.011610, 0.089055
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/878c0e4bd64ac241a097c8ce82029d13184ca478c55c3515f595899c91db9761.png" src="_images/878c0e4bd64ac241a097c8ce82029d13184ca478c55c3515f595899c91db9761.png" />
-<img alt="_images/f88a3d2805f3419325b01e32ec25392152c3e2674d5838a51a6b788d8423cb26.png" src="_images/f88a3d2805f3419325b01e32ec25392152c3e2674d5838a51a6b788d8423cb26.png" />
-<img alt="_images/b1c91d6351f866b8119fe90bef7babc692a6bec69039d65265e290b194178824.png" src="_images/b1c91d6351f866b8119fe90bef7babc692a6bec69039d65265e290b194178824.png" />
+<img alt="_images/816a9d5640266b59f67619b4525a7223da302f48418c99f55755080dcca6f59c.png" src="_images/816a9d5640266b59f67619b4525a7223da302f48418c99f55755080dcca6f59c.png" />
+<img alt="_images/bd14724ca492b7453ae894caf09a6b00eee7509ad6255ed5c7fb85513988e34e.png" src="_images/bd14724ca492b7453ae894caf09a6b00eee7509ad6255ed5c7fb85513988e34e.png" />
 </div>
 </div>
 <p>As expected, we get perfect alignments when we have any sample supervision that encourages the true alignment. However, the truly interesting part of this procedure is seeing how this perfect alignment influenced the feature coupling:</p>
@@ -948,9 +779,9 @@ BCD Iteration 4 - Loss: 0.011610, 0.089055
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/12d56948c4a7c3eb60664eccf9428d4dd1dfcc13882d055d1a9354e39886a970.png" src="_images/12d56948c4a7c3eb60664eccf9428d4dd1dfcc13882d055d1a9354e39886a970.png" />
-<img alt="_images/6805b0918e52afd79d2099099ca85dfb5bd773ea3ac6b199a52239593b58fdc9.png" src="_images/6805b0918e52afd79d2099099ca85dfb5bd773ea3ac6b199a52239593b58fdc9.png" />
-<img alt="_images/d71a261ef28d63ae0958840cfda501020481ff68c407768caa1328fa1be212ed.png" src="_images/d71a261ef28d63ae0958840cfda501020481ff68c407768caa1328fa1be212ed.png" />
+<img alt="_images/edb46193377f133cea135f6fe67aad5c1fda45a6186072e293700d9749f2b487.png" src="_images/edb46193377f133cea135f6fe67aad5c1fda45a6186072e293700d9749f2b487.png" />
+<img alt="_images/7f5703c4c844683dad1f8261fe8ce4ff7d00e175b70a6dd0216d0518a2cb568a.png" src="_images/7f5703c4c844683dad1f8261fe8ce4ff7d00e175b70a6dd0216d0518a2cb568a.png" />
+<img alt="_images/73ecc25b9ee51c188bbb7309cbaebcd0ff0556a735e1a2b62fa78608b6227ef4.png" src="_images/73ecc25b9ee51c188bbb7309cbaebcd0ff0556a735e1a2b62fa78608b6227ef4.png" />
 </div>
 </div>
 <p>As seen above, coupling the samples correctly uncovers the true feature coupling, which was slightly less clear without any sample supervision.</p>
@@ -1044,7 +875,7 @@ BCD Iteration 4 - Loss: 0.011610, 0.089055
   <div class="footer-item">
     
 <p class="component-author">
-By R. Singh
+By C. Baker
 </p>
 
   </div>

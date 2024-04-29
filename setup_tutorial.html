@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Setup Tutorial &#8212; SCOOTR</title>
+    <title>Setup Tutorial &#8212; SCOT+</title>
   
   
   
@@ -150,8 +150,8 @@
       
     
     
-    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOOTR - Home"/>
-    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOOTR - Home"/>`);</script>
+    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOT+ - Home"/>
+    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOT+ - Home"/>`);</script>
   
   
 </a></div>
@@ -453,27 +453,7 @@ CUDNN version: None
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot_sm_uot</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">pi_samp_sm_uot</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_sm_uot</span> <span class="o">=</span> <span class="n">scot_sm_uot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Changing alpha to 0, no GW data.
-BCD Iteration 1 - Loss: 0.105193, 0.105594
-BCD Iteration 2 - Loss: 0.098446, 0.098862
-BCD Iteration 3 - Loss: 0.089126, 0.089534
-BCD Iteration 4 - Loss: 0.079530, 0.079963
-BCD Iteration 5 - Loss: 0.073993, 0.074426
-BCD Iteration 6 - Loss: 0.081255, 0.081691
-BCD Iteration 7 - Loss: 0.090520, 0.090953
-BCD Iteration 8 - Loss: 0.093771, 0.094210
-BCD Iteration 9 - Loss: 0.086055, 0.086477
-BCD Iteration 10 - Loss: 0.080711, 0.081126
-BCD Iteration 11 - Loss: 0.079403, 0.079829
-BCD Iteration 12 - Loss: 0.073467, 0.073894
-BCD Iteration 13 - Loss: 0.073996, 0.074418
-BCD Iteration 14 - Loss: 0.070661, 0.071094
-BCD Iteration 15 - Loss: 0.070612, 0.071046
+<span class="n">pi_samp_sm_uot</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_sm_uot</span> <span class="o">=</span> <span class="n">scot_sm_uot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -481,15 +461,7 @@ BCD Iteration 15 - Loss: 0.070612, 0.071046
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot_lg_uot</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span> <span class="c1"># upper bound; UOT likely converges first</span>
-<span class="n">pi_samp_lg_uot</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg_uot</span> <span class="o">=</span> <span class="n">scot_lg_uot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Changing alpha to 0, no GW data.
-BCD Iteration 1 - Loss: 0.097210, 0.097649
-BCD Iteration 2 - Loss: 0.080799, 0.081259
-BCD Iteration 3 - Loss: 0.080798, 0.081259
+<span class="n">pi_samp_lg_uot</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg_uot</span> <span class="o">=</span> <span class="n">scot_lg_uot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -511,8 +483,8 @@ BCD Iteration 3 - Loss: 0.080798, 0.081259
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d509cfc5acf2cc2059b85c07b074ca89c02c80e60a84b11ec334ca55cd564a47.png" src="_images/d509cfc5acf2cc2059b85c07b074ca89c02c80e60a84b11ec334ca55cd564a47.png" />
-<img alt="_images/2bded1bbe4b9bc86aa87429d9665d575499ae74fa400d6a19d45c6c576cb185d.png" src="_images/2bded1bbe4b9bc86aa87429d9665d575499ae74fa400d6a19d45c6c576cb185d.png" />
+<img alt="_images/b232a914c47e70d1fa70548e61d121b247a604db57b9581e3a4d8826e06e3316.png" src="_images/b232a914c47e70d1fa70548e61d121b247a604db57b9581e3a4d8826e06e3316.png" />
+<img alt="_images/7f18989af06350489df074e11ac37b1cc93a592b6e7d4a20116b4447b0d69d00.png" src="_images/7f18989af06350489df074e11ac37b1cc93a592b6e7d4a20116b4447b0d69d00.png" />
 </div>
 </div>
 <p>Note that the coupling matrices in the first case are not perfectly sparse. We see this result because each individual matrix was not evaluated as much individually (small nits_uot) as they were jointly (normal nits_bcd).</p>
@@ -520,22 +492,7 @@ BCD Iteration 3 - Loss: 0.080798, 0.081259
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot_sm_bcd</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nits_bcd</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">pi_samp_sm_bcd</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_sm_bcd</span> <span class="o">=</span> <span class="n">scot_sm_bcd</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Changing alpha to 0, no GW data.
-BCD Iteration 1 - Loss: 0.128270, 0.131761
-BCD Iteration 2 - Loss: 0.083552, 0.087574
-BCD Iteration 3 - Loss: 0.076625, 0.080771
-BCD Iteration 4 - Loss: 0.076482, 0.080741
-BCD Iteration 5 - Loss: 0.074275, 0.078487
-BCD Iteration 6 - Loss: 0.073326, 0.077636
-BCD Iteration 7 - Loss: 0.071058, 0.075297
-BCD Iteration 8 - Loss: 0.078605, 0.082837
-BCD Iteration 9 - Loss: 0.075397, 0.079568
-BCD Iteration 10 - Loss: 0.070657, 0.074796
+<span class="n">pi_samp_sm_bcd</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_sm_bcd</span> <span class="o">=</span> <span class="n">scot_sm_bcd</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -543,16 +500,7 @@ BCD Iteration 10 - Loss: 0.070657, 0.074796
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot_lg_bcd</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">nits_bcd</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">pi_samp_lg_bcd</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg_bcd</span> <span class="o">=</span> <span class="n">scot_lg_bcd</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Changing alpha to 0, no GW data.
-BCD Iteration 1 - Loss: 0.117262, 0.120491
-BCD Iteration 2 - Loss: 0.075060, 0.079551
-BCD Iteration 3 - Loss: 0.074377, 0.078959
-BCD Iteration 4 - Loss: 0.074376, 0.078959
+<span class="n">pi_samp_lg_bcd</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg_bcd</span> <span class="o">=</span> <span class="n">scot_lg_bcd</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -569,8 +517,8 @@ BCD Iteration 4 - Loss: 0.074376, 0.078959
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a183f610908dd85e9eca636a90b9a5836cc3d4064d0cd57b5d21b052adecb834.png" src="_images/a183f610908dd85e9eca636a90b9a5836cc3d4064d0cd57b5d21b052adecb834.png" />
-<img alt="_images/7aa5e65f3390acc59215f69c3517d3b5ee100c58b5191724bd922f85aa65f454.png" src="_images/7aa5e65f3390acc59215f69c3517d3b5ee100c58b5191724bd922f85aa65f454.png" />
+<img alt="_images/3120244f9c9c29e39c56c1d9a309c120d5656e165ce025fd3a8e0589a428de3c.png" src="_images/3120244f9c9c29e39c56c1d9a309c120d5656e165ce025fd3a8e0589a428de3c.png" />
+<img alt="_images/7f18989af06350489df074e11ac37b1cc93a592b6e7d4a20116b4447b0d69d00.png" src="_images/7f18989af06350489df074e11ac37b1cc93a592b6e7d4a20116b4447b0d69d00.png" />
 </div>
 </div>
 <p>As seen in the matrices above, limiting nits_uot and nits_bcd leads to a lack of convergence to a sparse solution as we would expect from this level of epsilon (see UCOOT/UGW tutorial to learn more about epsilon).</p>
@@ -588,8 +536,7 @@ BCD Iteration 4 - Loss: 0.074376, 0.078959
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Changing alpha to 0, no GW data.
-Number of cost calculations: 73
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 60
 </pre></div>
 </div>
 </div>
@@ -603,8 +550,7 @@ Number of cost calculations: 73
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Changing alpha to 0, no GW data.
-Number of cost calculations: 3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 2
 </pre></div>
 </div>
 </div>
@@ -636,8 +582,7 @@ Number of cost calculations: 3
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Changing alpha to 0, no GW data.
-Number of cost calculations: 2
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 1
 </pre></div>
 </div>
 </div>
@@ -652,8 +597,7 @@ Number of cost calculations: 2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Changing alpha to 0, no GW data.
-Number of cost calculations: 16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 15
 </pre></div>
 </div>
 </div>
@@ -668,8 +612,7 @@ Number of cost calculations: 16
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Changing alpha to 0, no GW data.
-Number of cost calculations: 151
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 150
 </pre></div>
 </div>
 </div>
@@ -686,8 +629,7 @@ Number of cost calculations: 151
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Changing alpha to 0, no GW data.
-Number of cost calculations: 16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 15
 </pre></div>
 </div>
 </div>
@@ -702,7 +644,7 @@ Number of cost calculations: 16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/533573ba38e5e3ff6175e29e66ccb5e64b7883de28ce1f96c4e3da59ee2ef70b.png" src="_images/533573ba38e5e3ff6175e29e66ccb5e64b7883de28ce1f96c4e3da59ee2ef70b.png" />
+<img alt="_images/b232a914c47e70d1fa70548e61d121b247a604db57b9581e3a4d8826e06e3316.png" src="_images/b232a914c47e70d1fa70548e61d121b247a604db57b9581e3a4d8826e06e3316.png" />
 </div>
 </div>
 <p>Here, we see a similar result as when we limited nits_uot in the first section, which is consistent, since our high tol_uot is roughly equivalent (in practice) to nits_uot = 1.</p>
@@ -797,7 +739,7 @@ Number of cost calculations: 16
   <div class="footer-item">
     
 <p class="component-author">
-By R. Singh
+By C. Baker
 </p>
 
   </div>

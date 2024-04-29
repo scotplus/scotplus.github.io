@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>UGW Tutorial &#8212; SCOOTR</title>
+    <title>UGW Tutorial &#8212; SCOT+</title>
   
   
   
@@ -152,8 +152,8 @@
       
     
     
-    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOOTR - Home"/>
-    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOOTR - Home"/>`);</script>
+    <img src="_static/SCOTplus_logo.png" class="logo__image only-light" alt="SCOT+ - Home"/>
+    <script>document.write(`<img src="_static/SCOTplus_logo.png" class="logo__image only-dark" alt="SCOT+ - Home"/>`);</script>
   
   
 </a></div>
@@ -592,52 +592,7 @@ CUDNN version: None
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># set verbose=True to get a breakdown of the cost progression during optimization</span>
 <span class="c1"># set log=True to get extra return values, log_cost and log_ent_cost, which display the cost progression</span>
 <span class="c1"># set early stopping tol to end convergence early based on displayed costs</span>
-<span class="p">(</span><span class="n">pi_samp_1</span><span class="p">,</span> <span class="n">pi_samp_2</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 10.927032, 11.109968
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 9.653778, 9.900175
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 9.159737, 9.415975
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 9.011368, 9.274309
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 9.005905, 9.269339
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 9.005127, 9.267925
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 9.003723, 9.266100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 8.994026, 9.256955
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 8.987350, 9.251730
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 8.985947, 9.250631
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 8.985138, 9.249963
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 8.984802, 9.249677
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 8.984665, 9.249556
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 14 - Loss: 8.984795, 9.249692
-BCD Iteration 15 - Loss: 8.984825, 9.249728
+<span class="p">(</span><span class="n">pi_samp_1</span><span class="p">,</span> <span class="n">pi_samp_2</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">log_ent_cost</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">early_stopping_tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -721,7 +676,7 @@ BCD Iteration 15 - Loss: 8.984825, 9.249728
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d428ba00f24e018bcd61330d7baed12bad9478b8526880bb20484d313707c85d.png" src="_images/d428ba00f24e018bcd61330d7baed12bad9478b8526880bb20484d313707c85d.png" />
+<img alt="_images/d7aeea70479f5909043b84d4f4ee680b23ec156675f45672f4b68903422b418d.png" src="_images/d7aeea70479f5909043b84d4f4ee680b23ec156675f45672f4b68903422b418d.png" />
 </div>
 </div>
 <p>Note that the alignments look nice (the shapes match up well). This property does not guarantee a good alignment, as we can see by our high original FOSCTTM score. In fact, it is more a representation of the sparsity of the coupling matrix – if the coupling matrix is very sparse, it will get close to attempting a 1-1 matching, which could be wrong (even though it is 1-1). Having a coupling matrix that is too sparse can be quite dangerous in cases where there is no underlying 1-1 sample map.</p>
@@ -906,101 +861,9 @@ Total sum of differences: 0.0006263484247028828
 <p>We can also demonstrate that the “entropic_mode” parameter doesn’t matter for UGW; the distinction between ‘joint’ and ‘independent’ comes in when we are hoping to regularize coupling matrices separately, which is not the case for UGW (where we expect our coupling matrices to be similar upon convergence). See our UCOOT tutorial for more detail on this parameter. See the following for an example of how they do not differ:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Independent:&quot;</span><span class="p">)</span>
-<span class="n">pi_samp_ind</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;independent&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp_ind</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;independent&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Joint:&quot;</span><span class="p">)</span>
-<span class="n">pi_samp_jnt</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;joint&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Independent:
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 10.927032, 11.109968
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 9.653778, 9.900175
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 9.159737, 9.415975
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 9.011368, 9.274309
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 9.005905, 9.269339
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 9.005127, 9.267925
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 9.003723, 9.266100
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 8.994026, 9.256955
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 8.987350, 9.251730
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 8.985947, 9.250631
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 8.985138, 9.249963
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 8.984802, 9.249677
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 8.984665, 9.249556
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 14 - Loss: 8.984795, 9.249692
-BCD Iteration 15 - Loss: 8.984825, 9.249728
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Joint:
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 10.927017, 11.109953
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 9.653740, 9.900138
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 9.159767, 9.416005
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 9.011345, 9.274285
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 9.005898, 9.269331
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 9.005127, 9.267926
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 9.003738, 9.266115
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 8.994003, 9.256931
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 8.987350, 9.251730
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 8.985939, 9.250624
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 8.985107, 9.249932
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 8.984802, 9.249677
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 8.984688, 9.249578
+<span class="n">pi_samp_jnt</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s2">&quot;joint&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1030,49 +893,8 @@ BCD Iteration 15 - Loss: 8.984825, 9.249728
 <p>Specifically, <span class="math notranslate nohighlight">\(\rho_x\)</span> and <span class="math notranslate nohighlight">\(\rho_y\)</span> are multiplied by respective terms that measure (in terms of KL divergence) how close the desired distribution is to the marginals of the coupling matrix. So, the larger either <span class="math notranslate nohighlight">\(\rho\)</span> is, the closer its respective desired distribution will be to the marginals of the coupling matrix, as there will be a higher cost to differences between the distributions. In fact, we used <span class="math notranslate nohighlight">\(\rho\)</span> = infty in the previous examples; this forces the marginals of the coupling matrix to exactly match the desired distributions (otherwise incurring a cost of infinity). Allowing <span class="math notranslate nohighlight">\(\rho\)</span> to decrease below infinity leads to what we might call an “unbalancing” in the initial distributions, as we allow some samples to transport more or less mass than they were originally allocated. This is why we now use ugw instead of gw – the u stands for unbalanced. Let’s look at how ugw works, first on a fairly balanced set of data:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">aligned_rna</span> <span class="o">=</span> <span class="n">get_barycentre</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">adt</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">pi_samp</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 6.091248, 6.230510
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 4.869470, 5.079669
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 4.669812, 4.894057
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 4.644800, 4.872685
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 4.632323, 4.862092
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 4.631449, 4.861610
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 4.631290, 4.861551
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 4.631252, 4.861545
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 4.631231, 4.861537
-BCD Iteration 10 - Loss: 4.631222, 4.861531
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 4.631229, 4.861543
-BCD Iteration 12 - Loss: 4.631211, 4.861534
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 4.631217, 4.861547
-BCD Iteration 14 - Loss: 4.631196, 4.861533
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 15 - Loss: 4.631194, 4.861537
 </pre></div>
 </div>
 </div>
@@ -1241,96 +1063,8 @@ Name: count, dtype: int64
 <p>Now, we can align:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp_u</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn_new</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-<span class="n">pi_samp_ctrl</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn_new</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 10.901960, 10.922110
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 10.572162, 10.603938
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 10.540407, 10.575678
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 10.533343, 10.568952
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 10.524888, 10.561310
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 10.519067, 10.556095
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 10.513914, 10.551647
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 10.509946, 10.548558
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 10.506916, 10.546493
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 10.504412, 10.544837
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 10.502377, 10.543303
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 12 - Loss: 10.501422, 10.542435
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 10.500514, 10.541537
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 14 - Loss: 10.498717, 10.539718
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 15 - Loss: 10.496578, 10.537644
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 1 - Loss: 23.839811, 23.879280
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 2 - Loss: 23.401943, 23.462212
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 3 - Loss: 23.307062, 23.373026
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 4 - Loss: 23.242388, 23.309988
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 5 - Loss: 23.205818, 23.274103
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 6 - Loss: 23.183363, 23.254223
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 7 - Loss: 23.176638, 23.248644
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 8 - Loss: 23.171129, 23.244947
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 9 - Loss: 23.168304, 23.243759
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 10 - Loss: 23.165667, 23.242325
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 11 - Loss: 23.164740, 23.242180
-BCD Iteration 12 - Loss: 23.161880, 23.240295
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 13 - Loss: 23.159889, 23.238943
-BCD Iteration 14 - Loss: 23.158251, 23.237688
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BCD Iteration 15 - Loss: 23.157915, 23.237694
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pi_samp_u</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn_new</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pi_samp_ctrl</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">D_rna_knn_new</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="n">rho</span><span class="o">=</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)),</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1500,7 +1234,7 @@ BCD Iteration 14 - Loss: 23.158251, 23.237688
   <div class="footer-item">
     
 <p class="component-author">
-By R. Singh
+By C. Baker
 </p>
 
   </div>
