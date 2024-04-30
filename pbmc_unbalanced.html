@@ -494,7 +494,7 @@ Categories (7, object): [&#39;B cells&#39;, &#39;CD4 T cells&#39;, &#39;CD8 T ce
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 
-<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">fracs</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">ctype</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">atac</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;celltype&quot;</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -516,13 +516,13 @@ FCGR3A+ Monocytes
 NK cells
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;CD4 T cells&#39;: 891,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;CD4 T cells&#39;: 1058,
          &#39;CD14+ Monocytes&#39;: 454,
-         &#39;B cells&#39;: 161,
-         &#39;CD8 T cells&#39;: 104,
+         &#39;B cells&#39;: 121,
+         &#39;CD8 T cells&#39;: 114,
          &#39;FCGR3A+ Monocytes&#39;: 93,
-         &#39;NK cells&#39;: 67,
-         &#39;Dendritic cells&#39;: 40})
+         &#39;NK cells&#39;: 71,
+         &#39;Dendritic cells&#39;: 24})
 </pre></div>
 </div>
 </div>
@@ -544,13 +544,13 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;B cells&#39;: 0.8,
- &#39;CD4 T cells&#39;: 0.8,
- &#39;CD8 T cells&#39;: 0.5,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;B cells&#39;: 0.6,
+ &#39;CD4 T cells&#39;: 0.95,
+ &#39;CD8 T cells&#39;: 0.55,
  &#39;CD14+ Monocytes&#39;: 0.7,
- &#39;Dendritic cells&#39;: 0.9,
+ &#39;Dendritic cells&#39;: 0.55,
  &#39;FCGR3A+ Monocytes&#39;: 0.8500000000000001,
- &#39;NK cells&#39;: 0.8}
+ &#39;NK cells&#39;: 0.8500000000000001}
 </pre></div>
 </div>
 </div>
@@ -610,7 +610,7 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1126b13ca106ba17287aa28692497f7bc213d4c92f96556b674eda563a7ec07d.png" src="_images/1126b13ca106ba17287aa28692497f7bc213d4c92f96556b674eda563a7ec07d.png" />
+<img alt="_images/5af7bf3d52144b6a3f6f231be990c9f6dd80522a09668cbf8b93e14f8fe52161.png" src="_images/5af7bf3d52144b6a3f6f231be990c9f6dd80522a09668cbf8b93e14f8fe52161.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -641,7 +641,7 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e94045b5a4ac461a9ab66c02ba932017e442ddaa602e64f24d110c43b3cbdbe4.png" src="_images/e94045b5a4ac461a9ab66c02ba932017e442ddaa602e64f24d110c43b3cbdbe4.png" />
+<img alt="_images/43ada338dd5f4157754d77517de215c8c18ee768808300d2495d5eeb90ae1d8e.png" src="_images/43ada338dd5f4157754d77517de215c8c18ee768808300d2495d5eeb90ae1d8e.png" />
 </div>
 </div>
 <p>We can now attempt an alignment:</p>
@@ -652,7 +652,7 @@ NK cells
 <span class="n">Drna</span> <span class="o">=</span> <span class="n">compute_graph_distances</span><span class="p">(</span><span class="n">rna_mtx</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">)</span>
 <span class="n">Datac</span> <span class="o">=</span><span class="n">compute_graph_distances</span><span class="p">(</span><span class="n">atac_mtx</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">)</span>
 <span class="n">agw_class</span> <span class="o">=</span>  <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">tol_uot</span><span class="o">=</span><span class="mf">2e-5</span><span class="p">)</span>
-<span class="n">pi_samp</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">pi_feat</span> <span class="o">=</span> <span class="n">agw_class</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">Drna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">Datac</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">rho</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">eps</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1e-4</span><span class="p">),</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">pi_samp</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">pi_feat</span> <span class="o">=</span> <span class="n">agw_class</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">Drna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">Datac</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">rho</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -671,7 +671,7 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/89ca47042c89141990d1cacb11bd9210fea48c321b9ccad48b4cfa7e21a7aaba.png" src="_images/89ca47042c89141990d1cacb11bd9210fea48c321b9ccad48b4cfa7e21a7aaba.png" />
+<img alt="_images/8f72367a5e8462c7baefae36e15ba0d483152af3ab97e0db9dce7facab9ff17f.png" src="_images/8f72367a5e8462c7baefae36e15ba0d483152af3ab97e0db9dce7facab9ff17f.png" />
 </div>
 </div>
 <p>Now, we can finally compute our alignment:</p>
@@ -684,7 +684,7 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((2407, 50), torch.Size([1810, 50]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((2407, 50), torch.Size([1935, 50]))
 </pre></div>
 </div>
 </div>
@@ -720,7 +720,7 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/83e34b5ca1e3900a9fc082cb349045ceeac63709e791eeee79818b05ff2daa66.png" src="_images/83e34b5ca1e3900a9fc082cb349045ceeac63709e791eeee79818b05ff2daa66.png" />
+<img alt="_images/5065921e9012439a84e9b7da3d0a0c40f631b224da8cdef4806261245007ceb9.png" src="_images/5065921e9012439a84e9b7da3d0a0c40f631b224da8cdef4806261245007ceb9.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -745,10 +745,10 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1774e9840&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x17ecdb610&gt;
 </pre></div>
 </div>
-<img alt="_images/b3e98b7e8de708234b6892e6f311314d51ce6a464393d2044b981ae337bc5e30.png" src="_images/b3e98b7e8de708234b6892e6f311314d51ce6a464393d2044b981ae337bc5e30.png" />
+<img alt="_images/d22670da337373fc1ca3fe913a593b31739328a2239e013ad84e1c924ad24159.png" src="_images/d22670da337373fc1ca3fe913a593b31739328a2239e013ad84e1c924ad24159.png" />
 </div>
 </div>
 <p>We can evaluate our alignment with label transfer accuracy, which determines how well a classifier extends from the original domain to the new domain:</p>
@@ -778,7 +778,7 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0785209804736186
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6373078520980474
 </pre></div>
 </div>
 </div>
