@@ -189,6 +189,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exploration on Real World Datasets</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="pbmc_unbalanced.html">Unbalanced Cell Type Alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citeseq_sample_supervision.html">CITE-seq Sample Supervision and Hyperparameter Grid Search</a></li>
 </ul>
 
     </div>
@@ -403,7 +404,7 @@ document.write(`
 <p>In this tutorial, we will go over how to set up a Solver object for generating coupling matrices. In particular, we will dive into the different parameters that affect how closely we approximate exact optimal transport solutions.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>If you have not yet configured a SCOT+ directory of some kind, see our installation instructions markdown. Once you complete those steps or set up your own virual environment, continue on here.</p>
+<p>If you have not yet configured a SCOT+ directory of some kind, see our installation instructions markdown. Once you complete those steps or set up your own virtual environment, continue on here.</p>
 <p>If you are unsure what some of the notation means throughout the rest of this document, or what we are really trying to accomplish, try reading our optimal transport theory section to get more comfortable.</p>
 <p>If you are already comfortable with setting up a Solver object, try moving on to our UGW tutorial, which will ease you into using the tool and give some intuition for how to select different hyperparameters.</p>
 </div>
@@ -411,8 +412,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scotplus.solvers</span> <span class="kn">import</span> <span class="n">SinkhornSolver</span>
-<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -430,6 +429,7 @@ document.write(`
 
 <span class="n">nx</span><span class="p">,</span> <span class="n">ny</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
 
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">nx</span><span class="p">,</span> <span class="n">dx</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ny</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 </pre></div>
@@ -448,27 +448,50 @@ CUDNN version: None
 <h2>Iterations<a class="headerlink" href="#iterations" title="Link to this heading">#</a></h2>
 <p>Now, we can begin examining the Solver object. First, we will look at how the number of iterations (of BCD and UOT) impact alignment.</p>
 <p>When instantiating a Solver object, there are two options for modifying the number of iterations done in approximating the optimal coupling matrices for a given alignment: nits_bcd and nits_uot (and nits_gw, which is specified later in the AGW tutorial). To understand what these do, we have to understand the BCD (block coordinate descent) part of the algorithm, as well as the UOT (unbalanced optimal transport) part. See our theory document for a little more detail on these.</p>
-<p>When solving for the optimal coupling matrices, our process begins in either the sample or feature matrix (we start with sample in this code), and begins solving a single, non-co-optimal transport problem on this matrix using an OT algorithm like Sinkhorn. Then, it switches to the other matrix, and does the same. We define a single BCD iteration to be one set of OT iterations on each matrix. So, some OT iterations on the sample matrix, followed by some OT iterations on the feature matrix, would constitute one iteration. The total number of iterations the alignment will run for, not accounting for early stopping, is what we select for nits_bcd.</p>
+<p>The goal of any call to a Solver object is to solve for three optimal coupling matrices: P, P’, and Q (which we sometimes refer to as pi_samp, pi_samp_prime, and pi_feat in the code). P and P’ are both sample coupling matrices as per GW loss, and Q is the feature coupling matrix as per COOT loss.</p>
+<p>When solving for these optimal coupling matrices, we broadly loop over BCD iterations. Within each BCD iteration, we do another pair of loops: a set of GW iterations, and a COOT iteration (which we have left without a loop). Each GW iteration comprises a pair of calculations: one where we hold P’, Q constant and solve for P, and another where we hold P, Q constant and solve for P’. When we hold two matrices constant like this, we recover a UOT problem, which we can solve with an OT algorithm like Sinkhorn (e.g. from Tran, et. al. or Chizat, et. al., 2018b). Each COOT iteration (of which we currently allow only one per set of GW iterations) consists of another pair of calculations: holding P’, Q, constant and solving for P, and holding P, P’ constant and solving for Q.</p>
+<p>As a result, a BCD iteration consists of a number of UOT calculations: two per GW iteration and two for the singular COOT iteration. This total number of iterations the alignment will run for, not accounting for early stopping, is what we select for nits_bcd.</p>
 <p>Within a given BCD iteration, we do the selected OT algorithm on each coupling matrix for a certain number of iterations, or until convergence. nits_uot defines the maximum number of times we iterate this algorithm before switching within the larger BCD process. So, a smaller value for nits_uot leads to faster BCD iterations and more communication between the sample/feature coupling matrices, while a larger one will do the opposite. Let’s try out some extreme values just to get a sense of how this works:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot_sm_uot</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">scot_sm_uot</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">pi_samp_sm_uot</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_sm_uot</span> <span class="o">=</span> <span class="n">scot_sm_uot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.011200904846191406
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot_lg_uot</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span> <span class="c1"># upper bound; UOT likely converges first</span>
-<span class="n">pi_samp_lg_uot</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg_uot</span> <span class="o">=</span> <span class="n">scot_lg_uot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+<span class="n">scot_lg_uot</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span> <span class="c1"># upper bound; UOT likely converges first</span>
+<span class="n">pi_samp_lg_uot</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg_uot</span> <span class="o">=</span> <span class="n">scot_lg_uot</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.813658237457275
 </pre></div>
 </div>
 </div>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>In this example, we are using the Sinkhorn algorithm to solve for our coupling matrices, which is not the only way to solve this problem! However, we’re currently working on a more generic solver that allows you to pass in an OT solver of your choosing, subject to some interface requirements, which we will try to match up with existing OT implementations (e.g., POT).</p>
+<p>In this example, we are using the Sinkhorn algorithm to solve for our coupling matrices, which is not the only way to solve this problem! However, we’re currently working on a more generic solver that allows you to pass in an OT solver of your choosing, subject to some interface requirements, which we will try to match up with existing OT implementations (e.g., POT). The user will have to translate our UOT inputs into their UOT problem in a wrapper function.</p>
 </div>
 <p>Clearly, the second cell of code takes much longer (total, and per iteration) than the first, as expected. In addition, the first cell requires many more BCD iterations to reach the error tolerance, considering each BCD step is doing a lot less (less nested iterations). We can visualize the different coupling matrices:</p>
 <div class="cell docutils container">
@@ -483,8 +506,8 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8f868745d08c0e28e1de3b54acf65439c951f62ed7eadb6c49af7a32b4350502.png" src="_images/8f868745d08c0e28e1de3b54acf65439c951f62ed7eadb6c49af7a32b4350502.png" />
-<img alt="_images/116364412cb704d4fbb82f766f5e3b0c6384d2e14c58920bd385ce3322d145d1.png" src="_images/116364412cb704d4fbb82f766f5e3b0c6384d2e14c58920bd385ce3322d145d1.png" />
+<img alt="_images/12490896da4d12c662f6d84c05fe609c0ac9f3e117d7ebf5d1209e25f1d96564.png" src="_images/12490896da4d12c662f6d84c05fe609c0ac9f3e117d7ebf5d1209e25f1d96564.png" />
+<img alt="_images/3c8cd64ce97d44929f06392e8b7f3f6dace2fe2705881334a3309394f4a39795.png" src="_images/3c8cd64ce97d44929f06392e8b7f3f6dace2fe2705881334a3309394f4a39795.png" />
 </div>
 </div>
 <p>Note that the coupling matrices in the first case are not perfectly sparse. We see this result because each individual matrix was not evaluated as much individually (small nits_uot) as they were jointly (normal nits_bcd).</p>
@@ -492,7 +515,13 @@ CUDNN version: None
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot_sm_bcd</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nits_bcd</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">pi_samp_sm_bcd</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_sm_bcd</span> <span class="o">=</span> <span class="n">scot_sm_bcd</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_sm_bcd</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_sm_bcd</span><span class="p">),</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot_sm_bcd</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">log_cost</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
 </pre></div>
 </div>
 </div>
@@ -500,7 +529,13 @@ CUDNN version: None
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot_lg_bcd</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">nits_uot</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">nits_bcd</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">pi_samp_lg_bcd</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg_bcd</span> <span class="o">=</span> <span class="n">scot_lg_bcd</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">(</span><span class="n">pi_samp_lg_bcd</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">pi_feat_lg_bcd</span><span class="p">),</span> <span class="n">log_cost</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot_lg_bcd</span><span class="o">.</span><span class="n">coot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">log_cost</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
 </pre></div>
 </div>
 </div>
@@ -517,12 +552,12 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/df7e4cc4f0d8d60360fd654656013b5f8ad1bb848e86274b335723a958d07a61.png" src="_images/df7e4cc4f0d8d60360fd654656013b5f8ad1bb848e86274b335723a958d07a61.png" />
-<img alt="_images/116364412cb704d4fbb82f766f5e3b0c6384d2e14c58920bd385ce3322d145d1.png" src="_images/116364412cb704d4fbb82f766f5e3b0c6384d2e14c58920bd385ce3322d145d1.png" />
+<img alt="_images/75b8b55ec099caeac9cdfc506c1ecb97ab3f05e858e00f2ba66f4efe1c0219a9.png" src="_images/75b8b55ec099caeac9cdfc506c1ecb97ab3f05e858e00f2ba66f4efe1c0219a9.png" />
+<img alt="_images/3c8cd64ce97d44929f06392e8b7f3f6dace2fe2705881334a3309394f4a39795.png" src="_images/3c8cd64ce97d44929f06392e8b7f3f6dace2fe2705881334a3309394f4a39795.png" />
 </div>
 </div>
 <p>As seen in the matrices above, limiting nits_uot and nits_bcd leads to a lack of convergence to a sparse solution as we would expect from this level of epsilon (see UCOOT/UGW tutorial to learn more about epsilon).</p>
-<p>Now that we have an understanding of how these two parameters work, we can make some suggestions. First, we suggest leaving nits_bcd at the default, unless your alignment is going beyond its bound, and you would like to see continued convergence (this will happen in cases where you have a very low error tolerance, which leads to later iterations being less meaningful anyway). For nits_uot, we suggest a little bit more experimentation, although as you can see in these results, allowing for a larger number of iterations leads to more sparse coupling matrices, which may be desirable.</p>
+<p>Now that we have an understanding of how these two parameters work, we can make some suggestions. First, we suggest leaving nits_bcd at the default, unless your alignment is going beyond its bound, and you would like to see continued convergence (this will happen in cases where you have a very low error tolerance, which leads to later iterations being less meaningful anyway). For nits_uot, we suggest a little bit more experimentation, although as you can see in these results, allowing for a larger number of iterations can to more sparse/lower cost coupling matrices, which may be desirable.</p>
 </section>
 <section id="evaluation">
 <h2>Evaluation<a class="headerlink" href="#evaluation" title="Link to this heading">#</a></h2>
@@ -536,7 +571,7 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 46
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 84
 </pre></div>
 </div>
 </div>
@@ -557,10 +592,10 @@ CUDNN version: None
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>eval_bcd, as seen above, does affect the actual alignment. We will see exactly why in the next section; however, the basic idea is that once the optimization hits a certain convergence threshold, it will stop. Since we only evaluate this convergence threshold every eval_bcd iterations, then if eval_bcd is a large, we might hit the threshold, but continue running BCD until we reach the next “eval” iteration. This is why we see more iterations in the second cell above; it would have stopped closer to 73 if eval_bcd were smaller. Instead, it was forced to continue to iteration 101.</p>
+<p>eval_bcd, as seen above, does affect the actual alignment. We will see exactly why in the next section; however, the basic idea is that once the optimization hits a certain convergence threshold, it will stop. Since we only evaluate this convergence threshold every eval_bcd iterations, then if eval_bcd is a large, we might hit the threshold, but continue running BCD until we reach the next “eval” iteration. This is why we see more iterations in the second cell above; it would have stopped closer to 85 if eval_bcd were smaller. Instead, it was forced to continue to iteration 100.</p>
 </div>
-<p>Since eval_uot is almost entirely under the hood, we will not look at a code example. However, it functions the same as eval_bcd, except on the inner OT processes. The only reason to raise eval_uot above 1 is if you believe your coupling matrix will take a long time to converge and thus want to save a little bit of time by evaluating error less frequently.</p>
-<p>Clearly, the two evaluation parameters are slightly more important in conjunction with the tolerance parameters we will now examine. Note, in addition to the total transport cost being printed on the screen, we also evaluate the error in terms of how far away the previous iteration is from the current iteration under the hood, both in terms of cost and in terms of the products themselves (i.e. UGW(pi) - UGW(pi_prev), but also pi - pi_prev, in a sense). We call these types of errors “differential error” in the next section.</p>
+<p>Since eval_uot is almost entirely under the hood, we will not look at a code example. However, it functions the same as eval_bcd, except on the inner OT processes. The only reason to raise eval_uot above 1 is if you believe your coupling matrix will take a long time to converge and thus want to save a little bit of time by evaluating error less frequently. However, the main part of the Sinkhorn algorithm asymptotically scales much faster than the error check with matrix size, so it shouldn’t be much of a concern.</p>
+<p>The two evaluation parameters are slightly more important in conjunction with the tolerance parameters we will now examine. Note, in addition to the total transport cost being printed on the screen, we also evaluate the error in terms of how far away the previous iteration is from the current iteration under the hood, both in terms of cost and in terms of the products themselves (i.e. UGW(pi) - UGW(pi_prev), but also pi - pi_prev, in a sense). We call these types of errors “differential error” in the next section.</p>
 </section>
 <section id="tolerance">
 <h2>Tolerance<a class="headerlink" href="#tolerance" title="Link to this heading">#</a></h2>
@@ -597,7 +632,7 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 15
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of cost calculations: 7
 </pre></div>
 </div>
 </div>
@@ -644,7 +679,7 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8f868745d08c0e28e1de3b54acf65439c951f62ed7eadb6c49af7a32b4350502.png" src="_images/8f868745d08c0e28e1de3b54acf65439c951f62ed7eadb6c49af7a32b4350502.png" />
+<img alt="_images/12490896da4d12c662f6d84c05fe609c0ac9f3e117d7ebf5d1209e25f1d96564.png" src="_images/12490896da4d12c662f6d84c05fe609c0ac9f3e117d7ebf5d1209e25f1d96564.png" />
 </div>
 </div>
 <p>Here, we see a similar result as when we limited nits_uot in the first section, which is consistent, since our high tol_uot is roughly equivalent (in practice) to nits_uot = 1.</p>

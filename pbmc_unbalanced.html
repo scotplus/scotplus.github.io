@@ -60,6 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'pbmc_unbalanced';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CITE-seq Sample Supervision and Hyperparameter Grid Search" href="citeseq_sample_supervision.html" />
     <link rel="prev" title="AGW Tutorial" href="AGW_tutorial.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -188,6 +189,7 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Exploration on Real World Datasets</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Unbalanced Cell Type Alignment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="citeseq_sample_supervision.html">CITE-seq Sample Supervision and Hyperparameter Grid Search</a></li>
 </ul>
 
     </div>
@@ -401,9 +403,17 @@ document.write(`
 <h1>Unbalanced Cell Type Alignment<a class="headerlink" href="#unbalanced-cell-type-alignment" title="Link to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This notebook is a sample of what our applications chapter will look like when we release it. We’re working hard on compiling all of our results to share with you!</p>
+<p>This notebook is a sample of what our applications chapter will look like when we fully release it. We’re working hard on compiling all of our results to share with you!</p>
 </div>
-<p>In this notebook, we’ll look at what happens when we systematically downsample one of our domains in an alignment problem (simulating a situtation where we only have separately assayed data). In particular, we’ll systematically downsample by cell type in a PBMC co-assayed dataset that contains RNAseq (gene expression) and ATACseq (open chromatin) data.</p>
+<p>In this notebook, we’ll look at what happens when we systematically downsample one of our domains in an alignment problem (simulating a situtation where we only have separately assayed data). In particular, we’ll systematically downsample by cell type in a PBMC co-assayed dataset that contains RNA-seq (gene expression) and ATAC-seq (open chromatin) data. For now, we have provided our preprocessed version of this dataset in smaller files in the GitHub repository of this book, although we plan on additionally sharing our preprocessing steps once we have them in a publishable format.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you have not yet configured a SCOT+ directory of some kind, see our installation instructions markdown. Once you complete those steps or set up your own virual environment, continue on here.</p>
+<p>If you aren’t sure what any of the parameters for setting up a Solver object mean, try our setup tutorial for getting used to using the tool.</p>
+<p>If you are looking for more detail on what the parameters of the alignment do in practice, start by visiting our UGW, UCOOT, fused formulation tutorials. We will draw on all of these when examining AGW.</p>
+<p>If you are unsure what some of the notation means throughout the rest of this document, try reading our optimal transport theory section to get more comfortable.</p>
+<p>If you want to understand how to use AGW more generally, visit our AGW tutorial.</p>
+</div>
 <section id="preprocessing">
 <h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
 <p>We can begin by loading in our data:</p>
@@ -463,7 +473,8 @@ Categories (7, object): [&#39;B cells&#39;, &#39;CD4 T cells&#39;, &#39;CD8 T ce
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rna</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">rna</span><span class="p">,</span> <span class="n">ctypes</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># attach celltype info to rna/atac data</span>
+<span class="n">rna</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">rna</span><span class="p">,</span> <span class="n">ctypes</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">atac</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">((</span><span class="n">atac</span><span class="p">,</span> <span class="n">ctypes</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -494,7 +505,7 @@ Categories (7, object): [&#39;B cells&#39;, &#39;CD4 T cells&#39;, &#39;CD8 T ce
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
 
-<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">fracs</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">ctype</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">atac</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;celltype&quot;</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -516,13 +527,13 @@ FCGR3A+ Monocytes
 NK cells
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;CD4 T cells&#39;: 1058,
-         &#39;CD14+ Monocytes&#39;: 454,
-         &#39;B cells&#39;: 121,
-         &#39;CD8 T cells&#39;: 114,
-         &#39;FCGR3A+ Monocytes&#39;: 93,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Counter({&#39;CD4 T cells&#39;: 780,
+         &#39;CD14+ Monocytes&#39;: 648,
+         &#39;B cells&#39;: 191,
+         &#39;CD8 T cells&#39;: 155,
          &#39;NK cells&#39;: 71,
-         &#39;Dendritic cells&#39;: 24})
+         &#39;FCGR3A+ Monocytes&#39;: 54,
+         &#39;Dendritic cells&#39;: 40})
 </pre></div>
 </div>
 </div>
@@ -544,12 +555,12 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;B cells&#39;: 0.6,
- &#39;CD4 T cells&#39;: 0.95,
- &#39;CD8 T cells&#39;: 0.55,
- &#39;CD14+ Monocytes&#39;: 0.7,
- &#39;Dendritic cells&#39;: 0.55,
- &#39;FCGR3A+ Monocytes&#39;: 0.8500000000000001,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;B cells&#39;: 0.95,
+ &#39;CD4 T cells&#39;: 0.7,
+ &#39;CD8 T cells&#39;: 0.75,
+ &#39;CD14+ Monocytes&#39;: 1.0,
+ &#39;Dendritic cells&#39;: 0.9,
+ &#39;FCGR3A+ Monocytes&#39;: 0.5,
  &#39;NK cells&#39;: 0.8500000000000001}
 </pre></div>
 </div>
@@ -563,7 +574,7 @@ NK cells
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scotplus.solvers</span> <span class="kn">import</span> <span class="n">SinkhornSolver</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">normalize</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
@@ -586,20 +597,17 @@ NK cells
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="c1"># Sample label array (replace with your own label array)</span>
 <span class="n">label_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rna</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
 
-<span class="c1"># Get unique labels</span>
 <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">label_array</span><span class="p">)</span>
-<span class="n">pca</span><span class="o">=</span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">Xrna_2Dpca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">rna_mtx</span><span class="p">)</span>
-<span class="c1"># Plot PCA-transformed data with labels</span>
+<span class="n">rna_pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">rna_pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">rna_mtx</span><span class="p">)</span>
+<span class="n">rna_2Dpca</span> <span class="o">=</span> <span class="n">rna_pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">rna_mtx</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 
-<span class="c1"># Plot each unique label separately</span>
 <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unique_labels</span><span class="p">:</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_array</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Xrna_2Dpca</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Xrna_2Dpca</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">subset</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_array</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">rna_2Dpca</span><span class="p">[</span><span class="n">subset</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">rna_2Dpca</span><span class="p">[</span><span class="n">subset</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 
 <span class="c1"># plt.legend(loc=&#39;best&#39;, shadow=False)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PBMC Gene Expression Domain Before Alignment&#39;</span><span class="p">)</span>
@@ -615,25 +623,53 @@ NK cells
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">umap</span>
 
-<span class="c1"># Sample label array (replace with your own label array)</span>
-<span class="n">label_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atac_mod</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+<span class="n">label_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rna</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
 
-<span class="c1"># Get unique labels</span>
 <span class="n">unique_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">label_array</span><span class="p">)</span>
-<span class="n">pca</span><span class="o">=</span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">Yatac_2Dpca</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">atac_mtx</span><span class="p">)</span>
-<span class="c1"># Plot PCA-transformed data with labels</span>
+<span class="n">rna_umap</span><span class="o">=</span><span class="n">umap</span><span class="o">.</span><span class="n">UMAP</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">transform_seed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">rna_umap</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">rna_mtx</span><span class="p">)</span>
+<span class="n">rna_2Dumap</span><span class="o">=</span><span class="n">rna_umap</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">rna_mtx</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 
-<span class="c1"># Plot each unique label separately</span>
 <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unique_labels</span><span class="p">:</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_array</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Yatac_2Dpca</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Yatac_2Dpca</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">subset</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_array</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">rna_2Dumap</span><span class="p">[</span><span class="n">subset</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">rna_2Dumap</span><span class="p">[</span><span class="n">subset</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 
 <span class="c1"># plt.legend(loc=&#39;best&#39;, shadow=False)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PBMC Chromatin Accessibility Domain Before Alignment&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PBMC Gene Expression Domain Before Alignment&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;UMAP Component 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;UMAP Component 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+<img alt="_images/9036597d57003def28e7f52273a78d2c9670e55937086a892906cd751b99cf48.png" src="_images/9036597d57003def28e7f52273a78d2c9670e55937086a892906cd751b99cf48.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">label_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">atac_mod</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+
+<span class="n">unique_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">label_array</span><span class="p">)</span>
+<span class="n">atac_pca</span><span class="o">=</span><span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">atac_2Dpca</span><span class="o">=</span><span class="n">atac_pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">atac_mtx</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unique_labels</span><span class="p">:</span>
+    <span class="n">subset</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_array</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">atac_2Dpca</span><span class="p">[</span><span class="n">subset</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">atac_2Dpca</span><span class="p">[</span><span class="n">subset</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+
+<span class="c1"># plt.legend(loc=&#39;best&#39;, shadow=False)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Unbalanced PBMC Chromatin Accessibility Domain Before Alignment&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Principal Component 2&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -641,37 +677,40 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/43ada338dd5f4157754d77517de215c8c18ee768808300d2495d5eeb90ae1d8e.png" src="_images/43ada338dd5f4157754d77517de215c8c18ee768808300d2495d5eeb90ae1d8e.png" />
+<img alt="_images/03a25cee433efa02873df2235547f46c10450a37b87538638d8319a64ab2e8a9.png" src="_images/03a25cee433efa02873df2235547f46c10450a37b87538638d8319a64ab2e8a9.png" />
 </div>
 </div>
 <p>We can now attempt an alignment:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scotplus.utils.alignment</span> <span class="kn">import</span> <span class="n">compute_graph_distances</span>
-
-<span class="n">Drna</span> <span class="o">=</span> <span class="n">compute_graph_distances</span><span class="p">(</span><span class="n">rna_mtx</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">)</span>
-<span class="n">Datac</span> <span class="o">=</span><span class="n">compute_graph_distances</span><span class="p">(</span><span class="n">atac_mtx</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">)</span>
-<span class="n">agw_class</span> <span class="o">=</span>  <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">tol_uot</span><span class="o">=</span><span class="mf">2e-5</span><span class="p">)</span>
-<span class="n">pi_samp</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">pi_feat</span> <span class="o">=</span> <span class="n">agw_class</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">Drna</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">Datac</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">rho</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">D_rna</span> <span class="o">=</span> <span class="n">compute_graph_distances</span><span class="p">(</span><span class="n">rna_mtx</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">)</span>
+<span class="n">D_atac</span> <span class="o">=</span> <span class="n">compute_graph_distances</span><span class="p">(</span><span class="n">atac_mtx</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">),</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">110</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot a corner of the heatmap to get a sense for density</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scot</span> <span class="o">=</span> <span class="n">SinkhornSolver</span><span class="p">(</span><span class="n">tol_uot</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">nits_uot</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">nits_bcd</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">pi_samp</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">pi_feat</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">ugw</span><span class="p">(</span><span class="n">D_rna</span><span class="p">,</span> <span class="n">D_atac</span><span class="p">,</span> <span class="n">rho</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">),</span> <span class="n">eps</span> <span class="o">=</span> <span class="mf">5e-3</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot a corner of the heatmap to get a sense for density</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">pi_samp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Value&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Heatmap of Matrix&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X Axis&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y Axis&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Heatmap of Sample Matrix&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8f72367a5e8462c7baefae36e15ba0d483152af3ab97e0db9dce7facab9ff17f.png" src="_images/8f72367a5e8462c7baefae36e15ba0d483152af3ab97e0db9dce7facab9ff17f.png" />
+<img alt="_images/a6bfda01a151b0f63a6222ab22884fa7eb51793ab5ecbedce3ff8f85ad9a55f1.png" src="_images/a6bfda01a151b0f63a6222ab22884fa7eb51793ab5ecbedce3ff8f85ad9a55f1.png" />
 </div>
 </div>
 <p>Now, we can finally compute our alignment:</p>
@@ -684,7 +723,7 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((2407, 50), torch.Size([1935, 50]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((2407, 50), torch.Size([1939, 50]))
 </pre></div>
 </div>
 </div>
@@ -697,10 +736,9 @@ NK cells
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xrna_integrated</span><span class="o">=</span><span class="n">rna_mtx</span>
 <span class="n">Yatac_subsamp_integrated</span><span class="o">=</span><span class="n">aligned_atac</span>
-<span class="c1"># run PC jointly:</span>
 <span class="n">concatenated</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Xrna_integrated</span><span class="p">,</span><span class="n">Yatac_subsamp_integrated</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">concatenated_pc</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">concatenated</span><span class="p">)</span>
+<span class="n">concatenated_pc</span><span class="o">=</span><span class="n">rna_pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">concatenated</span><span class="p">)</span>
 <span class="n">Xrna_integrated_pc</span><span class="o">=</span><span class="n">concatenated_pc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">Xrna_integrated</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],:]</span>
 <span class="n">Yatac_subsamp_integrated_pc</span><span class="o">=</span><span class="n">concatenated_pc</span><span class="p">[</span><span class="n">Xrna_integrated</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,:]</span>
 
@@ -709,10 +747,10 @@ NK cells
 <span class="n">concat_pc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Xrna_integrated_pc</span><span class="p">,</span><span class="n">Yatac_subsamp_integrated_pc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unique_labels</span><span class="p">:</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_array</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Yatac_subsamp_integrated_pc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Yatac_subsamp_integrated_pc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">alpha</span> <span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Yatac_subsamp_integrated_pc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Yatac_subsamp_integrated_pc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="p">)</span>
     
     
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;PBMC Chromatin Accessibility Domain After Alignment&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Unbalanced PBMC Gene Expression Domain After Alignment&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Principal Component 1&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Principal Component 2&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -720,35 +758,61 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5065921e9012439a84e9b7da3d0a0c40f631b224da8cdef4806261245007ceb9.png" src="_images/5065921e9012439a84e9b7da3d0a0c40f631b224da8cdef4806261245007ceb9.png" />
+<img alt="_images/9922db3cdaf5770a9a17e7c97d8f9d2e26557511acbdfbc16b318a3030d39120.png" src="_images/9922db3cdaf5770a9a17e7c97d8f9d2e26557511acbdfbc16b318a3030d39120.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xrna_integrated</span><span class="o">=</span><span class="n">rna_mtx</span>
 <span class="n">Yatac_subsamp_integrated</span><span class="o">=</span><span class="n">aligned_atac</span>
-<span class="c1"># run PC jointly:</span>
 <span class="n">concatenated</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Xrna_integrated</span><span class="p">,</span><span class="n">Yatac_subsamp_integrated</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">concatenated_pc</span><span class="o">=</span><span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">concatenated</span><span class="p">)</span>
-<span class="n">Xrna_integrated_pc</span><span class="o">=</span><span class="n">concatenated_pc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">Xrna_integrated</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],:]</span>
-<span class="n">Yatac_subsamp_integrated_pc</span><span class="o">=</span><span class="n">concatenated_pc</span><span class="p">[</span><span class="n">Xrna_integrated</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,:]</span>
+<span class="n">concatenated_umap</span><span class="o">=</span><span class="n">rna_umap</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">concatenated</span><span class="p">)</span>
+<span class="n">Xrna_integrated_umap</span><span class="o">=</span><span class="n">concatenated_umap</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">Xrna_integrated</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],:]</span>
+<span class="n">Yatac_subsamp_integrated_umap</span><span class="o">=</span><span class="n">concatenated_umap</span><span class="p">[</span><span class="n">Xrna_integrated</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,:]</span>
 
 <span class="n">x_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rna</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">])</span>
 <span class="n">concat_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x_labels</span><span class="p">,</span><span class="n">label_array</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">concat_pc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Xrna_integrated_pc</span><span class="p">,</span><span class="n">Yatac_subsamp_integrated_pc</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">concat_pc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Xrna_integrated_umap</span><span class="p">,</span><span class="n">Yatac_subsamp_integrated_umap</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">unique_labels</span><span class="p">:</span>
-    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">concat_labels</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">concat_pc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">concat_pc</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">label_array</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Yatac_subsamp_integrated_umap</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">Yatac_subsamp_integrated_umap</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="p">)</span>
+    
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Unbalanced PBMC Gene Expression Domain After Alignment&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;UMAP Component 1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;UMAP Component 2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x17ecdb610&gt;
+<img alt="_images/40fa33be0c38a915a2561726028185f1dd33be654c18fcf18fd5e9d022d703b6.png" src="_images/40fa33be0c38a915a2561726028185f1dd33be654c18fcf18fd5e9d022d703b6.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xrna_integrated</span><span class="o">=</span><span class="n">rna_mtx</span>
+<span class="n">Yatac_subsamp_integrated</span><span class="o">=</span><span class="n">aligned_atac</span>
+<span class="n">concatenated</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">Xrna_integrated</span><span class="p">,</span><span class="n">Yatac_subsamp_integrated</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">concatenated_pc</span><span class="o">=</span><span class="n">rna_pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">concatenated</span><span class="p">)</span>
+<span class="n">Xrna_integrated_pc</span><span class="o">=</span><span class="n">concatenated_pc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">Xrna_integrated</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],:]</span>
+<span class="n">Yatac_subsamp_integrated_pc</span><span class="o">=</span><span class="n">concatenated_pc</span><span class="p">[</span><span class="n">Xrna_integrated</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:,:]</span>
+
+<span class="n">x_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rna</span><span class="p">[</span><span class="s1">&#39;celltype&#39;</span><span class="p">])</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x_labels</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">label_array</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">unique_labels</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffa500&#39;</span><span class="p">,</span> <span class="s1">&#39;#964b00&#39;</span><span class="p">]):</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">x_labels</span><span class="p">,</span> <span class="n">label_array</span><span class="p">))</span> <span class="o">==</span> <span class="n">label</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">Xrna_integrated_pc</span><span class="p">,</span> <span class="n">Yatac_subsamp_integrated_pc</span><span class="p">))[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">Xrna_integrated_pc</span><span class="p">,</span> <span class="n">Yatac_subsamp_integrated_pc</span><span class="p">))[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alphas</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<img alt="_images/d22670da337373fc1ca3fe913a593b31739328a2239e013ad84e1c924ad24159.png" src="_images/d22670da337373fc1ca3fe913a593b31739328a2239e013ad84e1c924ad24159.png" />
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c2d21254b02707c374dc55c55042fedf8559659d0d8f8295ade4bf025a0e2da5.png" src="_images/c2d21254b02707c374dc55c55042fedf8559659d0d8f8295ade4bf025a0e2da5.png" />
 </div>
 </div>
 <p>We can evaluate our alignment with label transfer accuracy, which determines how well a classifier extends from the original domain to the new domain:</p>
@@ -778,7 +842,7 @@ NK cells
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6373078520980474
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.896551724137931
 </pre></div>
 </div>
 </div>
@@ -824,6 +888,15 @@ NK cells
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">AGW Tutorial</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="citeseq_sample_supervision.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">CITE-seq Sample Supervision and Hyperparameter Grid Search</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

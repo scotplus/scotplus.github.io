@@ -333,7 +333,10 @@ As a result, we have the following minimization problem (for balanced AGW, which
 
 $min_{\pi_s, \pi_f} \alpha(\langle L(A, B) \otimes \pi_f, \pi_s \rangle) + (1 - \alpha) (\langle L(D_{\mu_s}, D_{\nu_s}), \pi_s \otimes \pi_s \rangle)  + \epsilon KL(\pi_s \otimes \pi_f | \mu^s \otimes \nu^s \otimes \mu^f \otimes \nu^f)$
 
-While less theoretical than the previous formulations we have looked at, AGW
+Note that to solve this minimization problem, we alternate between BCD cycles for GW-like
+and COOT-like penalties; see more detail in the supplementary materials of our upcoming paper.
+
+While less theoretically grounded than the previous formulations we have looked at, AGW
 allows for an improvement on UCOOT by allowing for the recovery of nonlinear
 relationships among the original measures we sought to couple, $\mu_s$ and $\nu_s$.
 Now, we will move onto why we use these methods in single-cell multi-omics alignment. 
