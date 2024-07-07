@@ -15,7 +15,7 @@ First, install anaconda on your device. From here, enter these commands into you
 
 <center>conda activate scotplus</center>
 
-<center>pip3 install scotplus</center>
+<center>pip install scotplus</center>
 
 <center>python -m ipykernel install --user --name=scotplus</center>
 
