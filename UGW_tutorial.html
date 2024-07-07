@@ -387,16 +387,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maybe-come-back-and-change-notation">maybe come back and change notation…</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-download">Data download</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-datasets-to-distance-matrices">Converting Datasets to Distance Matrices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-gw">Default GW</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropic-regularization">Entropic Regularization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-relaxation">Marginal Relaxation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-download">Data download</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-datasets-to-distance-matrices">Converting Datasets to Distance Matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-gw">Default GW</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropic-regularization">Entropic Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-relaxation">Marginal Relaxation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
             </nav>
         </div>
@@ -410,8 +407,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ugw-tutorial">
 <h1>UGW Tutorial<a class="headerlink" href="#ugw-tutorial" title="Link to this heading">#</a></h1>
-<section id="maybe-come-back-and-change-notation">
-<h2>maybe come back and change notation…<a class="headerlink" href="#maybe-come-back-and-change-notation" title="Link to this heading">#</a></h2>
 <p>In this tutorial, we will examine how to use Gromov-Wasserstein (GW) and unbalanced Gromov-Wasserstein (UGW) to align a CITE-seq dataset, which has co-assayed antibody and gene expression data on 7985 human/mouse blood cells. We select 1000 human samples from this dataset, and split the data into two matrices: one that contains antibody information on these samples and another that contains gene expression information on the same samples. The goal in this tutorial (as well as UCOOT) will be to recover which sample matches with which sample using optimal transport. So, we are trying to recover a 1-1 mapping that we know exists.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -425,12 +420,12 @@ document.write(`
 <p>If you are already comfortable with UGW, try moving on to our UCOOT tutorial.</p>
 </div>
 <section id="data-download">
-<h3>Data download<a class="headerlink" href="#data-download" title="Link to this heading">#</a></h3>
+<h2>Data download<a class="headerlink" href="#data-download" title="Link to this heading">#</a></h2>
 <p>If you wish to work with the raw PBMC_ADT and PBMC_RNA files from the CITE-seq dataset (we will use the mostly preprocessed ones), run the following commands in the terminal in the root directory of this tutorial repository:</p>
 <center> sh ./download_scripts/CITEseq_download.sh </center><p>If you download the code manually instead, make sure to produce the same file structure - i.e., there should be a data directory with a CITEseq subdirectory containing your csv files. This folder should already be populated with our two preprocessed datasets if you use the given script.</p>
 </section>
 <section id="preprocessing">
-<h3>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h3>
+<h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
 <p>We will start with some mild preprocessing, such as loading the preprocessed datasets into variables local to this notebook. We begin by setting up pytorch. Use this as is, unless you would like to try a different device.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -555,7 +550,7 @@ CUDNN version: None
 </div>
 </section>
 <section id="converting-datasets-to-distance-matrices">
-<h3>Converting Datasets to Distance Matrices<a class="headerlink" href="#converting-datasets-to-distance-matrices" title="Link to this heading">#</a></h3>
+<h2>Converting Datasets to Distance Matrices<a class="headerlink" href="#converting-datasets-to-distance-matrices" title="Link to this heading">#</a></h2>
 <p>In this tutorial, we will go over how to use a Solver object to align your data using UGW, starting with balanced scenarios (GW). UGW is a simpler form of UCOOT and AGW, which seeks only to minimize the transport cost for samples, and ignores the problem of aligning features. We can begin by instantiating a Solver object. These parameters (as per setup tutorial) are set to make this notebook run a bit faster, in addition to the fact that the CITEseq data doesn’t require quite as many UOT iterations to converge to a nice result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -581,7 +576,7 @@ CUDNN version: None
 </div>
 </section>
 <section id="default-gw">
-<h3>Default GW<a class="headerlink" href="#default-gw" title="Link to this heading">#</a></h3>
+<h2>Default GW<a class="headerlink" href="#default-gw" title="Link to this heading">#</a></h2>
 <p>Now, we will start with an example of GW using its default parameters, followed by a completed alignment. Note that, to complete an alignment, we must use the produced coupling matrix to project the samples in one domain into the other. Since we use squared euclidean distance to penalize the difference in pairwise distances (<span class="math notranslate nohighlight">\(L\)</span> function in the cost in the previous section), this projection, for a given <span class="math notranslate nohighlight">\(y_a\)</span> in the domain we are seeking to project, takes the row/column-wise (depending on the orientation of <span class="math notranslate nohighlight">\(\pi\)</span>) weighted average associated with <span class="math notranslate nohighlight">\(y_a\)</span>:</p>
 <p><span class="math notranslate nohighlight">\(y_a\)</span> projected onto <span class="math notranslate nohighlight">\(X = \frac{\Sigma_{i=1}^{n_x}(x_i*\pi_{x_i,y_a})}{\Sigma_{i=1}^{n_x} (\pi_{x_i,y_a})}\)</span></p>
 <p>Once this process is completed for all <span class="math notranslate nohighlight">\(y_j\)</span>, we recover GW’s predicted values for the cells from domain <span class="math notranslate nohighlight">\(Y\)</span> on the features of domain <span class="math notranslate nohighlight">\(X\)</span>. In a separately assayed example (not as trivial like this case), this alignment will give us the measurement for every feature in <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> on the sample set of <span class="math notranslate nohighlight">\(Y\)</span> – we have the measured values on <span class="math notranslate nohighlight">\(Y\)</span>’s features and the predicted values on <span class="math notranslate nohighlight">\(X\)</span>’s features. Let’s see this workflow in action (GW followed by projection) using GW’s default parameters (except for a change in <span class="math notranslate nohighlight">\(\epsilon\)</span>, which we will examine later). Then, we will move on to the two main hyperparameters for this method. Note that for now, we will stick to KNN distance.</p>
@@ -694,7 +689,7 @@ Total sum of differences: 0.0014336302410811186
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b4f2535bf2c3c8ef0f0847a2296c3438f2a1c59e295586201e34ab58b4b58d24.png" src="_images/b4f2535bf2c3c8ef0f0847a2296c3438f2a1c59e295586201e34ab58b4b58d24.png" />
+<img alt="_images/e7b64c9905542eed5865160af882f52ffa3749755ba990363285b9dcd854c2c4.png" src="_images/e7b64c9905542eed5865160af882f52ffa3749755ba990363285b9dcd854c2c4.png" />
 </div>
 </div>
 <p>Note that the alignments look nice (the shapes match up well). This property does not guarantee a good alignment, as we can see by our somewhat high original FOSCTTM score. In fact, it is more a representation of the sparsity of the coupling matrix – if the coupling matrix is very sparse, it will get close to attempting a 1-1 matching, which could be wrong (even though it is 1-1). Having a coupling matrix that is too sparse can be quite dangerous in cases where there is no underlying 1-1 sample map.</p>
@@ -718,7 +713,7 @@ Total sum of differences: 0.016281310468912125
 <p>As we can see, the matrices are quite close; relative to their total size, they don’t differ much in how they assign mass. If these matrices converged perfectly, we would see no difference, given the symmetry of the distance matrices we discussed above.</p>
 </section>
 <section id="entropic-regularization">
-<h3>Entropic Regularization<a class="headerlink" href="#entropic-regularization" title="Link to this heading">#</a></h3>
+<h2>Entropic Regularization<a class="headerlink" href="#entropic-regularization" title="Link to this heading">#</a></h2>
 <p>Now that we have one example done, let’s look at how entropic regularization and the <span class="math notranslate nohighlight">\(\epsilon\)</span> hyperparameter change the alignment process. In addition to the main part of the cost function as described in the previous section, GW adds an extra cost term measuring the entropy of the coupling matrix multiplied by the hyperparameter <span class="math notranslate nohighlight">\(\epsilon\)</span>. This means that, for larger values of <span class="math notranslate nohighlight">\(\epsilon\)</span>, the coupling matrix will have more entropy, meaning it will be more dense (farther from a sparse alignment of samples). In addition, the larger <span class="math notranslate nohighlight">\(\epsilon\)</span> is, the faster Sinkhorn’s algorithm will converge and produce a cost-minimizing coupling matrix. Let’s see these effects in action.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -750,11 +745,11 @@ Total sum of differences: 0.016281310468912125
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time for low epsilon: 90.50 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time for low epsilon: 84.62 seconds
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time for medium epsilon: 7.22 seconds
-Time for high epsilon: 0.08 seconds
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time for medium epsilon: 7.32 seconds
+Time for high epsilon: 0.14 seconds
 </pre></div>
 </div>
 </div>
@@ -850,7 +845,7 @@ Time for high epsilon: 0.08 seconds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5b0375bb85fef7ecbcd45a95c2889bf52e9b0befbc421fa9345bb65d3f85f76f.png" src="_images/5b0375bb85fef7ecbcd45a95c2889bf52e9b0befbc421fa9345bb65d3f85f76f.png" />
+<img alt="_images/1ec14a38706ae8beac950e2e39ab316b1ac4c294f666650db1e7855efda4462c.png" src="_images/1ec14a38706ae8beac950e2e39ab316b1ac4c294f666650db1e7855efda4462c.png" />
 </div>
 </div>
 <p>As we can see, the projected data has little to no variance with respect to the principal components of our anchor domain. We can interpret this to mean that every point in the domain being projected was projected to an average of every point in the anchor domain; since the coupling matrix was so dense, projection just led to a weighted average of points where the weights were much closer to even. So, <span class="math notranslate nohighlight">\(\epsilon\)</span> too high and too low both have their setbacks.</p>
@@ -883,7 +878,7 @@ Time for high epsilon: 0.08 seconds
 <p>Now, we will move onto a different hyperparameter. The key takeaway from this section is that increasing <span class="math notranslate nohighlight">\(\epsilon\)</span> trades better runtime for less sparsity.</p>
 </section>
 <section id="marginal-relaxation">
-<h3>Marginal Relaxation<a class="headerlink" href="#marginal-relaxation" title="Link to this heading">#</a></h3>
+<h2>Marginal Relaxation<a class="headerlink" href="#marginal-relaxation" title="Link to this heading">#</a></h2>
 <p>With a general understanding of what <span class="math notranslate nohighlight">\(\epsilon\)</span> is doing, let’s now examine the <span class="math notranslate nohighlight">\(\rho\)</span> hyperparameter. At this point, we move from balanced GW (our gw function) to unbalanced GW (our ugw function). As an argument to the UGW solver, <span class="math notranslate nohighlight">\(\rho\)</span> will be a tuple of two values; <span class="math notranslate nohighlight">\(\rho_x\)</span> relates to the samples in X, while <span class="math notranslate nohighlight">\(\rho_y\)</span> relates to the samples in y. Recall that UGW treats the samples in both domains as probability distributions and decides how to move mass from one distribution to the other, producing a coupling matrix. <span class="math notranslate nohighlight">\(\rho_x\)</span> and <span class="math notranslate nohighlight">\(\rho_y\)</span> determine how close the coupling matrix sticks to these distributions; they determine, in some sense, how close the marginals of the coupling distribution will be to these original distributions.</p>
 <p>Specifically, <span class="math notranslate nohighlight">\(\rho_x\)</span> and <span class="math notranslate nohighlight">\(\rho_y\)</span> are multiplied by respective terms that measure (in terms of KL divergence) how close the desired distribution is to the marginals of the coupling matrix. So, the larger either <span class="math notranslate nohighlight">\(\rho\)</span> is, the closer its respective desired distribution will be to the marginals of the coupling matrix, as there will be a higher cost to differences between the distributions. In fact, we used <span class="math notranslate nohighlight">\(\rho\)</span> = infty in the previous examples; this forces the marginals of the coupling matrix to exactly match the desired distributions (otherwise incurring a cost of infinity). Allowing <span class="math notranslate nohighlight">\(\rho\)</span> to decrease below infinity leads to what we might call an “unbalancing” in the initial distributions, as we allow some samples to transport more or less mass than they were originally allocated. This is why we now use UGW instead of GW – the U stands for unbalanced. Let’s look at how UGW works, first on a fairly balanced set of data:</p>
 <div class="cell docutils container">
@@ -1063,8 +1058,8 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c0be451a0b48badbf7b9d8b339110790f7e9931d34bc5b848b919749a52ad988.png" src="_images/c0be451a0b48badbf7b9d8b339110790f7e9931d34bc5b848b919749a52ad988.png" />
-<img alt="_images/3c192bf26a2d9ddf1361cd7abbae31fbc48db7c02faf8f2ac6b69f4310b33681.png" src="_images/3c192bf26a2d9ddf1361cd7abbae31fbc48db7c02faf8f2ac6b69f4310b33681.png" />
+<img alt="_images/edf6c75f31278abaa0f7688e2aa4ff603500064e030104f0844850d7a9e47847.png" src="_images/edf6c75f31278abaa0f7688e2aa4ff603500064e030104f0844850d7a9e47847.png" />
+<img alt="_images/d0a49c45c201ed8a87d9175f6e060d4180984dba63baeca2d9b7f7a4b71d3156.png" src="_images/d0a49c45c201ed8a87d9175f6e060d4180984dba63baeca2d9b7f7a4b71d3156.png" />
 </div>
 </div>
 <p>The heatmap visualization is not so easy to grasp; however, the alignment suggests that UGW did a reasonable job keeping large cluster samples in the large cluster, but not as well keeping small cluster samples in their small clusters (we see a concentration of green in the bottom left). If we look at the column-wise sums, we can see exactly how unbalanced the coupling matrices are:</p>
@@ -1131,11 +1126,10 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="conclusion">
-<h3>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h3>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>Now that we have gone through all of the most important pieces of how to run UGW on your own data, you can move onto our fused formulation or UCOOT tutorial. The fused formulation helps incorporate prior knowledge into the UGW/UCOOT procedures.</p>
 <p>Citations:</p>
 <p>Quang Huy Tran, Hicham Janati, Nicolas Courty, Rémi Flamary, Ievgen Redko, Pinar Demetci and Ritambhara Singh. Unbalanced CO-Optimal Transport. arXiv, <a class="reference external" href="http://stat.ML">stat.ML</a>, 2023.</p>
-</section>
 </section>
 </section>
 
@@ -1203,16 +1197,13 @@ Name: count, dtype: int64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maybe-come-back-and-change-notation">maybe come back and change notation…</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-download">Data download</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-datasets-to-distance-matrices">Converting Datasets to Distance Matrices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#default-gw">Default GW</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entropic-regularization">Entropic Regularization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-relaxation">Marginal Relaxation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-download">Data download</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing">Preprocessing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-datasets-to-distance-matrices">Converting Datasets to Distance Matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#default-gw">Default GW</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entropic-regularization">Entropic Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marginal-relaxation">Marginal Relaxation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
 </ul>
   </nav></div>
 
