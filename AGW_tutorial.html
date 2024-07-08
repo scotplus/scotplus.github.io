@@ -634,7 +634,7 @@ CUDNN version: None
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># changing entropic_mode to mimic GW-like regularization</span>
-<span class="n">pi_samp_ngw</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">agw</span><span class="p">(</span><span class="n">rna</span><span class="p">,</span> <span class="n">adt</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">3e-3</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s1">&#39;independent&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pi_samp_ngw</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">agw</span><span class="p">(</span><span class="n">rna</span><span class="p">,</span> <span class="n">adt</span><span class="p">,</span> <span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">3e-3</span><span class="p">,</span> <span class="n">entropic_mode</span><span class="o">=</span><span class="s1">&#39;independent&#39;</span><span class="p">,</span> <span class="n">nits_gw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">pi_samp_ogw</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">scot</span><span class="o">.</span><span class="n">gw</span><span class="p">(</span><span class="n">D_rna_knn</span><span class="p">,</span> <span class="n">D_adt_knn</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">3e-3</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
@@ -654,7 +654,7 @@ CUDNN version: None
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor(1.), tensor(1.0000), tensor(0.2599))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor(1.0000), tensor(1.0000), tensor(0.))
 </pre></div>
 </div>
 </div>
@@ -706,7 +706,7 @@ CUDNN version: None
 <div class="cell_output docutils container">
 <img alt="_images/64e26122caf5ff8863270985b6ed3b5d03afa65e3b5a7e9dff5a0aff3ddf9052.png" src="_images/64e26122caf5ff8863270985b6ed3b5d03afa65e3b5a7e9dff5a0aff3ddf9052.png" />
 <img alt="_images/7208273891a60db2450d646b449087b04f2aa229e735c58a5e6d0ab700de7949.png" src="_images/7208273891a60db2450d646b449087b04f2aa229e735c58a5e6d0ab700de7949.png" />
-<img alt="_images/757af862d5668b6a73281d0f3c3987feefd33039f283b1a7f040f19387a953de.png" src="_images/757af862d5668b6a73281d0f3c3987feefd33039f283b1a7f040f19387a953de.png" />
+<img alt="_images/09b04fa675e1aeffc3cf934f9c11c2460a1f38743ec88f6946d58e408479621c.png" src="_images/09b04fa675e1aeffc3cf934f9c11c2460a1f38743ec88f6946d58e408479621c.png" />
 </div>
 </div>
 <p>In addition, we can examine the coupling matrices:</p>
@@ -727,7 +727,7 @@ CUDNN version: None
 <div class="cell_output docutils container">
 <img alt="_images/330d91704cc265c09057b32fccdc2a85be193c3552cb76bf5a6f43b5165d0ec3.png" src="_images/330d91704cc265c09057b32fccdc2a85be193c3552cb76bf5a6f43b5165d0ec3.png" />
 <img alt="_images/302302f85affae7300f5f6a965efc3de7312db47bf3d655c0302c247ff412a6c.png" src="_images/302302f85affae7300f5f6a965efc3de7312db47bf3d655c0302c247ff412a6c.png" />
-<img alt="_images/bf489045a586578655ee1f3427253a7034517c1ae46622772737f7cf03cc7d0b.png" src="_images/bf489045a586578655ee1f3427253a7034517c1ae46622772737f7cf03cc7d0b.png" />
+<img alt="_images/2dadce3dd51a3b09621a67fa679dfcb8471095c2609017e4c6813710e8d12111.png" src="_images/2dadce3dd51a3b09621a67fa679dfcb8471095c2609017e4c6813710e8d12111.png" />
 </div>
 </div>
 <p>Note that the middle matrices, <span class="math notranslate nohighlight">\(\alpha=0.5\)</span>, appear to be somewhere in between the equivalent matrices for <span class="math notranslate nohighlight">\(\alpha=0\)</span> and <span class="math notranslate nohighlight">\(\alpha=1\)</span>. We recommend linearly searching over <span class="math notranslate nohighlight">\(\alpha\)</span>, as some datasets benefit more from focus on local geometry (high alpha), while some benefit from more focus on feature correspondence (low alpha, when features have strong relationships). As an example:</p>
